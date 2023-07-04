@@ -1,0 +1,334 @@
+Index: backend/voice_recognition.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import os\nimport wave\nimport json\nimport subprocess\nfrom vosk import Model, KaldiRecognizer\n\n# Load the Vosk model\nmodel = Model(lang=\"en-us\")\n\ndef transcribe_audio(file):\n\n    # Printing file name and MIME type\n    print(\"File name:\", file.filename)\n    print(\"MIME type:\", file.mimetype)\n\n    # Save the file to disk\n    file_path = os.path.join(\"/Users/junwei/Downloads\", \"received_audio.webm\")\n    file.save(file_path)\n\n    # Convert audio format using ffmpeg\n    output_path = os.path.join(\"/Users/junwei/Downloads\", 'converted_audio.wav')\n    subprocess.run(['ffmpeg', '-i', file_path, output_path])\n\n    # Process the audio file with Vosk\n    wf = wave.open(output_path, \"rb\")\n    recognizer = KaldiRecognizer(model, wf.getframerate())\n    recognizer.SetWords(True)\n    recognizer.SetPartialWords(True)\n\n    while True:\n        data = wf.readframes(4000)\n        if len(data) == 0:\n            break\n        if recognizer.AcceptWaveform(data):\n            print(recognizer.Result())\n        else:\n            print(recognizer.PartialResult())\n\n    final_result = recognizer.FinalResult()\n    print(final_result)\n\n    return final_result\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/voice_recognition.py b/backend/voice_recognition.py
+--- a/backend/voice_recognition.py	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ b/backend/voice_recognition.py	(date 1688430677861)
+@@ -2,23 +2,29 @@
+ import wave
+ import json
+ import subprocess
++import time
+ from vosk import Model, KaldiRecognizer
+ 
+ # Load the Vosk model
+ model = Model(lang="en-us")
+ 
++
+ def transcribe_audio(file):
+-
+     # Printing file name and MIME type
+     print("File name:", file.filename)
+     print("MIME type:", file.mimetype)
+ 
+-    # Save the file to disk
+-    file_path = os.path.join("/Users/junwei/Downloads", "received_audio.webm")
++    # Adding a timestamp to the filename to make it unique
++    timestamp = int(time.time())
++    unique_filename = f"received_audio_{timestamp}.webm"
++    converted_filename = f"converted_audio_{timestamp}.wav"
++
++    # Save the file to disk with the unique filename
++    file_path = os.path.join("/Users/junwei/Downloads", unique_filename)
+     file.save(file_path)
+ 
+     # Convert audio format using ffmpeg
+-    output_path = os.path.join("/Users/junwei/Downloads", 'converted_audio.wav')
++    output_path = os.path.join("/Users/junwei/Downloads", converted_filename)
+     subprocess.run(['ffmpeg', '-i', file_path, output_path])
+ 
+     # Process the audio file with Vosk
+@@ -39,4 +45,28 @@
+     final_result = recognizer.FinalResult()
+     print(final_result)
+ 
+-    return final_result
++    result = extract_text_and_check_for_transfer(final_result)
++    print(result)
++    if result:
++        return result
++    return None
++
++
++def extract_text_and_check_for_transfer(data_json):
++    # 解析 JSON 数据
++    data = json.loads(data_json)
++    print(data)
++    # 提取 text 字段的内容
++    text = data.get("text", "")
++
++    # 将 text 字段的内容分割成单词
++    words = text.split()
++    print(words)
++
++    # 检查是否包含 "transfer" 这个单词
++    if "transfer" in words:
++        return json.dumps({"text": "transfer"})
++    if "withdraw" in words:
++        return json.dumps({"text": "withdraw"})
++    else:
++        return None
+Index: frontend/src/logo.svg
+===================================================================
+diff --git a/frontend/src/logo.svg b/frontend/src/logo.svg
+deleted file mode 100644
+--- a/frontend/src/logo.svg	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ /dev/null	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
+@@ -1,1 +0,0 @@
+-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3"><g fill="#61DAFB"><path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/><circle cx="420.9" cy="296.5" r="45.7"/><path d="M520.5 78.1z"/></g></svg>
+\ No newline at end of file
+Index: frontend/src/setupTests.js
+===================================================================
+diff --git a/frontend/src/setupTests.js b/frontend/src/setupTests.js
+deleted file mode 100644
+--- a/frontend/src/setupTests.js	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ /dev/null	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
+@@ -1,5 +0,0 @@
+-// jest-dom adds custom jest matchers for asserting on DOM nodes.
+-// allows you to do things like:
+-// expect(element).toHaveTextContent(/react/i)
+-// learn more: https://github.com/testing-library/jest-dom
+-import '@testing-library/jest-dom';
+Index: frontend/src/reportWebVitals.js
+===================================================================
+diff --git a/frontend/src/reportWebVitals.js b/frontend/src/reportWebVitals.js
+deleted file mode 100644
+--- a/frontend/src/reportWebVitals.js	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ /dev/null	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
+@@ -1,13 +0,0 @@
+-const reportWebVitals = onPerfEntry => {
+-  if (onPerfEntry && onPerfEntry instanceof Function) {
+-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+-      getCLS(onPerfEntry);
+-      getFID(onPerfEntry);
+-      getFCP(onPerfEntry);
+-      getLCP(onPerfEntry);
+-      getTTFB(onPerfEntry);
+-    });
+-  }
+-};
+-
+-export default reportWebVitals;
+Index: frontend/src/App.test.js
+===================================================================
+diff --git a/frontend/src/App.test.js b/frontend/src/App.test.js
+deleted file mode 100644
+--- a/frontend/src/App.test.js	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ /dev/null	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
+@@ -1,8 +0,0 @@
+-import { render, screen } from '@testing-library/react';
+-import App from './App';
+-
+-test('renders learn react link', () => {
+-  render(<App />);
+-  const linkElement = screen.getByText(/learn react/i);
+-  expect(linkElement).toBeInTheDocument();
+-});
+Index: frontend/src/components/AudioRecorder.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState, useRef } from \"react\";\n\nconst AudioRecorder = () => {\n  const [recording, setRecording] = useState(false);\n  const [audioUrl, setAudioUrl] = useState(null);\n  const mediaRecorder = useRef(null);\n  const audioChunks = useRef([]);\n\n  const startRecording = () => {\n    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {\n      mediaRecorder.current = new MediaRecorder(stream);\n      mediaRecorder.current.ondataavailable = (event) => {\n        audioChunks.current.push(event.data);\n      };\n      mediaRecorder.current.onstop = saveAudioToDisk;\n      mediaRecorder.current.start();\n      setRecording(true);\n    });\n  };\n\n  const stopRecording = () => {\n    if (mediaRecorder.current) {\n      mediaRecorder.current.stop();\n      setRecording(false);\n    }\n  };\n\n  const saveAudioToDisk = () => {\n    const audioBlob = new Blob(audioChunks.current, { type: \"audio/wav\" });\n    const audioUrl = URL.createObjectURL(audioBlob);\n    setAudioUrl(audioUrl);\n    console.log(audioBlob);\n    console.log(audioBlob.size, audioBlob.type);\n    // Send audio to server\n    sendAudioToServer(audioBlob);\n  };\n\n  const sendAudioToServer = (audioBlob) => {\n    const formData = new FormData();\n    formData.append(\"audio\", audioBlob);\n    for (let [key, value] of formData.entries()) {\n      console.log(key, value);\n    }\n    fetch(\"http://127.0.0.1:5000/transcribe\", {\n      method: \"POST\",\n      body: formData,\n    })\n      .then((response) => response.json())\n      .then((data) => {\n        console.log(\"Response from server:\", data);\n      })\n      .catch((error) => console.error(\"Error:\", error));\n  };\n\n  return (\n    <div>\n      {recording ? (\n        <button onClick={stopRecording}>Stop Recording</button>\n      ) : (\n        <button onClick={startRecording}>Start Recording</button>\n      )}\n      {audioUrl && (\n        <div>\n          <p>Audio file:</p>\n          <audio controls src={audioUrl}></audio>\n          <p>\n            <a href={audioUrl} download=\"recording.wav\">\n              Download\n              {audioUrl}\n            </a>\n          </p>\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport default AudioRecorder;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/components/AudioRecorder.js b/frontend/src/components/AudioRecorder.js
+--- a/frontend/src/components/AudioRecorder.js	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ b/frontend/src/components/AudioRecorder.js	(date 1688430787688)
+@@ -35,6 +35,23 @@
+     sendAudioToServer(audioBlob);
+   };
+ 
++  // const sendAudioToServer = (audioBlob) => {
++  //   const formData = new FormData();
++  //   formData.append("audio", audioBlob);
++  //   for (let [key, value] of formData.entries()) {
++  //     console.log(key, value);
++  //   }
++  //   fetch("http://127.0.0.1:5000/transcribe", {
++  //     method: "POST",
++  //     body: formData,
++  //   })
++  //     .then((response) => response.json())
++  //     .then((data) => {
++  //       console.log("Response from server:", data);
++  //     })
++  //     .catch((error) => console.error("Error:", error));
++  // };
++
+   const sendAudioToServer = (audioBlob) => {
+     const formData = new FormData();
+     formData.append("audio", audioBlob);
+@@ -48,6 +65,20 @@
+       .then((response) => response.json())
+       .then((data) => {
+         console.log("Response from server:", data);
++
++        // 提取返回的 text 字段
++        const text = data.text;
++        console.log("Text:", text);
++
++        // 检查 text 字段中是否包含 "transfer" 这个单词
++        if (text && text.includes("transfer")) {
++          // 如果包含 "transfer" 这个单词，打开一个新的网页
++          window.location.href = "https://www.google.com";
++        }
++        if (text && text.includes("withdraw")) {
++          // 如果包含 "transfer" 这个单词，打开一个新的网页
++          window.location.href = "https://www.baidu.com";
++        }
+       })
+       .catch((error) => console.error("Error:", error));
+   };
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"92ccb80d-c90b-4eff-b4d8-870399107c80\" name=\"Changes\" comment=\"Initialization\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2S3nkMOMFk5Oz5NtcWBHpQ0JQMQ\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"last_opened_file_path\": \"/Users/junwei/Documents/UCL/COMP0073 MSc Computer Science Project (22:23)/SpeechRecognitionApp\",\n    \"nodejs_package_manager_path\": \"npm\"\n  }\n}]]></component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"92ccb80d-c90b-4eff-b4d8-870399107c80\" name=\"Changes\" comment=\"\" />\n      <created>1688384274327</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1688384274327</updated>\n      <workItem from=\"1688384275446\" duration=\"479000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Initialization\">\n      <created>1688384439415</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1688384439415</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Initialization\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Initialization\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ b/.idea/workspace.xml	(date 1688464332686)
+@@ -1,7 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="92ccb80d-c90b-4eff-b4d8-870399107c80" name="Changes" comment="Initialization" />
++    <list default="true" id="92ccb80d-c90b-4eff-b4d8-870399107c80" name="Changes" comment="Initialization">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/voice_recognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/voice_recognition.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/App.test.js" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/logo.svg" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/frontend/src/setupTests.js" beforeDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -19,15 +28,44 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "/Users/junwei/Documents/UCL/COMP0073 MSc Computer Science Project (22:23)/SpeechRecognitionApp",
+-    "nodejs_package_manager_path": "npm"
+-  }
+-}]]></component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/junwei/Documents/UCL/COMP0073 MSc Computer Science Project (22:23)/SpeechRecognitionApp&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
++  }
++}</component>
++  <component name="RunManager">
++    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++      <module name="SpeechRecognitionApp" />
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend" />
++      <option name="IS_MODULE_SDK" value="true" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/app.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
++      <method v="2" />
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Python.app" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -37,6 +75,8 @@
+       <option name="presentableId" value="Default" />
+       <updated>1688384274327</updated>
+       <workItem from="1688384275446" duration="479000" />
++      <workItem from="1688384772063" duration="1185000" />
++      <workItem from="1688386220326" duration="5019000" />
+     </task>
+     <task id="LOCAL-00001" summary="Initialization">
+       <created>1688384439415</created>
+@@ -45,7 +85,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1688384439415</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Initialization">
++      <created>1688384782712</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1688384782712</updated>
++    </task>
++    <task id="LOCAL-00003" summary="Initialization">
++      <created>1688385025810</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1688385025810</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -66,4 +120,7 @@
+     <MESSAGE value="Initialization" />
+     <option name="LAST_COMMIT_MESSAGE" value="Initialization" />
+   </component>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1688430475835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
++  </component>
+ </project>
+\ No newline at end of file
+Index: frontend/src/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport './index.css';\nimport App from './App';\nimport reportWebVitals from './reportWebVitals';\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);\n\n// If you want to start measuring performance in your app, pass a function\n// to log results (for example: reportWebVitals(console.log))\n// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals\nreportWebVitals();\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/index.js b/frontend/src/index.js
+--- a/frontend/src/index.js	(revision 12844ce86f0c2ea1cb3157ee1642cb40f3121c13)
++++ b/frontend/src/index.js	(date 1688408438081)
+@@ -1,10 +1,9 @@
+-import React from 'react';
+-import ReactDOM from 'react-dom/client';
+-import './index.css';
+-import App from './App';
+-import reportWebVitals from './reportWebVitals';
++import React from "react";
++import ReactDOM from "react-dom/client";
++import "./index.css";
++import App from "./App";
+ 
+-const root = ReactDOM.createRoot(document.getElementById('root'));
++const root = ReactDOM.createRoot(document.getElementById("root"));
+ root.render(
+   <React.StrictMode>
+     <App />

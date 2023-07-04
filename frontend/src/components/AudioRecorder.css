@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #eee;
+    font-family: Arial, sans-serif;
+  }
+  
+  .record-button {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .record-button.start {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .record-button.stop {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .audio-wrapper {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .download-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .download-link:hover {
+    background-color: #303f9f;
+  }
+  
