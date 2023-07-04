@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import "./AudioRecorder.css";
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
@@ -35,6 +36,23 @@ const AudioRecorder = () => {
     sendAudioToServer(audioBlob);
   };
 
+  // const sendAudioToServer = (audioBlob) => {
+  //   const formData = new FormData();
+  //   formData.append("audio", audioBlob);
+  //   for (let [key, value] of formData.entries()) {
+  //     console.log(key, value);
+  //   }
+  //   fetch("http://127.0.0.1:5000/transcribe", {
+  //     method: "POST",
+  //     body: formData,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Response from server:", data);
+  //     })
+  //     .catch((error) => console.error("Error:", error));
+  // };
+
   const sendAudioToServer = (audioBlob) => {
     const formData = new FormData();
     formData.append("audio", audioBlob);
@@ -48,23 +66,45 @@ const AudioRecorder = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Response from server:", data);
+
+        // 提取返回的 text 字段
+        const text = data.text;
+        console.log("Text:", text);
+
+        // 检查 text 字段中是否包含 "transfer" 这个单词
+        if (text && text.includes("transfer")) {
+          // 如果包含 "transfer" 这个单词，打开一个新的网页
+          window.location.href = "/transfer";
+        }
+        if (text && text.includes("withdraw")) {
+          // 如果包含 "transfer" 这个单词，打开一个新的网页
+          window.location.href = "/withdraw";
+        }
       })
       .catch((error) => console.error("Error:", error));
   };
 
   return (
-    <div>
+    <div className="container">
       {recording ? (
-        <button onClick={stopRecording}>Stop Recording</button>
+        <button className="record-button stop" onClick={stopRecording}>
+          Stop Recording
+        </button>
       ) : (
-        <button onClick={startRecording}>Start Recording</button>
+        <button className="record-button start" onClick={startRecording}>
+          Start Recording
+        </button>
       )}
       {audioUrl && (
-        <div>
+        <div className="audio-wrapper">
           <p>Audio file:</p>
           <audio controls src={audioUrl}></audio>
           <p>
-            <a href={audioUrl} download="recording.wav">
+            <a
+              href={audioUrl}
+              download="recording.wav"
+              className="download-link"
+            >
               Download
               {audioUrl}
             </a>
