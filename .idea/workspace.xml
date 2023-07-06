@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92ccb80d-c90b-4eff-b4d8-870399107c80" name="Changes" comment="Initialization">
+    <list default="true" id="92ccb80d-c90b-4eff-b4d8-870399107c80" name="Changes" comment="Demo Complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/voice_recognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/voice_recognition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/BankingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/BankingButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Transfer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +71,7 @@
       <updated>1688384274327</updated>
       <workItem from="1688384275446" duration="479000" />
       <workItem from="1688384772063" duration="1185000" />
-      <workItem from="1688386220326" duration="6123000" />
+      <workItem from="1688386220326" duration="12208000" />
     </task>
     <task id="LOCAL-00001" summary="Initialization">
       <created>1688384439415</created>
@@ -104,7 +94,21 @@
       <option name="project" value="LOCAL" />
       <updated>1688385025810</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Demo Complete">
+      <created>1688466101386</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688466101386</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Demo Complete">
+      <created>1688466115288</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688466115288</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,9 +127,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialization" />
+    <MESSAGE value="Demo Complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Demo Complete" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1688430475835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1688484779924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
   </component>
 </project>
