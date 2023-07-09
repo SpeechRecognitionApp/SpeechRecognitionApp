@@ -4,6 +4,16 @@ import AudioRecorder from "../components/AudioRecorder.js";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Grid from "@mui/material/Grid";
+import MenuItem from "../components/MenuItems";
+
+function Dashboard() {
+  return (
+    <div>
+      <Header />
+      <AudioRecorder />
+    </div>
+import Sidebar from "../components/Sidebar";
+import Grid from "@mui/material/Grid";
 
 function Dashboard() {
   return (
