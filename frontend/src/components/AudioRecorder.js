@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
-import "./AudioRecorder.css";
+import Button from '@mui/material/Button';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
@@ -87,13 +89,13 @@ const AudioRecorder = () => {
   return (
     <div className="container">
       {recording ? (
-        <button className="record-button stop" onClick={stopRecording}>
+        <Button variant = 'contained' size='large' sx={{textTransform:'none',mt:10}} onClick={stopRecording}>
           Stop Recording
-        </button>
+        </Button>
       ) : (
-        <button className="record-button start" onClick={startRecording}>
-          Start Recording
-        </button>
+        <Button variant = 'contained' size='large' sx={{textTransform:'none',mt:10,size:'large'}} startIcon ={<KeyboardVoiceIcon/>} onClick={startRecording}>
+          Click to Start Voice Navigation
+        </Button>
       )}
       {audioUrl && (
         <div className="audio-wrapper">
