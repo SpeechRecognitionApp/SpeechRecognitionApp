@@ -8,15 +8,6 @@ import MenuItem from "../components/MenuItems";
 
 function Dashboard() {
   return (
-    <div>
-      <Header />
-      <AudioRecorder />
-    </div>
-import Sidebar from "../components/Sidebar";
-import Grid from "@mui/material/Grid";
-
-function Dashboard() {
-  return (
     <Grid container direction="column">
       <Grid item>
         <Header />
