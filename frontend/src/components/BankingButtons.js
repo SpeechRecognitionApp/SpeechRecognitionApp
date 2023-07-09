@@ -36,9 +36,9 @@ function Banking_Buttons() {
   //     fetchData();
   //   }, []);
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button variant="contained" sx={{ mt: 2, height: 125, width: 125,textTransform:'none',flexDirection:'column' }} startIcon = {<AttachMoneyIcon/>}>
+        <Button variant="contained" sx={{ mt: 2,height:125,width: 125,textTransform:'none',flexDirection:'column' }} startIcon = {<AttachMoneyIcon/>}>
           Deposit
         </Button>
         <Button
@@ -53,7 +53,7 @@ function Banking_Buttons() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
           variant="contained"
-          sx={{ mt: 2, height: 125, width: 125,textTransform:'none',flexDirection:'column' }}
+          sx={{ mt: 2,ml:2, height: 125, width: 125,textTransform:'none',flexDirection:'column' }}
           onClick={handleClick}
           startIcon = {<SwapHorizIcon/>}
         >
