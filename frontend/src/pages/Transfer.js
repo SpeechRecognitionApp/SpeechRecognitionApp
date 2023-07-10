@@ -1,41 +1,44 @@
-import React from 'react'
-import { Box, Button, TextField, Typography } from '@mui/material';
+import React from "react";
+import { Box, Typography, Button, Card, CardContent } from "@mui/material";
+import CardSelector from "../components/CardSelector";
+import Header from "../components/Header";
 
-function TransferPage(){
-    return (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '100vh',
-            padding: '16px',
-          }}
-        >
-          <Typography variant="h4" component="h1" gutterBottom>
-            Transfer Money
-          </Typography>
-          <Box
-            component="form"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '16px',
-              width: '100%',
-              maxWidth: '400px',
-            }}
-          >
-            <TextField label="Sender's Account Number" variant="outlined" required />
-            <TextField label="Recipient's Account Number" variant="outlined" required />
-            <TextField label="Amount" variant="outlined" type="number" required />
-            <Button variant="contained" type="submit" color="primary">
-              Transfer
-            </Button>
-          </Box>
+function TransferPage() {
+  return (
+    <>
+      <Header />
+      <Box sx={{ marginTop: "20px" }}>
+        <Typography variant="h4">Choose Your Card</Typography>
+      </Box>
+      <Box sx={{ padding: "20px 0 0 60px" }}>
+        {/* 标题 */}
+
+        <Box sx={{ marginBottom: "20px" }}>
+          <CardSelector />
         </Box>
-      );
-    }
-    
+
+        <Box sx={{ marginBottom: "20px" }}>
+          <Typography variant="h4">Transfer To:</Typography>
+        </Box>
+        <Box>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ marginBottom: "10px", width: "250px" }}
+          >
+            Someone Paid Before
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ marginBottom: "10px", width: "250px", marginLeft: "10px" }}
+          >
+            New Person
+          </Button>
+        </Box>
+      </Box>
+    </>
+  );
+}
 
 export default TransferPage;
