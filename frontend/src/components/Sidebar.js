@@ -63,19 +63,6 @@ const Sidebar = () => {
   };
   useEffect(() => {}, [onClick]);
 
-  const checkTokenExpiration = async () => {
-    try {
-      const response = await axiosInstance.post("/api/users/verifyToken");
-      //console.log(response.data);
-      if (response.data.status !== "success") {
-        window.location.replace("/login");
-      }
-    } catch (error) {
-      console.error("Error checking token expiration:", error);
-      window.location.replace("/login");
-    }
-  };
-
   return (
     <Box sx={{ position: "relative", height: "100%" }}>
       <List>
