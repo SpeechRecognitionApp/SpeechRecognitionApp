@@ -19,10 +19,14 @@ function KioskDashboard() {
     function handleClick2() {
       navigate("/withdraw");
     }
+
+    function handleClick3() {
+      navigate("/deposit");
+    }
   return (
     <Grid container spacing={2} sx={{mt:2}}>
       <Grid item xs={4}>
-        <Button variant="contained" size="large" sx={{height:200,width:200}} fullWidth startIcon={<DepositIcon />} onClick={() => console.log("Deposit clicked")}>
+        <Button variant="contained" size="large" sx={{height:200,width:200}} fullWidth startIcon={<DepositIcon />} onClick={handleClick3}>
           Deposit
         </Button>
       </Grid>

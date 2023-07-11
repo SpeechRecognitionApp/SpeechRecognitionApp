@@ -17,6 +17,10 @@ function Banking_Buttons() {
     navigate("/withdraw");
   }
 
+  function handleClick3() {
+    navigate("/deposit");
+  }
+
   //   useEffect(() => {
   //     // Function to fetch the API data
   //     const fetchData = async () => {
@@ -38,7 +42,7 @@ function Banking_Buttons() {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button variant="contained" sx={{ mt: 2,height:125,width: 125,textTransform:'none',flexDirection:'column' }} startIcon = {<AttachMoneyIcon/>}>
+        <Button variant="contained" sx={{ mt: 2,height:125,width: 125,textTransform:'none',flexDirection:'column' }} onClick ={handleClick3} startIcon = {<AttachMoneyIcon/>}>
           Deposit
         </Button>
         <Button

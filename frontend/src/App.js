@@ -6,6 +6,8 @@ import WithdrawPage from "./pages/Withdraw";
 import { Route, Routes } from "react-router-dom";
 import WelcomePage from "./pages/Welcome";
 import { Login } from "./pages/Login";
+import DepositPage from "./pages/Deposit";
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/transfer" element={<TransferPage />} />
         <Route path="/withdraw" element={<WithdrawPage />} />
+        <Route path="/deposit" element={<DepositPage />} />
       </Routes>
     </div>
   );
