@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Button, Card, CardContent } from "@mui/material";
 import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function TransferPage() {
   return (
@@ -24,19 +25,20 @@ function TransferPage() {
           <Button
             variant="contained"
             color="primary"
-            sx={{ marginBottom: "10px", width: "250px" }}
+            sx={{ marginBottom: "10px", width: "250px", marginRight: "50px" }}
           >
             Someone Paid Before
           </Button>
           <Button
             variant="contained"
             color="secondary"
-            sx={{ marginBottom: "10px", width: "250px", marginLeft: "10px" }}
+            sx={{ marginBottom: "10px", width: "250px", marginLeft: "50px" }}
           >
             New Person
           </Button>
         </Box>
       </Box>
+      <Footer />
     </>
   );
 }

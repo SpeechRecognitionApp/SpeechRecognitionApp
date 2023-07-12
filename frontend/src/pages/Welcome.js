@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const WelcomePage = () => {
   const [mode, setMode] = useState({
@@ -24,7 +25,6 @@ const WelcomePage = () => {
   };
 
   const handleConfirm = () => {
-    // 这里你可以添加跳转到登录页面的代码
     console.log("Confirmed:", mode);
   };
 
@@ -38,6 +38,7 @@ const WelcomePage = () => {
         alignItems="center"
         minHeight="80vh"
         bgcolor="#f4f6f8"
+        sx={{ mt: 1 }}
       >
         <Paper
           elevation={5}
@@ -48,17 +49,26 @@ const WelcomePage = () => {
             alignItems: "center",
             bgcolor: "#f5f5f5",
             width: "80%",
+            maxHeight: 500,
             maxWidth: 500,
+            borderRadius: 7,
           }}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2 }}>
-            Accessibility modes:
+          <Typography variant="h5" sx={{ marginBottom: 2 }}>
+            Accessibility Modes:
           </Typography>
 
-          <FormControl sx={{ m: 3, width: "100%" }}>
-            <Grid container alignItems="center" justifyContent="space-between">
+          <FormControl sx={{ m: 4, width: "100%" }}>
+            <Grid
+              container
+              alignItems="center"
+              spacing={5}
+              // justifyContent="space-between"
+            >
               <Grid item>
-                <Typography>Keyboard and mouse</Typography>
+                <Typography variant="h6" style={{ marginLeft: "90px" }}>
+                  Keyboard and mouse
+                </Typography>
               </Grid>
               <Grid item>
                 <Switch
@@ -68,9 +78,20 @@ const WelcomePage = () => {
                 />
               </Grid>
             </Grid>
-            <Grid container alignItems="center" justifyContent="space-between">
+            <Grid
+              container
+              alignItems="center"
+              spacing={5}
+              // justifyContent="space-between"
+              marginTop={2}
+            >
               <Grid item>
-                <Typography>Facial navigation </Typography>
+                <Typography
+                  variant="h6"
+                  style={{ marginLeft: "90px", marginRight: "42px" }}
+                >
+                  Facial navigation{" "}
+                </Typography>
               </Grid>
               <Grid item>
                 <Switch
@@ -80,9 +101,20 @@ const WelcomePage = () => {
                 />
               </Grid>
             </Grid>
-            <Grid container alignItems="center" justifyContent="space-between">
+            <Grid
+              container
+              alignItems="center"
+              spacing={5}
+              // justifyContent="space-between"
+              marginTop={2}
+            >
               <Grid item>
-                <Typography>Voice navigation</Typography>
+                <Typography
+                  variant="h6"
+                  style={{ marginLeft: "90px", marginRight: "48px" }}
+                >
+                  Voice navigation
+                </Typography>
               </Grid>
               <Grid item>
                 <Switch
@@ -99,11 +131,14 @@ const WelcomePage = () => {
             sx={{ backgroundColor: "#4caf50", color: "white" }}
             startIcon={<CheckCircleIcon />}
             onClick={handleConfirm}
+            style={{ textTransform: "none" }}
           >
             <Link to="/login">Confirm</Link>
           </Button>
         </Paper>
       </Box>
+
+      <Footer />
     </div>
   );
 };
