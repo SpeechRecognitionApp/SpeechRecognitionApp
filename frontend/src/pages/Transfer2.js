@@ -3,6 +3,7 @@ import { Box, Typography, Button, Card, CardContent } from "@mui/material";
 import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CreditCard from "../components/CreditCard";
 
 function TransferPage2() {
   return (

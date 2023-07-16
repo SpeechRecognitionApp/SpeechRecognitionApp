@@ -54,7 +54,7 @@ function TransferPage() {
               textAlign: "center",
               fontSize: 28,
             }}
-            onClick={handleChange}
+            onClick={handleClick}
           >
             Select
           </Button>
