@@ -133,7 +133,7 @@ const WelcomePage = () => {
             onClick={handleConfirm}
             style={{ textTransform: "none" }}
           >
-            <Link to="/login">Confirm</Link>
+            <Link to="/dashboard">Confirm</Link>
           </Button>
         </Paper>
       </Box>

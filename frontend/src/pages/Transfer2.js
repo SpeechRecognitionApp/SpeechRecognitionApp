@@ -3,21 +3,14 @@ import { Box, Typography, Button, Card, CardContent } from "@mui/material";
 import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
 
-function TransferPage() {
-  const navigate = useNavigate();
-
-  function handleClick() {
-    navigate("/transfer2");
-  }
-
+function TransferPage2() {
   return (
     <>
       <Header />
       <Box
         sx={{
-          padding: "20px",
+          padding: "10px",
           width: "80%",
           margin: "40px auto",
           borderRadius: "10px",
@@ -27,12 +20,19 @@ function TransferPage() {
           backgroundColor: "#fff",
         }}
       >
-        <Typography variant="h4">Choose Your Card</Typography>
+        <Typography variant="h4">Pay Or Move Money</Typography>
       </Box>
-      <Box>
+      <Box sx={{ padding: "20px 0 0 60px" }}>
         {/* 标题 */}
-        <Box sx={{ marginTop: "80px", marginBottom: "20px" }}>
-          <CardSelector />
+        <Box sx={{ marginBottom: "20px" }}>
+          <div>
+            <CreditCard
+              cardnumber={"4321123412341234"}
+              cardname={"Morgan Bush"}
+              carddate={"09/30"}
+              cardcvc={"454"}
+            />
+          </div>
         </Box>
         <Box
           sx={{
@@ -47,16 +47,34 @@ function TransferPage() {
             sx={{
               backgroundColor: "#fff",
               color: "#000",
-              borderRadius: "20px",
+              borderRadius: "10px",
               width: "20%",
-              padding: "10px",
               marginTop: "30px",
-              textAlign: "center",
-              fontSize: 28,
             }}
-            onClick={handleChange}
           >
-            Select
+            Someone You've Paid Before
+          </Button>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "10px",
+              width: "20%",
+              marginTop: "30px",
+            }}
+          >
+            A new person or company
           </Button>
         </Box>
       </Box>
@@ -65,4 +83,4 @@ function TransferPage() {
   );
 }
 
-export default TransferPage;
+export default TransferPage2;

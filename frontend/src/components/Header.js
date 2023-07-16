@@ -24,6 +24,7 @@ const Header = () => {
     <AppBar
       position="static"
       style={{
+        width: "100%",
         backgroundColor: "#FFFFFF",
         color: "#000000",
         boxShadow: "0px 3px 5px 2px rgba(0, 0, 0, 0.3)", // Red shadow

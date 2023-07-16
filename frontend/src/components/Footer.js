@@ -6,7 +6,18 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div className="footer">
-      <Box className="app-footer">
+      <Box
+        className="app-footer"
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          boxShadow: "0px -2px 10px rgba(0, 0, 0, 0.1)",
+          borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+          display: "flex", // Enable Flexbox layout
+          justifyContent: "space-around", // Distribute the buttons evenly
+        }}
+      >
         <Button className="footer-button" style={{ textTransform: "none" }}>
           <Typography
             variant="h6"

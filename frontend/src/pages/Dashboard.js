@@ -5,13 +5,15 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Grid from "@mui/material/Grid";
 import KioskDashboard from "../components/DashboardItems";
+import Footer from "../components/Footer";
 
 function Dashboard() {
   return (
     <div>
-      <Header/>
-      <KioskDashboard/>
-      <AudioRecorder/>
+      <Header />
+      <KioskDashboard />
+      <AudioRecorder />
+      <Footer />
     </div>
   );
 }

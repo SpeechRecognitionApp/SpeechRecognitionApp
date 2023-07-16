@@ -1,13 +1,12 @@
 import React from "react";
-import { Grid, Button } from "@mui/material";
-import DepositIcon from "@mui/icons-material/AttachMoney";
-import WithdrawIcon from "@mui/icons-material/MoneyOff";
-import TransferIcon from "@mui/icons-material/SwapHoriz";
-import HistoryIcon from "@mui/icons-material/History";
-import AIIcon from "@mui/icons-material/Assistant";
-import AccountIcon from "@mui/icons-material/AccountBox";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
+import { Grid, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
+import MoneyOffRoundedIcon from "@mui/icons-material/MoneyOffRounded";
+import SwapHorizontalCircleRoundedIcon from "@mui/icons-material/SwapHorizontalCircleRounded";
+import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import SmartToyRoundedIcon from "@mui/icons-material/SmartToyRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
 function KioskDashboard() {
   const navigate = useNavigate();
@@ -29,72 +28,137 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5 }}
           fullWidth
-          startIcon={<DepositIcon />}
           onClick={handleClick3}
         >
-          Deposit
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <MonetizationOnRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">Deposit</Typography>
+          </Box>
         </Button>
       </Grid>
+
       <Grid item xs={4}>
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5 }}
           fullWidth
-          startIcon={<WithdrawIcon />}
           onClick={handleClick2}
         >
-          Withdraw
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <MoneyOffRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">Withdraw</Typography>
+          </Box>
         </Button>
       </Grid>
+
       <Grid item xs={4}>
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5 }}
           fullWidth
-          startIcon={<TransferIcon />}
           onClick={handleClick}
         >
-          Transfer
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <SwapHorizontalCircleRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">Transfer</Typography>
+          </Box>
         </Button>
       </Grid>
+
       <Grid item xs={4}>
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10 }}
           fullWidth
-          startIcon={<HistoryIcon />}
-          onClick={() => console.log("Transaction history clicked")}
+          onClick={handleClick3}
         >
-          Transaction History
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <HistoryRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">Transaction History</Typography>
+          </Box>
         </Button>
       </Grid>
+
       <Grid item xs={4}>
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10 }}
           fullWidth
-          startIcon={<AIIcon />}
-          onClick={() => console.log("AI assistant clicked")}
+          onClick={handleClick3}
         >
-          AI Assistant
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <SmartToyRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">AI Assistant</Typography>
+          </Box>
         </Button>
       </Grid>
+
       <Grid item xs={4}>
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200 }}
+          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10 }}
           fullWidth
-          startIcon={<AccountIcon />}
-          onClick={() => console.log("Account management clicked")}
+          onClick={handleClick3}
         >
-          Account Management
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <AccountCircleRoundedIcon sx={{ fontSize: 100 }} />{" "}
+            {/* Adjust this to change the icon size */}
+            <Typography variant="body1">Account Management</Typography>
+          </Box>
         </Button>
       </Grid>
     </Grid>
