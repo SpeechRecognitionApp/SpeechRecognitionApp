@@ -3,13 +3,10 @@ import {
   Box,
   Typography,
   Button,
-  Card,
-  CardContent,
   Grid,
   TextField,
   InputAdornment,
 } from "@mui/material";
-import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";

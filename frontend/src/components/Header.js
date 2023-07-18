@@ -4,11 +4,16 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import BankIcon from "@mui/icons-material/AccountBalance";
 import { format } from "date-fns";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/");
+  }
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -37,7 +42,12 @@ const Header = () => {
           color: "#FFFFFF",
         }}
       >
-        <IconButton edge="start" color="inherit" aria-label="logo">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="logo"
+          onClick={handleClick}
+        >
           <img src="/banklogo.png" alt="Bank Logo" style={{ height: "70px" }} />
         </IconButton>
         <Typography

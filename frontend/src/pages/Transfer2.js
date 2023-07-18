@@ -1,13 +1,19 @@
 import React from "react";
 import { Box, Typography, Button, Card, CardContent } from "@mui/material";
-import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import { useNavigate } from "react-router-dom";
+
 
 function TransferPage2() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/transfer3");
+  }
   return (
     <>
       <Header />
@@ -58,6 +64,7 @@ function TransferPage2() {
               alignItems: "center", // Center content vertically
               padding: "10px", // Add some padding
             }}
+            onClick={handleClick}
           >
             <GroupRoundedIcon sx={{ marginRight: "10px" }} />
             Someone You've Paid Before
@@ -85,6 +92,7 @@ function TransferPage2() {
               alignItems: "center", // Center content vertically
               padding: "10px", // Add some padding
             }}
+            onClick={handleClick}
           >
             <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new person
             or company
