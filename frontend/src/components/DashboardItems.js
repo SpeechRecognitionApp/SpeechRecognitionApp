@@ -22,6 +22,15 @@ function KioskDashboard() {
   function handleClick3() {
     navigate("/deposit");
   }
+
+  function handleClick4() {
+    navigate("/transactions");
+  }
+
+  function handleClick5() {
+    navigate("/accountmanage");
+  }
+
   return (
     <Grid container spacing={2} sx={{ mt: 2 }}>
       <Grid item xs={4}>
@@ -99,7 +108,7 @@ function KioskDashboard() {
           size="large"
           sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10 }}
           fullWidth
-          onClick={handleClick3}
+          onClick={handleClick4}
         >
           <Box
             sx={{
@@ -145,7 +154,7 @@ function KioskDashboard() {
           size="large"
           sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10 }}
           fullWidth
-          onClick={handleClick3}
+          onClick={handleClick5}
         >
           <Box
             sx={{

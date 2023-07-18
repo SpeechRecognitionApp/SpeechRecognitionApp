@@ -9,6 +9,8 @@ import { Login } from "./pages/Login";
 import DepositPage from "./pages/Deposit";
 import TransferPage2 from "./pages/Transfer2";
 import TransferPage3 from "./pages/Transfer3";
+import TransactionsPage from "./pages/Transactions";
+import AccountManagePage from "./pages/AccountManagement";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/transfer3" element={<TransferPage3 />} />
         <Route path="/withdraw" element={<WithdrawPage />} />
         <Route path="/deposit" element={<DepositPage />} />
+        <Route path ="/transactions" element ={<TransactionsPage/>} />
+        <Route path ="/accountmanage" element ={<AccountManagePage />} />
       </Routes>
     </div>
   );
