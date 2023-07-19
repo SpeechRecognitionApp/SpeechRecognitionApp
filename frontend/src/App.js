@@ -7,10 +7,11 @@ import { Route, Routes } from "react-router-dom";
 import WelcomePage from "./pages/Welcome";
 import { Login } from "./pages/Login";
 import DepositPage from "./pages/Deposit";
-import TransferPage2 from "./pages/Transfer2";
-import TransferPage3 from "./pages/Transfer3";
-import TransactionsPage from "./pages/Transactions";
 import AccountManagePage from "./pages/AccountManagement";
+import SelectContact from "./pages/SelectContact";
+import SelectPayee from "./pages/SelectPayee";
+import SelectAmount from "./pages/SelectAmount";
+import TransactionsPage from "./pages/Transactions";
 
 function App() {
   return (
@@ -20,12 +21,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/transfer" element={<TransferPage />} />
-        <Route path="/transfer2" element={<TransferPage2 />} />
-        <Route path="/transfer3" element={<TransferPage3 />} />
+        <Route path="/selectpayee" element={<SelectPayee />} />
+        <Route path="/selectcontact" element={<SelectContact />} />
         <Route path="/withdraw" element={<WithdrawPage />} />
+        <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/deposit" element={<DepositPage />} />
-        <Route path ="/transactions" element ={<TransactionsPage/>} />
-        <Route path ="/accountmanage" element ={<AccountManagePage />} />
+        <Route path="/selectamount" element={<SelectAmount />} />
+        <Route path="/accountmanage" element={<AccountManagePage />} />
+        <Route path="/selectcontact" element={<SelectContact />} />
       </Routes>
     </div>
   );

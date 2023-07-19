@@ -9,58 +9,61 @@ function TransferPage() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/transfer2");
+    navigate("/selectpayee");
   }
 
   return (
     <>
-      <Header />
-      <Box
-        sx={{
-          padding: "20px",
-          width: "80%",
-          margin: "40px auto",
-          borderRadius: "10px",
-          boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-          textAlign: "center",
-          lineHeight: "2",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Typography variant="h4">Choose Your Card</Typography>
-      </Box>
-      <Box>
-        {/* 标题 */}
-        <Box sx={{ marginTop: "80px", marginBottom: "20px" }}>
-          <CardSelector />
-        </Box>
+      <Box sx={{ backgroundColor: "#F5F5F9" }}>
+        <Header />
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
+            padding: "20px",
+            width: "80%",
+            margin: "40px auto",
+            borderRadius: "10px",
+            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            textAlign: "center",
+            lineHeight: "2",
+            backgroundColor: "#fff",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#fff",
-              color: "#000",
-              borderRadius: "20px",
-              width: "20%",
-              padding: "10px",
-              marginTop: "30px",
-              textAlign: "center",
-              fontSize: 28,
-            }}
-            onClick={handleClick}
-          >
-            Select
-          </Button>
+          <Typography variant="h4">Choose Your Card</Typography>
         </Box>
+        <Box>
+          {/* 标题 */}
+          <Box sx={{ marginTop: "80px", marginBottom: "20px" }}>
+            <CardSelector />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                borderRadius: "20px",
+                width: "20%",
+                padding: "10px",
+                marginTop: "30px",
+                textAlign: "center",
+                fontSize: 28,
+              }}
+              onClick={handleClick}
+            >
+              Select
+            </Button>
+          </Box>
+        </Box>
+
+        <Footer />
       </Box>
-      <Footer />
     </>
   );
 }
