@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 
 function Dashboard() {
   return (
-    <div>
+    <div style={{ backgroundColor: "#F5F5F9 " }}>
       <Header />
       <KioskDashboard />
       <AudioRecorder />

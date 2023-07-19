@@ -8,7 +8,7 @@ function TransactionsPage() {
   return (
     <div style={{ backgroundColor: "#F5F5F9 " }}>
       <Header />
-      <TitleBox buttonText ="Transaction History"/>
+      <TitleBox buttonText="Transaction History" />
       <TransactionHistory />
       <Footer />
     </div>
