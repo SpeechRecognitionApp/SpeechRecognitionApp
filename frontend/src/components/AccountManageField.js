@@ -14,6 +14,7 @@ function PersonalInformationPage() {
     marginRight: "10px",
     textTransform: "none",
     borderRadius: "8px",
+    width:150
   };
 
   const confirmButtonStyle = {
@@ -21,10 +22,11 @@ function PersonalInformationPage() {
     color: "white",
     textTransform: "none",
     borderRadius: "8px",
+    width:150
   };
 
   return (
-    <Grid container spacing={2} sx={{mt:5,mx:'auto'}}>
+    <Grid container spacing={2} sx={{mt:5,mx:'auto',height:"55vh"}}>
       <Grid item xs={12} sm={6}>
         <TextField
           label="First Name"
