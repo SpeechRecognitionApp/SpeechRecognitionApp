@@ -38,6 +38,35 @@ function SelectAmount() {
 
           <Box
             sx={{
+              padding: "10px 20px 30px 200px",
+              width: "80%",
+              margin: "40px auto",
+              borderRadius: "10px",
+              textAlign: "center",
+              lineHeight: "2",
+              backgroundColor: "#F5F5F9",
+            }}
+          >
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              spacing={2}
+            >
+              <Grid item>
+                <Typography variant="h6" sx={{ marginRight: "120px" }}>
+                  Transfer To:
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6" sx={{ marginRight: "120px" }}>
+                  Money D Luffy
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box
+            sx={{
               padding: "10px",
               width: "80%",
               margin: "40px auto",

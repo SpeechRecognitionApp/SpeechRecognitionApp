@@ -13,6 +13,11 @@ function SelectPayee() {
   function handleClick() {
     navigate("/selectcontact");
   }
+
+  function handleClick2() {
+    navigate("/createnewpayee");
+  }
+
   return (
     <>
       <Box sx={{ backgroundColor: "#F5F5F9" }}>
@@ -92,7 +97,7 @@ function SelectPayee() {
                 alignItems: "center", // Center content vertically
                 padding: "10px", // Add some padding
               }}
-              onClick={handleClick}
+              onClick={handleClick2}
             >
               <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new
               person or company

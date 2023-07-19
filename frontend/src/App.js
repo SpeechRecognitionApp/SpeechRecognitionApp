@@ -12,6 +12,7 @@ import SelectContact from "./pages/SelectContact";
 import SelectPayee from "./pages/SelectPayee";
 import SelectAmount from "./pages/SelectAmount";
 import TransactionsPage from "./pages/Transactions";
+import CreateNewPayee from "./pages/CreateNewPayee";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/selectamount" element={<SelectAmount />} />
         <Route path="/accountmanage" element={<AccountManagePage />} />
         <Route path="/selectcontact" element={<SelectContact />} />
+        <Route path="/createnewpayee" element={<CreateNewPayee />} />
       </Routes>
     </div>
   );
