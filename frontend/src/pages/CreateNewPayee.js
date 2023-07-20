@@ -66,7 +66,7 @@ function CreateNewPayee() {
           >
             <Grid
               container
-              spacing={2}
+              spacing={5}
               // sx={{ mt: 5, mx: "auto", height: "55vh" }}
               justify="space-between"
               alignItems="center"
@@ -87,7 +87,7 @@ function CreateNewPayee() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Card Number"
+                  label="Last Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                 />
@@ -101,28 +101,14 @@ function CreateNewPayee() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Email Address"
+                  label="Payee Description"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Street Line"
-                  fullWidth
-                  InputProps={{ style: textFieldStyle }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="House Name"
-                  fullWidth
-                  InputProps={{ style: textFieldStyle }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Postcode"
+                  label="Payee Reference"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                 />
