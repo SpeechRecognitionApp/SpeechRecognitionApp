@@ -19,109 +19,106 @@ function SelectPayee() {
   }
 
   return (
-    
+    <Box
+      sx={{
+        display: "grid",
+        backgroundColor: "#F5F5F9",
+        gridTemplateRows: "auto 1fr auto",
+        height: "100vh",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <Header />
+
       <Box
         sx={{
-          display: "grid",
-          backgroundColor: "#F5F5F9",
-          gridTemplateRows: "auto 1fr auto",
-          height: "100vh",
-          flexDirection: "column",
-          overflow: "hidden",
+          display: "grid", // Make this Box a grid container
+          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
+          padding: "20px", // Add some padding around the Box
         }}
       >
-        <Header />
+        <Box
+          sx={{
+            padding: "10px",
+            width: "80%",
+            margin: "auto",
+            borderRadius: "10px",
+            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+            textAlign: "center",
+            lineHeight: "2",
+            backgroundColor: "#fff",
+          }}
+        >
+          <Typography variant="h4">Pay Or Move Money</Typography>
+        </Box>
+        <Box>
+          <div>
+            <CreditCard
+              cardnumber={"4321123412341234"}
+              cardname={"Morgan Bush"}
+              carddate={"09/30"}
+              cardcvc={"454"}
+            />
+          </div>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "10px",
+              width: "20%",
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              padding: "10px",
+            }}
+            onClick={handleClick}
+          >
+            <GroupRoundedIcon sx={{ marginRight: "10px" }} />
+            Someone You've Paid Before
+          </Button>
+        </Box>
 
         <Box
           sx={{
-            display: "grid", // Make this Box a grid container
-            gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-            padding: "20px", // Add some padding around the Box
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
           }}
         >
-          <Box
+          <Button
+            variant="contained"
             sx={{
-              padding: "10px",
-              width: "80%",
-              margin: "auto",
-              borderRadius: "10px",
-              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-              textAlign: "center",
-              lineHeight: "2",
               backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "10px",
+              width: "20%",
+              marginBottom: "auto",
+              display: "flex", // Enable Flexbox layout
+              justifyContent: "flex-start", // Align content to the left
+              alignItems: "center", // Center content vertically
+              padding: "10px", // Add some padding
             }}
+            onClick={handleClick2}
           >
-            <Typography variant="h4">Pay Or Move Money</Typography>
-          </Box>
-          <Box sx={{ margin: "auto" }}>
-            <div>
-              <CreditCard
-                cardnumber={"4321123412341234"}
-                cardname={"Morgan Bush"}
-                carddate={"09/30"}
-                cardcvc={"454"}
-              />
-            </div>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: "10px",
-                width: "20%",
-                margin: "auto",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                padding: "10px",
-              }}
-              onClick={handleClick}
-            >
-              <GroupRoundedIcon sx={{ marginRight: "10px" }} />
-              Someone You've Paid Before
-            </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: "10px",
-                width: "20%",
-                margin: "auto",
-                display: "flex", // Enable Flexbox layout
-                justifyContent: "flex-start", // Align content to the left
-                alignItems: "center", // Center content vertically
-                padding: "10px", // Add some padding
-              }}
-              onClick={handleClick2}
-            >
-              <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new
-              person or company
-            </Button>
-          </Box>
+            <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new person
+            or company
+          </Button>
         </Box>
-        <Footer />
       </Box>
-    
+      <Footer />
+    </Box>
   );
 }
 
