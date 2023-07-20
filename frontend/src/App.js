@@ -13,6 +13,8 @@ import SelectPayee from "./pages/SelectPayee";
 import SelectAmount from "./pages/SelectAmount";
 import TransactionsPage from "./pages/Transactions";
 import CreateNewPayee from "./pages/CreateNewPayee";
+import WithdrawAmount from "./pages/WithdrawAmonut";
+import DepositAmount from "./pages/DepositAmount";
 
 function App() {
   return (
@@ -24,12 +26,13 @@ function App() {
         <Route path="/transfer" element={<TransferPage />} />
         <Route path="/selectpayee" element={<SelectPayee />} />
         <Route path="/selectcontact" element={<SelectContact />} />
-        <Route path="/withdraw" element={<WithdrawPage />} />
-        <Route path="/transactions" element={<TransactionsPage />} />
-        <Route path="/deposit" element={<DepositPage />} />
         <Route path="/selectamount" element={<SelectAmount />} />
+        <Route path="/withdraw" element={<WithdrawPage />} />
+        <Route path="/withdrawamount" element={<WithdrawAmount />} />
+        <Route path="/deposit" element={<DepositPage />} />
+        <Route path="/depositamount" element={<DepositAmount />} />
         <Route path="/accountmanage" element={<AccountManagePage />} />
-        <Route path="/selectcontact" element={<SelectContact />} />
+        <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/createnewpayee" element={<CreateNewPayee />} />
       </Routes>
     </div>
