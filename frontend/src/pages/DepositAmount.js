@@ -20,7 +20,16 @@ function DepositAmount() {
   }
   return (
     <>
-      <Box sx={{ backgroundColor: "#F5F5F9" }}>
+      <Box
+        sx={{
+          display: "grid",
+          backgroundColor: "#F5F5F9",
+          gridTemplateRows: "auto 1fr auto",
+          height: "100vh",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
+      >
         <Header />
 
         <Box>
