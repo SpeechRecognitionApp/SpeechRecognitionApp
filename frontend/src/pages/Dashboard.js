@@ -16,7 +16,7 @@ function Dashboard() {
         gridTemplateRows: "auto 1fr auto",
         height: "100vh",
         flexDirection: "column",
-        overflow: "hidden",
+        // overflow: "hidden",
       }}
     >
       <Header />
