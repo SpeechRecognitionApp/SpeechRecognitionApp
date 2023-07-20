@@ -3,7 +3,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Grid, Button, Box, Typography } from "@mui/material";
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
     {
       field: 'date',
       headerName: 'Date',
@@ -76,8 +75,7 @@ const columns = [
             },
           }}
           pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
+          
         />
       </Box>
     );
