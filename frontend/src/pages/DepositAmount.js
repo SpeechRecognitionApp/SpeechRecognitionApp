@@ -32,9 +32,16 @@ function DepositAmount() {
       >
         <Header />
 
-        <Box>
+        <Box
+          sx={{
+            display: "grid", // Make this Box a grid container
+            gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
+            height: "100%", // Make this Box fill its parent
+            padding: "20px", // Add some padding around the Box
+          }}
+        >
           {/* 标题 */}
-          <Box sx={{ marginBottom: "20px", marginTop: "80px" }}>
+          <Box>
             <div>
               <CreditCard
                 cardnumber={"4321123412341234"}
@@ -102,7 +109,6 @@ function DepositAmount() {
                 borderRadius: "20px",
                 width: "20%",
                 padding: "10px",
-                marginTop: "30px",
                 textAlign: "center",
                 fontSize: 28,
               }}
