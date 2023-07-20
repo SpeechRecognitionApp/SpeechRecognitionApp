@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import TitleBox from "../components/TitleBox";
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Radio, Button } from "@mui/material";
+import { Box, Radio, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function SelectContact() {
@@ -13,7 +13,6 @@ function SelectContact() {
   function handleClick() {
     navigate("/selectamount");
   }
-
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -72,58 +71,88 @@ function SelectContact() {
     { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
   return (
-    <div style={{ backgroundColor: "#F5F5F9 " }}>
+    <Box
+      sx={{
+        display: "grid",
+        backgroundColor: "#F5F5F9",
+        gridTemplateRows: "auto 1fr auto",
+        height: "100vh",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
       <Header />
-      <TitleBox buttonText="Select A Payee" />
       <Box
         sx={{
-          height: 400,
-          width: "90%",
-          mx: "auto",
-          mt: 3,
-          bgcolor: "#ffff",
-          boxShadow: 3,
-          mb: 2,
+          display: "grid", // Make this Box a grid container
+          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
+          // Divide the container into three equal rows
+          gap: "20px", // Add some gap between rows
+          padding: "20px", // Add some padding around the Box
         }}
       >
-        <DataGrid
-          rows={rows}
-          columns={columns.map((column) => ({
-            ...column,
-            disableClickEventBubbling: true,
-          }))}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10, 15]}
-          checkboxSelection={false}
-          disableSelectionOnClick
-        />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <Button
-          variant="contained"
+        <Box
           sx={{
-            backgroundColor: "#fff",
-            color: "#000",
-            borderRadius: "20px",
-            width: "20%",
-            padding: "10px",
+            padding: "20px",
+            width: "80%",
+            margin: "auto",
+            borderRadius: "10px",
+            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             textAlign: "center",
-            fontSize: 28,
+            lineHeight: "2",
+            backgroundColor: "#fff",
           }}
-          onClick={handleClick}
         >
-          Select
-        </Button>
+          <Typography variant="h4">Choose Your Card To Transfer</Typography>
+        </Box>
+        <Box
+          sx={{
+            height: 400,
+            width: "90%",
+            bgcolor: "#ffff",
+            boxShadow: 3,
+            margin: "auto",
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns.map((column) => ({
+              ...column,
+              disableClickEventBubbling: true,
+            }))}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 15]}
+            checkboxSelection={false}
+            disableSelectionOnClick
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "20px",
+              width: "20%",
+              padding: "10px",
+              textAlign: "center",
+              fontSize: 28,
+            }}
+            onClick={handleClick}
+          >
+            Select
+          </Button>
+        </Box>
       </Box>
       <Footer />
-    </div>
+    </Box>
   );
 }
 

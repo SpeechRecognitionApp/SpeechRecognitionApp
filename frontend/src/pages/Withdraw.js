@@ -13,14 +13,31 @@ function WithdrawPage() {
   }
 
   return (
-    <>
-      <Box sx={{ backgroundColor: "#F5F5F9" }}>
-        <Header />
+    <Box
+      sx={{
+        backgroundColor: "#F5F5F9",
+        display: "grid",
+        gridTemplateRows: "auto 1fr auto",
+        height: "100vh",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <Header />
+
+      <Box
+        sx={{
+          display: "grid", // Make this Box a grid container
+          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
+          gap: "20px", // Add some gap between rows
+          padding: "20px", // Add some padding around the Box
+        }}
+      >
         <Box
           sx={{
             padding: "20px",
             width: "80%",
-            margin: "40px auto",
+            margin: "auto",
             borderRadius: "10px",
             boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             textAlign: "center",
@@ -32,41 +49,38 @@ function WithdrawPage() {
             Choose Your Card To Withdraw From
           </Typography>
         </Box>
+        {/* 标题 */}
         <Box>
-          {/* 标题 */}
-          <Box sx={{ marginTop: "80px", marginBottom: "20px" }}>
-            <CardSelector />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: "20px",
-                width: "20%",
-                padding: "10px",
-                marginTop: "30px",
-                textAlign: "center",
-                fontSize: 28,
-              }}
-              onClick={handleClick}
-            >
-              Select
-            </Button>
-          </Box>
+          <CardSelector sx={{ marginTop: "auto", marginBottom: "auto" }} />
         </Box>
-
-        <Footer />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "20px",
+              width: "20%",
+              padding: "10px",
+              margin: "auto",
+              textAlign: "center",
+              fontSize: 28,
+            }}
+            onClick={handleClick}
+          >
+            Select
+          </Button>
+        </Box>
       </Box>
-    </>
+      <Footer />
+    </Box>
   );
 }
 

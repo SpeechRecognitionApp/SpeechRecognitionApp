@@ -29,7 +29,6 @@ function DepositPage() {
           display: "grid", // Make this Box a grid container
           gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
           gap: "20px", // Add some gap between rows
-          height: "100%", // Make this Box fill its parent
           padding: "20px", // Add some padding around the Box
         }}
       >
@@ -67,7 +66,7 @@ function DepositPage() {
               borderRadius: "20px",
               width: "20%",
               padding: "10px",
-              marginTop: "30px",
+              margin: "auto",
               textAlign: "center",
               fontSize: 28,
             }}

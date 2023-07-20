@@ -20,12 +20,28 @@ function SelectAmount() {
   }
   return (
     <>
-      <Box sx={{ backgroundColor: "#F5F5F9" }}>
+      <Box
+        sx={{
+          display: "grid",
+          backgroundColor: "#F5F5F9",
+          gridTemplateRows: "auto 1fr auto",
+          height: "100vh",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
+      >
         <Header />
 
-        <Box>
+        <Box
+          sx={{
+            display: "grid", // Make this Box a grid container
+            gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
+            gap: "20px", // Add some gap between rows
+            padding: "20px", // Add some padding around the Box
+          }}
+        >
           {/* 标题 */}
-          <Box sx={{ marginBottom: "20px", marginTop: "80px" }}>
+          <Box sx={{ marginBottom: "auto", marginTop: "auto" }}>
             <div>
               <CreditCard
                 cardnumber={"4321123412341234"}
@@ -40,7 +56,7 @@ function SelectAmount() {
             sx={{
               padding: "10px 20px 30px 200px",
               width: "80%",
-              margin: "40px auto",
+              margin: "auto",
               borderRadius: "10px",
               textAlign: "center",
               lineHeight: "2",
@@ -69,7 +85,7 @@ function SelectAmount() {
             sx={{
               padding: "10px",
               width: "80%",
-              margin: "40px auto",
+              margin: "auto",
               borderRadius: "10px",
               textAlign: "center",
               lineHeight: "2",
@@ -122,7 +138,7 @@ function SelectAmount() {
                 borderRadius: "20px",
                 width: "20%",
                 padding: "10px",
-                marginTop: "30px",
+                margin: "auto",
                 textAlign: "center",
                 fontSize: 28,
               }}

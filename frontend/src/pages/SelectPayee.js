@@ -19,26 +19,41 @@ function SelectPayee() {
   }
 
   return (
-    <>
-      <Box sx={{ backgroundColor: "#F5F5F9" }}>
+    
+      <Box
+        sx={{
+          display: "grid",
+          backgroundColor: "#F5F5F9",
+          gridTemplateRows: "auto 1fr auto",
+          height: "100vh",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
+      >
         <Header />
+
         <Box
           sx={{
-            padding: "10px",
-            width: "80%",
-            margin: "40px auto",
-            borderRadius: "10px",
-            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-            textAlign: "center",
-            lineHeight: "2",
-            backgroundColor: "#fff",
+            display: "grid", // Make this Box a grid container
+            gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
+            padding: "20px", // Add some padding around the Box
           }}
         >
-          <Typography variant="h4">Pay Or Move Money</Typography>
-        </Box>
-        <Box>
-          {/* 标题 */}
-          <Box sx={{ marginBottom: "20px" }}>
+          <Box
+            sx={{
+              padding: "10px",
+              width: "80%",
+              margin: "auto",
+              borderRadius: "10px",
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+              textAlign: "center",
+              lineHeight: "2",
+              backgroundColor: "#fff",
+            }}
+          >
+            <Typography variant="h4">Pay Or Move Money</Typography>
+          </Box>
+          <Box sx={{ margin: "auto" }}>
             <div>
               <CreditCard
                 cardnumber={"4321123412341234"}
@@ -63,7 +78,7 @@ function SelectPayee() {
                 color: "#000",
                 borderRadius: "10px",
                 width: "20%",
-                marginTop: "30px",
+                margin: "auto",
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
@@ -91,7 +106,7 @@ function SelectPayee() {
                 color: "#000",
                 borderRadius: "10px",
                 width: "20%",
-                marginTop: "30px",
+                margin: "auto",
                 display: "flex", // Enable Flexbox layout
                 justifyContent: "flex-start", // Align content to the left
                 alignItems: "center", // Center content vertically
@@ -104,10 +119,9 @@ function SelectPayee() {
             </Button>
           </Box>
         </Box>
-
         <Footer />
       </Box>
-    </>
+    
   );
 }
 
