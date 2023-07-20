@@ -28,7 +28,9 @@ function TransferPage() {
             backgroundColor: "#fff",
           }}
         >
-          <Typography variant="h4">Choose Your Card</Typography>
+          <Typography variant="h4">
+            Choose Your Card To Transfer From
+          </Typography>
         </Box>
         <Box>
           {/* 标题 */}
