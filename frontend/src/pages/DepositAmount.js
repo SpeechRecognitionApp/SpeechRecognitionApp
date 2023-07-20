@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import { useNavigate } from "react-router-dom";
+import { Margin } from "@mui/icons-material";
 
 function DepositAmount() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function DepositAmount() {
           }}
         >
           {/* 标题 */}
-          <Box>
+          <Box sx={{ marginTop: "auto" }}>
             <div>
               <CreditCard
                 cardnumber={"4321123412341234"}
@@ -111,6 +112,7 @@ function DepositAmount() {
                 padding: "10px",
                 textAlign: "center",
                 fontSize: 28,
+                marginBottom: "auto",
               }}
               onClick={handleClick}
             >
