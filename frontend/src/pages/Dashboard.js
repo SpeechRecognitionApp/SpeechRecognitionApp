@@ -17,16 +17,6 @@ function Dashboard() {
       flexDirection: "column",
       overflow: "hidden",
     }}>
-    <Box
-      sx={{
-        display: "grid",
-        backgroundColor: "#F5F5F9",
-        gridTemplateRows: "auto 1fr auto",
-        height: "100vh",
-        flexDirection: "column",
-        // overflow: "hidden",
-      }}
-    >
       <Header />
       <Box sx={{
           display: "grid", // Make this Box a grid container
