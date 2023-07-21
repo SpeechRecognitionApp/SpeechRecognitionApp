@@ -96,14 +96,14 @@ function SelectContact() {
             padding: "20px",
             width: "80%",
             margin: "auto",
-            borderRadius: "10px",
-            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+           
+           
             textAlign: "center",
             lineHeight: "2",
-            backgroundColor: "#fff",
+          
           }}
         >
-          <Typography variant="h4">Choose Your Card To Transfer</Typography>
+          <TitleBox buttonText="Choose Contact"/> 
         </Box>
         <Box
           sx={{

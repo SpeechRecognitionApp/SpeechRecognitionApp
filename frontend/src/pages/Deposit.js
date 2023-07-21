@@ -4,6 +4,7 @@ import CardSelector from "../components/CardSelector";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import TitleBox from "../components/TitleBox";
 
 function DepositPage() {
   const navigate = useNavigate();
@@ -35,16 +36,16 @@ function DepositPage() {
         <Box
           sx={{
             padding: "20px",
-            width: "80%",
+           
             margin: "auto",
             borderRadius: "10px",
-            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+          
             textAlign: "center",
             lineHeight: "2",
-            backgroundColor: "#fff",
+            
           }}
         >
-          <Typography variant="h4">Choose A Card To Deposit To</Typography>
+          <TitleBox buttonText="Choose card to deposit into"/>
         </Box>
         {/* 标题 */}
         <Box sx={{ marginTop: "auto", marginBottom: "auto" }}>

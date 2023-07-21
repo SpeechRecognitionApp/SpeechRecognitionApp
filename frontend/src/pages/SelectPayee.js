@@ -6,6 +6,7 @@ import CreditCard from "../components/CreditCard";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { useNavigate } from "react-router-dom";
+import TitleBox from "../components/TitleBox";
 
 function SelectPayee() {
   const navigate = useNavigate();
@@ -42,16 +43,15 @@ function SelectPayee() {
           <Box
             sx={{
               padding: "10px",
-              width: "80%",
+              
               margin: "auto",
-              borderRadius: "10px",
-              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+             
               textAlign: "center",
               lineHeight: "2",
-              backgroundColor: "#fff",
+             
             }}
           >
-            <Typography variant="h4">Pay Or Move Money</Typography>
+            <TitleBox buttonText="Pay or Move Money"/> 
           </Box>
           <Box sx={{ margin: "auto" }}>
             <div>

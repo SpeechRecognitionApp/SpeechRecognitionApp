@@ -89,11 +89,11 @@ const AudioRecorder = () => {
   return (
     <div className="container">
       {recording ? (
-        <Button variant = 'contained' size='large' sx={{textTransform:'none',mt:10,bgcolor: '#2196f3'}} onClick={stopRecording}>
+        <Button variant = 'contained' size='large' sx={{textTransform:'none',bgcolor: '#ffff',color:'black',fontWeight:'black'}} onClick={stopRecording}>
           Stop Recording
         </Button>
       ) : (
-        <Button variant = 'contained' size='large' sx={{textTransform:'none',mt:10,size:'large',bgcolor: '#2196f3'}} startIcon ={<KeyboardVoiceIcon/>} onClick={startRecording}>
+        <Button variant = 'contained' size='large' sx={{textTransform:'none',size:'large',bgcolor: '#ffff',color:'black',fontWeight:'bold'}} startIcon ={<KeyboardVoiceIcon/>} onClick={startRecording}>
           Click to Start Voice Navigation
         </Button>
       )}
