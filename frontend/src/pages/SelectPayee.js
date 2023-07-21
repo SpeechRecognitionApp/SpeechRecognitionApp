@@ -20,18 +20,17 @@ function SelectPayee() {
   }
 
   return (
-    
-      <Box
-        sx={{
-          display: "grid",
-          backgroundColor: "#F5F5F9",
-          gridTemplateRows: "auto 1fr auto",
-          height: "100vh",
-          flexDirection: "column",
-          overflow: "hidden",
-        }}
-      >
-        <Header />
+    <Box
+      sx={{
+        display: "grid",
+        backgroundColor: "#F5F5F9",
+        gridTemplateRows: "auto 1fr auto",
+        height: "100vh",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <Header />
 
         <Box
           sx={{
@@ -91,37 +90,36 @@ function SelectPayee() {
             </Button>
           </Box>
 
-          <Box
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "10px",
+              width: "20%",
+              marginBottom: "auto",
+              display: "flex", // Enable Flexbox layout
+              justifyContent: "flex-start", // Align content to the left
+              alignItems: "center", // Center content vertically
+              padding: "10px", // Add some padding
             }}
+            onClick={handleClick2}
           >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: "10px",
-                width: "20%",
-                margin: "auto",
-                display: "flex", // Enable Flexbox layout
-                justifyContent: "flex-start", // Align content to the left
-                alignItems: "center", // Center content vertically
-                padding: "10px", // Add some padding
-              }}
-              onClick={handleClick2}
-            >
-              <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new
-              person or company
-            </Button>
-          </Box>
+            <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new person
+            or company
+          </Button>
         </Box>
-        <Footer />
       </Box>
-    
+      <Footer />
+    </Box>
   );
 }
 
