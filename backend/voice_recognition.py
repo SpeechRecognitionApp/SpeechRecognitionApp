@@ -68,5 +68,17 @@ def extract_text_and_check_for_transfer(data_json):
         return json.dumps({"text": "transfer"})
     if "withdraw" in words:
         return json.dumps({"text": "withdraw"})
+    if "deposit" in words:
+        return json.dumps({"text": "deposit"})
     else:
         return None
+
+
+def check_key_points_transaction(words_input):
+    keywords = ["transaction", "history", "records", "transaction history"]
+    commands = ["send", "money", "to"]
+
+    if any(keyword in words_input for keyword in keywords):
+        return json.dumps({"text": "transaction"})
+    if all(command in words_input for command in commands):
+        return json.dumps({"text": "transaction"})

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
-import Button from '@mui/material/Button';
-import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-
+import Button from "@mui/material/Button";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
@@ -69,17 +68,13 @@ const AudioRecorder = () => {
       .then((data) => {
         console.log("Response from server:", data);
 
-        // 提取返回的 text 字段
         const text = data.text;
         console.log("Text:", text);
 
-        // 检查 text 字段中是否包含 "transfer" 这个单词
         if (text && text.includes("transfer")) {
-          // 如果包含 "transfer" 这个单词，打开一个新的网页
           window.location.href = "/transfer";
         }
         if (text && text.includes("withdraw")) {
-          // 如果包含 "transfer" 这个单词，打开一个新的网页
           window.location.href = "/withdraw";
         }
       })
@@ -89,11 +84,33 @@ const AudioRecorder = () => {
   return (
     <div className="container">
       {recording ? (
-        <Button variant = 'contained' size='large' sx={{textTransform:'none',bgcolor: '#ffff',color:'black',fontWeight:'black'}} onClick={stopRecording}>
+        <Button
+          variant="contained"
+          size="large"
+          sx={{
+            textTransform: "none",
+            bgcolor: "#ffff",
+            color: "black",
+            fontWeight: "black",
+          }}
+          onClick={stopRecording}
+        >
           Stop Recording
         </Button>
       ) : (
-        <Button variant = 'contained' size='large' sx={{textTransform:'none',size:'large',bgcolor: '#ffff',color:'black',fontWeight:'bold'}} startIcon ={<KeyboardVoiceIcon/>} onClick={startRecording}>
+        <Button
+          variant="contained"
+          size="large"
+          sx={{
+            textTransform: "none",
+            size: "large",
+            bgcolor: "#ffff",
+            color: "black",
+            fontWeight: "bold",
+          }}
+          startIcon={<KeyboardVoiceIcon />}
+          onClick={startRecording}
+        >
           Click to Start Voice Navigation
         </Button>
       )}
