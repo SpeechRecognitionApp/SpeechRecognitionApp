@@ -63,22 +63,23 @@ def extract_text_and_check_for_transfer(data_json):
     words = text.split()
     print(words)
 
-    # 检查是否包含 "transfer" 这个单词
     if "transfer" in words:
         return json.dumps({"text": "transfer"})
     if "withdraw" in words:
         return json.dumps({"text": "withdraw"})
     if "deposit" in words:
         return json.dumps({"text": "deposit"})
-    else:
-        return None
 
+    transactions_command = ["transaction", "history", "records", "transaction history"]
+    transfer_commands = ["send", "money", "to", "transfer"]
+    account_commands = ["account", "management", "account management", "manage"]
 
-def check_key_points_transaction(words_input):
-    keywords = ["transaction", "history", "records", "transaction history"]
-    commands = ["send", "money", "to"]
-
-    if any(keyword in words_input for keyword in keywords):
+    if any(command in words for command in transactions_command):
         return json.dumps({"text": "transaction"})
-    if all(command in words_input for command in commands):
-        return json.dumps({"text": "transaction"})
+    if any(command in words for command in transfer_commands):
+        return json.dumps({"text": "transfer"})
+    if any(command in words for command in account_commands):
+        return json.dumps({"text": "account"})
+
+    # 如果以上条件都不满足，返回一个错误消息
+    return json.dumps({"error": "The voice command you entered is incorrect"})

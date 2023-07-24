@@ -77,6 +77,15 @@ const AudioRecorder = () => {
         if (text && text.includes("withdraw")) {
           window.location.href = "/withdraw";
         }
+        if (text && text.includes("deposit")) {
+          window.location.href = "/deposit";
+        }
+        if (text && text.includes("transaction")) {
+          window.location.href = "/transactions";
+        }
+        if (text && text.includes("account")) {
+          window.location.href = "/accountmanage";
+        }
       })
       .catch((error) => console.error("Error:", error));
   };
