@@ -1,36 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import Button from "@mui/material/Button";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
-import annyang from "annyang";
+import io from "socket.io-client";
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
+  const [recognizedText, setRecognizedText] = useState("");
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
 
   useEffect(() => {
-    // Set up annyang for voice commands
-    if (annyang) {
-      // Define voice commands and their corresponding functions
-      const commands = {
-        "start recording": startRecording,
-        "deposit": stopRecording,
-      };
-      annyang.addCommands(commands);
-
-      // Start annyang listening
-      annyang.start();
-    } else {
-      console.log("Sorry, your browser doesn't support annyang for speech recognition.");
-    }
-
-    // Clean up annyang when the component is unmounted
-    return () => {
-      if (annyang) {
-        annyang.abort();
-      }
-    };
+    startRecording();
   }, []);
 
   const startRecording = () => {
