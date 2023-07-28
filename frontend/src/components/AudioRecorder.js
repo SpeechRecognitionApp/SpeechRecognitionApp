@@ -11,8 +11,37 @@ const AudioRecorder = () => {
   const audioChunks = useRef([]);
 
   useEffect(() => {
-    startRecording();
+    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+
+    socket.on("recognized_text", (data) => {
+      const text = JSON.parse(data).text;
+      setRecognizedText(text);
+
+      if (text && text.includes("deposit")) {
+        // Stop recording when "deposit" is detected
+        console.log("Deposit detected")
+        window.location.href = "/deposit";
+        
+      }
+      if (text && text.includes("withdraw")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/withdraw";
+      }
+
+      if (text && text.includes("transfer")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/transfer";
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
+
+ 
 
   const startRecording = () => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {

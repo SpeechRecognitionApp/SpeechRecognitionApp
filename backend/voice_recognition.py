@@ -3,11 +3,44 @@ import wave
 import json
 import subprocess
 import time
+import pyaudio
+from flask_socketio import SocketIO
 from vosk import Model, KaldiRecognizer
+
 
 # Load the Vosk model
 model = Model(lang="en-us")
 
+
+def extract_text_and_check_for_keywords(data_json):
+    # Parse JSON data
+    data = json.loads(data_json)
+
+    # Extract the text field's content
+    text = data.get("text", "")
+
+    # Split the text into words
+    words = text.split()
+
+    if "deposit" in words:
+        return json.dumps({"text": "deposit"})
+    elif "withdraw" in words:
+        return json.dumps({"text": "withdraw"})
+
+    # If none of the keywords are found, return None
+    return None
+
+def constant_voice():
+    recognizer = KaldiRecognizer(model,16000)
+    mic = pyaudio.PyAudio()
+    stream = mic.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8192)
+
+    while True:
+        data = stream.read(4096)
+        if recognizer.AcceptWaveform(data):
+            text = recognizer.Result()
+            result = extract_text_and_check_for_keywords(text)
+            print(result)
 
 def transcribe_audio(file):
     # Printing file name and MIME type
