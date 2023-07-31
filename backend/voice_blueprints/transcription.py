@@ -1,4 +1,4 @@
-# blueprints/transcription.py
+# voice_blueprints/transcription.py
 from flask import Blueprint, request, jsonify
 from .voice_recognition import transcribe_audio
 

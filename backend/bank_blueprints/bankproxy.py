@@ -1,4 +1,4 @@
-# blueprints/bankproxy.py
+# voice_blueprints/bankproxy.py
 import requests
 from flask import Blueprint, request, Response
 

@@ -71,13 +71,9 @@ def transcribe_audio(file):
 
 
 def extract_text_and_check_for_keywords(data_json):
-    # 解析 JSON 数据
     data = json.loads(data_json)
     # print(data)
-    # 提取 text 字段的内容
     text = data.get("text", "")
-
-    # 将 text 字段的内容分割成单词
     words = text.split()
     # print(words)
 
