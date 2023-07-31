@@ -11,8 +11,37 @@ const AudioRecorder = () => {
   const audioChunks = useRef([]);
 
   useEffect(() => {
-    startRecording();
+    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+
+    socket.on("recognized_text", (data) => {
+      const text = JSON.parse(data).text;
+      setRecognizedText(text);
+
+      if (text && text.includes("deposit")) {
+        // Stop recording when "deposit" is detected
+        console.log("Deposit detected")
+        window.location.href = "/deposit";
+        
+      }
+      if (text && text.includes("withdraw")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/withdraw";
+      }
+
+      if (text && text.includes("transfer")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/transfer";
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
+
+ 
 
   const startRecording = () => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
@@ -96,57 +125,57 @@ const AudioRecorder = () => {
       .catch((error) => console.error("Error:", error));
   };
 
-  return (
-    <div className="container">
-      {recording ? (
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            textTransform: "none",
-            bgcolor: "#ffff",
-            color: "black",
-            fontWeight: "black",
-          }}
-          onClick={stopRecording}
-        >
-          Stop Recording
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            textTransform: "none",
-            size: "large",
-            bgcolor: "#ffff",
-            color: "black",
-            fontWeight: "bold",
-          }}
-          startIcon={<KeyboardVoiceIcon />}
-          onClick={startRecording}
-        >
-          Click to Start Voice Navigation
-        </Button>
-      )}
-      {audioUrl && (
-        <div className="audio-wrapper">
-          <p>Audio file:</p>
-          <audio controls src={audioUrl}></audio>
-          <p>
-            <a
-              href={audioUrl}
-              download="recording.wav"
-              className="download-link"
-            >
-              Download
-              {audioUrl}
-            </a>
-          </p>
-        </div>
-      )}
-    </div>
-  );
+  // return (
+  //   <div className="container">
+  //     {recording ? (
+  //       <Button
+  //         variant="contained"
+  //         size="large"
+  //         sx={{
+  //           textTransform: "none",
+  //           bgcolor: "#ffff",
+  //           color: "black",
+  //           fontWeight: "black",
+  //         }}
+  //         onClick={stopRecording}
+  //       >
+  //         Stop Recording
+  //       </Button>
+  //     ) : (
+  //       <Button
+  //         variant="contained"
+  //         size="large"
+  //         sx={{
+  //           textTransform: "none",
+  //           size: "large",
+  //           bgcolor: "#ffff",
+  //           color: "black",
+  //           fontWeight: "bold",
+  //         }}
+  //         startIcon={<KeyboardVoiceIcon />}
+  //         onClick={startRecording}
+  //       >
+  //         Click to Start Voice Navigation
+  //       </Button>
+  //     )}
+  //     {audioUrl && (
+  //       <div className="audio-wrapper">
+  //         <p>Audio file:</p>
+  //         <audio controls src={audioUrl}></audio>
+  //         <p>
+  //           <a
+  //             href={audioUrl}
+  //             download="recording.wav"
+  //             className="download-link"
+  //           >
+  //             Download
+  //             {audioUrl}
+  //           </a>
+  //         </p>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
 };
 
 export default AudioRecorder;
