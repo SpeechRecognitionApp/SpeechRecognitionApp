@@ -125,57 +125,57 @@ const AudioRecorder = () => {
       .catch((error) => console.error("Error:", error));
   };
 
-  return (
-    <div className="container">
-      {recording ? (
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            textTransform: "none",
-            bgcolor: "#ffff",
-            color: "black",
-            fontWeight: "black",
-          }}
-          onClick={stopRecording}
-        >
-          Stop Recording
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            textTransform: "none",
-            size: "large",
-            bgcolor: "#ffff",
-            color: "black",
-            fontWeight: "bold",
-          }}
-          startIcon={<KeyboardVoiceIcon />}
-          onClick={startRecording}
-        >
-          Click to Start Voice Navigation
-        </Button>
-      )}
-      {audioUrl && (
-        <div className="audio-wrapper">
-          <p>Audio file:</p>
-          <audio controls src={audioUrl}></audio>
-          <p>
-            <a
-              href={audioUrl}
-              download="recording.wav"
-              className="download-link"
-            >
-              Download
-              {audioUrl}
-            </a>
-          </p>
-        </div>
-      )}
-    </div>
-  );
+  // return (
+  //   <div className="container">
+  //     {recording ? (
+  //       <Button
+  //         variant="contained"
+  //         size="large"
+  //         sx={{
+  //           textTransform: "none",
+  //           bgcolor: "#ffff",
+  //           color: "black",
+  //           fontWeight: "black",
+  //         }}
+  //         onClick={stopRecording}
+  //       >
+  //         Stop Recording
+  //       </Button>
+  //     ) : (
+  //       <Button
+  //         variant="contained"
+  //         size="large"
+  //         sx={{
+  //           textTransform: "none",
+  //           size: "large",
+  //           bgcolor: "#ffff",
+  //           color: "black",
+  //           fontWeight: "bold",
+  //         }}
+  //         startIcon={<KeyboardVoiceIcon />}
+  //         onClick={startRecording}
+  //       >
+  //         Click to Start Voice Navigation
+  //       </Button>
+  //     )}
+  //     {audioUrl && (
+  //       <div className="audio-wrapper">
+  //         <p>Audio file:</p>
+  //         <audio controls src={audioUrl}></audio>
+  //         <p>
+  //           <a
+  //             href={audioUrl}
+  //             download="recording.wav"
+  //             className="download-link"
+  //           >
+  //             Download
+  //             {audioUrl}
+  //           </a>
+  //         </p>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
 };
 
 export default AudioRecorder;
