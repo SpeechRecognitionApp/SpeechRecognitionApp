@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify
+import requests
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
-import os
-from voice_recognition import transcribe_audio
+from backend.blueprints.voice_recognition import transcribe_audio
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -25,6 +25,34 @@ def transcribe():
 
     # Return the transcription result
     return result, 200
+
+
+@app.route('/proxy/<path:url>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def proxy(url):
+    try:
+        if request.method == 'GET':
+            resp = requests.get(f'https://openbanking.santander.co.uk/{url}',headers={'Accept': 'application/prs.openbanking.opendata.v2.2+json'})
+        elif request.method == 'POST':
+            resp = requests.post(f'https://openbanking.santander.co.uk/{url}', json=request.json, headers=request.headers)
+        elif request.method == 'PUT':
+            resp = requests.put(f'https://openbanking.santander.co.uk/{url}', json=request.json, headers=request.headers)
+        elif request.method == 'DELETE':
+            resp = requests.delete(f'https://openbanking.santander.co.uk/{url}', headers=request.headers)
+    except Exception as e:
+        return Response(f"An error occurred: {str(e)}", status=500)
+
+    print(resp.status_code)
+    # print(resp.text)
+    print(resp.headers.items())
+    headers = {k: v for k, v in resp.headers.items() if k.lower() not in ('transfer-encoding', 'content-length')}
+    return resp.text, 200
+    # return Response(resp.text, resp.status_code, resp.headers.items())
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

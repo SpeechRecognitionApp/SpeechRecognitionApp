@@ -20,11 +20,11 @@ def transcribe_audio(file):
     converted_filename = f"converted_audio_{timestamp}.wav"
 
     # Save the file to disk with the unique filename
-    file_path = os.path.join("C:/Users/minha/Downloads", unique_filename)
+    file_path = os.path.join("/Users/junwei/Downloads", unique_filename)
     file.save(file_path)
 
     # Convert audio format using ffmpeg
-    output_path = os.path.join("C:/Users/minha/Downloads", converted_filename)
+    output_path = os.path.join("/Users/junwei/Downloads", converted_filename)
     subprocess.run(['ffmpeg', '-i', file_path, output_path])
 
     # Process the audio file with Vosk
