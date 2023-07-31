@@ -5,12 +5,26 @@ import json
 from vosk import Model, KaldiRecognizer
 from flask_socketio import SocketIO
 import pyaudio
+from openbank_api import authenticate_with_open_bank_project
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+# username = "minhazh00"
+# password = "Openbankminz1!"
+# consumer_key = "kbvhddnoif1m5iisus1uewgqgkkyplunvs5otfhb"
+#
+# auth_token = authenticate_with_open_bank_project(username,password,consumer_key)
+#
+# if auth_token:
+#     print("Authentication token:",auth_token)
+#
+# else:
+#     print("Authentication failed")
+#
 model = Model(lang="en-us")
+
 
 
 def extract_text_and_check_for_keywords(data_json):
