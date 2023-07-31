@@ -1,6 +1,9 @@
 # app.py
 from flask import Flask
 from flask_cors import CORS
+from flask_socketio import SocketIO
+
+from voice_recognition import constant_voice
 from transcription import transcription
 from bankproxy import bankproxy
 import requests
@@ -24,9 +27,12 @@ data = {
     # "intent": "login"
 }
 
+
+constant_voice();
+
 response = requests.get(url, data=data)
 print(response.text)
 with open('response.html', 'w') as f:
     f.write(response.text)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5008)

@@ -1,11 +1,11 @@
 import requests
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, Response
 from flask_cors import CORS
 import json
-from backend.blueprints.vosk import Model, KaldiRecognizer
+# from blueprints.vosk import Model, KaldiRecognizer
 from flask_socketio import SocketIO
+
 import pyaudio
-from openbank_api import authenticate_with_open_bank_project
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -119,5 +119,4 @@ def proxy(url):
 if __name__ == '__main__':
     # Start constant voice recognition in the background
     socketio.start_background_task(target=transcribe)
-
     socketio.run(app, debug=True,allow_unsafe_werkzeug=True)

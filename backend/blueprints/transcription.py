@@ -1,6 +1,6 @@
 # blueprints/transcription.py
 from flask import Blueprint, request, jsonify
-from voice_recognition import transcribe_audio
+from .voice_recognition import transcribe_audio
 
 transcription = Blueprint('transcription', __name__)
 

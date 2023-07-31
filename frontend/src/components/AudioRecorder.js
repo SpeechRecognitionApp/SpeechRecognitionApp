@@ -19,9 +19,8 @@ const AudioRecorder = () => {
 
       if (text && text.includes("deposit")) {
         // Stop recording when "deposit" is detected
-        console.log("Deposit detected")
+        console.log("Deposit detected");
         window.location.href = "/deposit";
-        
       }
       if (text && text.includes("withdraw")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
@@ -40,8 +39,6 @@ const AudioRecorder = () => {
       socket.disconnect();
     };
   }, []);
-
- 
 
   const startRecording = () => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
