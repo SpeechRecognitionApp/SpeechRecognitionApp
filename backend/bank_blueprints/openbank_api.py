@@ -1,5 +1,8 @@
 import requests
 
+
+
+
 def authenticate_with_open_bank_project(username, password, consumer_key):
     api_url = "https://apisandbox.openbankproject.com/my/logins/direct"
 
