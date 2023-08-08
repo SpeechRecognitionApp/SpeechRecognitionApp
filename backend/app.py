@@ -24,10 +24,8 @@ auth_token = authenticate_with_open_bank_project(username,password,consumer_key)
 
 if auth_token:
     print("Authentication token:",auth_token)
-
 else:
     print("Authentication failed")
-
 
 # url = "https://api.monzo.com/oauth2/authorize"
 url = "https://auth.monzo.com"
