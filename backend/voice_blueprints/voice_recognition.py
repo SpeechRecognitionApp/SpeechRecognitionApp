@@ -85,12 +85,12 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "deposit"})
 
     transactions_command = ["transaction", "history", "records", "transaction history"]
-    transfer_commands = ["send", "money", "to", "transfer"]
+    transfer_commands = ["send", "money", "to"]
     account_commands = ["account", "management", "account management", "manage"]
 
     if any(command in words for command in transactions_command):
         return json.dumps({"text": "transaction"})
-    if any(command in words for command in transfer_commands):
+    if all(command in words for command in transfer_commands):
         return json.dumps({"text": "transfer"})
     if any(command in words for command in account_commands):
         return json.dumps({"text": "account"})

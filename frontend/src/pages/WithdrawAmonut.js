@@ -16,16 +16,20 @@ function WithdrawAmount() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/dashboard");
+    navigate("/insertmoney");
   }
+
+  // Mock data for card balance
+  const cardBalance = "£500.00";
+
   return (
     <Box
       sx={{
-        display: "grid",
+        display: "flex",
         backgroundColor: "#F5F5F9",
-        gridTemplateRows: "auto 1fr auto",
-        height: "100vh",
         flexDirection: "column",
+        // gridTemplateRows: "auto 1fr auto",
+        height: "100vh",
         overflow: "hidden",
       }}
     >
@@ -33,22 +37,40 @@ function WithdrawAmount() {
 
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-          padding: "20px", // Add some padding around the Box
-          height: "100%", // Make this Box fill its parent
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "40px",
+          overflowY: "auto", // Add vertical scroll if content overflows
         }}
       >
         {/* 标题 */}
-        <Box sx={{ marginTop: "auto" }}>
-          <div>
-            <CreditCard
-              cardnumber={"4321123412341234"}
-              cardname={"Morgan Bush"}
-              carddate={"09/30"}
-              cardcvc={"454"}
-            />
-          </div>
+        <Box
+          sx={{
+            marginBottom: "20px",
+            mt: "auto",
+          }}
+        >
+          <CreditCard
+            cardnumber={"4321123412341234"}
+            cardname={"Morgan Bush"}
+            carddate={"09/30"}
+            cardcvc={"454"}
+          />
+          {/* Display Card Balance */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "20px 0", // Add some vertical padding
+            }}
+          >
+            <Typography variant="h6">
+              Current Card Balance: {cardBalance}
+            </Typography>
+          </Box>
         </Box>
 
         <Box
@@ -111,6 +133,7 @@ function WithdrawAmount() {
               textAlign: "center",
               fontSize: 28,
               marginBottom: "auto",
+              mt: "auto",
             }}
             onClick={handleClick}
           >

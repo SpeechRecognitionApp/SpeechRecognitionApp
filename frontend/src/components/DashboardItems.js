@@ -12,15 +12,15 @@ function KioskDashboard() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/transfer");
+    navigate("/selectpayee");
   }
 
   function handleClick2() {
-    navigate("/withdraw");
+    navigate("/withdrawamount");
   }
 
   function handleClick3() {
-    navigate("/deposit");
+    navigate("/depositamount");
   }
 
   function handleClick4() {
@@ -37,7 +37,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 5,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick3}
         >
@@ -47,12 +53,16 @@ function KioskDashboard() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              
             }}
           >
-            <MonetizationOnRoundedIcon sx={{ fontSize: 100,color:'black' }} />{" "}
+            <MonetizationOnRoundedIcon sx={{ fontSize: 100, color: "black" }} />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>Deposit</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              Deposit
+            </Typography>
           </Box>
         </Button>
       </Grid>
@@ -61,7 +71,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 5,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick2}
         >
@@ -73,9 +89,14 @@ function KioskDashboard() {
               justifyContent: "center",
             }}
           >
-            <MoneyOffRoundedIcon sx={{ fontSize: 100,color:'black'}} />{" "}
+            <MoneyOffRoundedIcon sx={{ fontSize: 100, color: "black" }} />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>Withdraw</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              Withdraw
+            </Typography>
           </Box>
         </Button>
       </Grid>
@@ -84,7 +105,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 5,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 5,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick}
         >
@@ -96,9 +123,16 @@ function KioskDashboard() {
               justifyContent: "center",
             }}
           >
-            <SwapHorizontalCircleRoundedIcon sx={{ fontSize: 100,color:'black' }} />{" "}
+            <SwapHorizontalCircleRoundedIcon
+              sx={{ fontSize: 100, color: "black" }}
+            />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>Transfer</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              Transfer
+            </Typography>
           </Box>
         </Button>
       </Grid>
@@ -107,7 +141,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 10,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick4}
         >
@@ -119,9 +159,14 @@ function KioskDashboard() {
               justifyContent: "center",
             }}
           >
-            <HistoryRoundedIcon sx={{ fontSize: 100,color:'black' }} />{" "}
+            <HistoryRoundedIcon sx={{ fontSize: 100, color: "black" }} />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>Transaction History</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              Transaction History
+            </Typography>
           </Box>
         </Button>
       </Grid>
@@ -130,7 +175,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 10,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick3}
         >
@@ -142,9 +193,14 @@ function KioskDashboard() {
               justifyContent: "center",
             }}
           >
-            <SmartToyRoundedIcon sx={{ fontSize: 100,color:'black' }} />{" "}
+            <SmartToyRoundedIcon sx={{ fontSize: 100, color: "black" }} />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>AI Assistant</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              AI Assistant
+            </Typography>
           </Box>
         </Button>
       </Grid>
@@ -153,7 +209,13 @@ function KioskDashboard() {
         <Button
           variant="contained"
           size="large"
-          sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10,bgcolor:'#ffff' }}
+          sx={{
+            height: 200,
+            width: 200,
+            borderRadius: 10,
+            marginTop: 10,
+            bgcolor: "#ffff",
+          }}
           fullWidth
           onClick={handleClick5}
         >
@@ -165,9 +227,14 @@ function KioskDashboard() {
               justifyContent: "center",
             }}
           >
-            <AccountCircleRoundedIcon sx={{ fontSize: 100,color:'black' }} />{" "}
+            <AccountCircleRoundedIcon sx={{ fontSize: 100, color: "black" }} />{" "}
             {/* Adjust this to change the icon size */}
-            <Typography variant="body1" sx={{color:'black',fontWeight:'bold'}}>Account Management</Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "black", fontWeight: "bold" }}
+            >
+              Account Management
+            </Typography>
           </Box>
         </Button>
       </Grid>

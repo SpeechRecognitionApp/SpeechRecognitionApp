@@ -10,19 +10,31 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
+  const navigate = useNavigate();
+
   const [mode, setMode] = useState({
     mode1: false,
     mode2: false,
     mode3: false,
   });
 
-  const handleChange = (event) => {
-    setMode({ ...mode, [event.target.name]: event.target.checked });
+  const handleChange = (e) => {
+    const name = e.target.name;
+    setMode({
+      mode1: false,
+      mode2: false,
+      mode3: false,
+      [name]: e.target.checked,
+    });
   };
+
+  function handleClick() {
+    navigate("/dashboard");
+  }
 
   const handleConfirm = () => {
     console.log("Confirmed:", mode);
@@ -130,10 +142,10 @@ const WelcomePage = () => {
             variant="contained"
             sx={{ backgroundColor: "#4caf50", color: "white" }}
             startIcon={<CheckCircleIcon />}
-            onClick={handleConfirm}
+            onClick={handleClick}
             style={{ textTransform: "none" }}
           >
-            <Link to="/dashboard">Confirm</Link>
+            Confirm
           </Button>
         </Paper>
       </Box>
