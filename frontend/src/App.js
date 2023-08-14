@@ -16,6 +16,7 @@ import CreateNewPayee from "./pages/CreateNewPayee";
 import WithdrawAmount from "./pages/WithdrawAmonut";
 import DepositAmount from "./pages/DepositAmount";
 import SantanderBranches from "./pages/SantanderBranches";
+import Chatbot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/createnewpayee" element={<CreateNewPayee />} />
         <Route path="/branches" element={<SantanderBranches />} />
+        <Route path="/chatbot" element ={<Chatbot />} />
       </Routes>
     </div>
   );

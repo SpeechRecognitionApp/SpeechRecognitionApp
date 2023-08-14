@@ -11,7 +11,7 @@ function TitleBox({buttonText}) {
         <Box sx={{bgcolor:"#ffff",height:75,width:1100,mx:'auto',borderRadius:'16px', display: "flex",
         justifyContent: "center",
         alignItems: "center", boxShadow:5}}>
-            <Typography variant='h4' sx={{ textAlign: "center" }}>
+            <Typography variant='h4' sx={{ textAlign: "center",fontWeight:'bold' }}>
                 {buttonText}
             </Typography>
         </Box>

@@ -4,6 +4,8 @@ from flask_socketio import SocketIO
 from voice_blueprints.voice_recognition import constant_voice
 from voice_blueprints.transcription import transcription
 from bank_blueprints.bankproxy import bankproxy
+# from facial_blueprints import trigger_facial
+from chatbot_blueprints.chatbot import chatbot
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -11,6 +13,9 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 app.register_blueprint(transcription)
 app.register_blueprint(bankproxy)
+# trigger_facial()
+app.register_blueprint(chatbot)
+
 
 # username = "minhazh00"
 # password = "Openbankminz1!"
@@ -51,5 +56,5 @@ def init_constant_voice():
 
 if __name__ == '__main__':
     # app.run(debug=True, port=5008)
-    socketio.start_background_task(target=init_constant_voice)
+    # socketio.start_background_task(target=init_constant_voice)
     socketio.run(app, debug=True, allow_unsafe_werkzeug=True, port=5000)

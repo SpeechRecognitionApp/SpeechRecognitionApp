@@ -31,6 +31,10 @@ function KioskDashboard() {
     navigate("/accountmanage");
   }
 
+  function handleClick6() {
+    navigate("/chatbot");
+  }
+
   return (
     <Grid container spacing={2} sx={{ mt: 2 }}>
       <Grid item xs={4}>
@@ -132,7 +136,7 @@ function KioskDashboard() {
           size="large"
           sx={{ height: 200, width: 200, borderRadius: 10, marginTop: 10,bgcolor:'#ffff' }}
           fullWidth
-          onClick={handleClick3}
+          onClick={handleClick6}
         >
           <Box
             sx={{
