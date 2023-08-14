@@ -2,8 +2,15 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
 import "./Footer.css";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/");
+  }
+
   return (
     <div className="footer">
       <Box
@@ -19,7 +26,11 @@ const Footer = () => {
           marginTop: "auto",
         }}
       >
-        <Button className="footer-button" style={{ textTransform: "none" }}>
+        <Button
+          className="footer-button"
+          style={{ textTransform: "none" }}
+          onClick={handleClick}
+        >
           <Typography
             variant="h6"
             sx={{

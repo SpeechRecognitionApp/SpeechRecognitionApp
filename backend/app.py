@@ -4,6 +4,9 @@ from flask_socketio import SocketIO
 from voice_blueprints.voice_recognition import constant_voice
 from voice_blueprints.transcription import transcription
 from bank_blueprints.bankproxy import bankproxy
+from bank_blueprints.openbank_api import authenticate_with_open_bank_project
+from database_blueprints import controllers
+
 # from facial_blueprints import trigger_facial
 from chatbot_blueprints.chatbot import chatbot
 
@@ -13,23 +16,21 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 app.register_blueprint(transcription)
 app.register_blueprint(bankproxy)
+app.register_blueprint(controllers)
+
+username = "minhazh00"
+password = "Openbankminz1!"
+consumer_key = "kbvhddnoif1m5iisus1uewgqgkkyplunvs5otfhb"
 # trigger_facial()
 app.register_blueprint(chatbot)
 
 
-# username = "minhazh00"
-# password = "Openbankminz1!"
-# consumer_key = "kbvhddnoif1m5iisus1uewgqgkkyplunvs5otfhb"
-#
-# auth_token = authenticate_with_open_bank_project(username,password,consumer_key)
-#
-# if auth_token:
-#     print("Authentication token:",auth_token)
-#
-# else:
-#     print("Authentication failed")
-#
+auth_token = authenticate_with_open_bank_project(username,password,consumer_key)
 
+if auth_token:
+    print("Authentication token:",auth_token)
+else:
+    print("Authentication failed")
 
 # url = "https://api.monzo.com/oauth2/authorize"
 url = "https://auth.monzo.com"

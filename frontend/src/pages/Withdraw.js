@@ -37,16 +37,12 @@ function WithdrawPage() {
         <Box
           sx={{
             padding: "20px",
-          
             margin: "auto",
-            
-            
             textAlign: "center",
             lineHeight: "2",
-            
           }}
         >
-          <TitleBox buttonText="Choose a card to withdraw from"/> 
+          <TitleBox buttonText="Choose a card to withdraw from" />
         </Box>
         {/* 标题 */}
         <Box>
