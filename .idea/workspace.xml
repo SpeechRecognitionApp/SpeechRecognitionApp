@@ -5,13 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/voice_blueprints/voice_recognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/voice_blueprints/voice_recognition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database_blueprints/card_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database_blueprints/card_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AudioRecorder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SelectPayee.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SelectPayee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/EnterPin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/EnterPin.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +90,7 @@
       <workItem from="1688386220326" duration="13575000" />
       <workItem from="1691972079231" duration="584000" />
       <workItem from="1691972671637" duration="2423000" />
-      <workItem from="1692031701172" duration="2317000" />
+      <workItem from="1692031701172" duration="4924000" />
     </task>
     <task id="LOCAL-00001" summary="Initialization">
       <created>1688384439415</created>
@@ -161,6 +158,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Welcome Page And Login Page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1692063967168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1692066304005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
   </component>
 </project>

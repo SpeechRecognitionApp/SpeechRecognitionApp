@@ -5,14 +5,8 @@ import swal from "sweetalert";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import "./EnterPin.css";
-import {
-  Box,
-  Typography,
-  Button,
-  Grid,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import axios from "axios";
+import { Box } from "@mui/material";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -20,13 +14,17 @@ function EnterPin() {
   const [value, setValue] = useState("");
   const [pinTime, setPinTime] = useState(new Date());
   const pinRef = useRef(null);
+  const keyboardRef = useRef(null);
+
   useEffect(() => {
     const timerID = setInterval(() => setPinTime(new Date()), 1000);
     return () => clearInterval(timerID);
   }, []);
 
   useEffect(() => {
+    console.log("useEffect triggered, current value:", value);
     if (value.length === 4) {
+      console.log("value length is 4, calling onSubmitHandler");
       onSubmitHandler();
     }
   }, [value]);
@@ -43,7 +41,7 @@ function EnterPin() {
       let elements = pinRef.current.elements;
       if (elements[2].state.value) {
         elements[3].state.value = button;
-        setTimeout(onSubmitHandler, 1000);
+        // setTimeout(onSubmitHandler, 1000);
         return;
       }
       if (elements[1].state.value) {
@@ -65,18 +63,49 @@ function EnterPin() {
     elements[1].state.value = "";
     elements[2].state.value = "";
     elements[3].state.value = "";
-    keyboardRef.current.clearInput();
+    // keyboardRef.current.clearInput();
+    console.log("Cleared value:", value);
+    setTimeout(() => {
+      window.location.href = "/enterpin";
+    }, 700);
   };
 
   const onSubmitHandler = () => {
+    if (value.length !== 4) {
+      // If the length of the value is not equal to 4, we exit early.
+      // This ensures we don't attempt to submit an incomplete PIN.
+      return;
+    }
     console.log("Submitting PIN, current value:", value);
 
-    if (value === "1234") {
-      window.location.href = "/";
-    } else {
-      swal("Invalid PIN!", "Pin you entered didn't match. Try again", "error");
-      handleClear();
-    }
+    const requestData = {
+      card_number: "1252452125167000",
+      pin: value,
+    };
+
+    axios
+      .post("http://127.0.0.1:5000/card/verify_pin", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.data.match) {
+          window.location.href = "/";
+        } else {
+          swal(
+            "Invalid PIN!",
+            "Pin you entered didn't match. Try again",
+            "error"
+          );
+          handleClear();
+        }
+      })
+      .catch((error) => {
+        console.error("API request failed:", error);
+        swal("Error", "Failed to verify PIN. Please try again later.", "error");
+        handleClear();
+      });
   };
 
   return (
@@ -111,6 +140,7 @@ function EnterPin() {
           onComplete={onSubmitHandler}
         />
         <Keyboard
+          ref={keyboardRef}
           theme={
             "hg-theme-default hg-theme-numeric hg-layout-numeric numeric-theme"
           }

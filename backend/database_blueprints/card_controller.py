@@ -7,8 +7,10 @@ card_controller = Blueprint('card_controller', __name__)
 @card_controller.route('/card/verify_pin', methods=['POST'])
 def verify_pin():
     data = request.get_json()
+    print(data)
     card_number = data.get('card_number')
     pin = int(data.get('pin'))
+
 
     # 查找与给定卡号匹配的卡
     card = Card.objects(card_number=card_number).first()
