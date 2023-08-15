@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import axios from "axios";
 import TitleBox from "../components/TitleBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Radio, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,30 @@ function SelectContact() {
     navigate("/selectamount");
   }
 
+  const [contacts, setContacts] = useState([]); // Step 1: State to hold contacts
   const [selectedValue, setSelectedValue] = useState(null);
+
+  useEffect(() => {
+    const userId = "1"; // Replace with actual user ID
+    axios
+      .get(`http://127.0.0.1:5000/contacts/user/${userId}`)
+      .then((response) => {
+        setContacts(response.data);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch contacts:", error);
+      });
+  }, []);
+
+  // Step 2: Format the contacts data for the DataGrid
+  const rows = contacts.map((contact, index) => ({
+    id: index,
+    firstName: contact.first_name,
+    lastName: contact.second_name,
+    sort_code: contact.sort_code,
+    accountNumber: contact.account_number,
+  }));
+  console.log(rows);
 
   const columns = [
     {
@@ -43,8 +67,8 @@ function SelectContact() {
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
     {
-      field: "cardNumber",
-      headerName: "Card Number",
+      field: "sort_code",
+      headerName: "Sort Code",
       flex: 1,
       editable: false,
       align: "left",
@@ -59,17 +83,6 @@ function SelectContact() {
     },
   ];
 
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
   return (
     <Box
       sx={{
@@ -96,14 +109,12 @@ function SelectContact() {
             padding: "20px",
             width: "80%",
             margin: "auto",
-           
-           
+
             textAlign: "center",
             lineHeight: "2",
-          
           }}
         >
-          <TitleBox buttonText="Choose Contact"/> 
+          <TitleBox buttonText="Choose Contact" />
         </Box>
         <Box
           sx={{

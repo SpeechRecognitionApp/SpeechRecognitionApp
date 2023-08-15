@@ -28,9 +28,10 @@ def get_contact(contact_id):
         return jsonify({'message': 'Contact not found'}), 404
     return jsonify(json.loads(contact.to_json())), 200
 
-
 @contact_controller.route('/contacts/user/<user_id>', methods=['GET'])
 def get_contacts_by_user(user_id):
+    if not user_id:
+        return jsonify({'message': 'user_id parameter is required'}), 400
     contacts = Contact.objects(user_id=user_id)
     if not contacts:
         return jsonify({'message': 'No contacts found for this user'}), 404
