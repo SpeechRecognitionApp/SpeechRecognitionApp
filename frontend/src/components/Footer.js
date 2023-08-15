@@ -10,6 +10,9 @@ const Footer = () => {
   function handleClick() {
     navigate("/");
   }
+  function handleClick2() {
+    navigate("/enterpin");
+  }
 
   return (
     <div className="footer">
@@ -54,7 +57,11 @@ const Footer = () => {
             Tutorials
           </Typography>
         </Button>
-        <Button className="footer-button" style={{ textTransform: "none" }}>
+        <Button
+          className="footer-button"
+          style={{ textTransform: "none" }}
+          onClick={handleClick2}
+        >
           <Typography
             variant="h6"
             sx={{
