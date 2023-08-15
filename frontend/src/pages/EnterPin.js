@@ -66,7 +66,7 @@ function EnterPin() {
     // keyboardRef.current.clearInput();
     console.log("Cleared value:", value);
     setTimeout(() => {
-      window.location.href = "/enterpin";
+      window.location.href = "/";
     }, 700);
   };
 
@@ -91,7 +91,7 @@ function EnterPin() {
       })
       .then((response) => {
         if (response.data.match) {
-          window.location.href = "/";
+          window.location.href = "/welcome";
         } else {
           swal(
             "Invalid PIN!",

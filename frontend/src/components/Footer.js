@@ -8,10 +8,10 @@ const Footer = () => {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/");
+    navigate("/welcome");
   }
   function handleClick2() {
-    navigate("/enterpin");
+    navigate("/");
   }
 
   return (

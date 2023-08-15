@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/CreateNewPayee.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/CreateNewPayee.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +88,7 @@
       <workItem from="1688386220326" duration="13575000" />
       <workItem from="1691972079231" duration="584000" />
       <workItem from="1691972671637" duration="2423000" />
-      <workItem from="1692031701172" duration="8262000" />
+      <workItem from="1692031701172" duration="8573000" />
     </task>
     <task id="LOCAL-00001" summary="Initialization">
       <created>1688384439415</created>
