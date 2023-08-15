@@ -83,7 +83,10 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "withdraw"})
     if "deposit" in words:
         return json.dumps({"text": "deposit"})
-
+    if "before" in words:
+        return json.dumps({"text": "before"})
+    if "create" in words:
+        return json.dumps({"text": "create"})
     transactions_command = ["transaction", "history", "records", "transaction history"]
     transfer_commands = ["send", "money", "to"]
     account_commands = ["account", "management", "account management", "manage"]

@@ -7,6 +7,7 @@ import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { useNavigate } from "react-router-dom";
 import TitleBox from "../components/TitleBox";
+import TransferAudioRecorder from "../AudioRecorders/TransferAudioRecorder";
 
 function SelectPayee() {
   const navigate = useNavigate();
@@ -31,64 +32,63 @@ function SelectPayee() {
       }}
     >
       <Header />
-
+      <TransferAudioRecorder />
+      <Box
+        sx={{
+          display: "grid", // Make this Box a grid container
+          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
+          padding: "20px", // Add some padding around the Box
+        }}
+      >
         <Box
           sx={{
-            display: "grid", // Make this Box a grid container
-            gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-            padding: "20px", // Add some padding around the Box
+            padding: "10px",
+
+            margin: "auto",
+
+            textAlign: "center",
+            lineHeight: "2",
           }}
         >
-          <Box
+          <TitleBox buttonText="Pay or Move Money" />
+        </Box>
+        <Box sx={{ margin: "auto" }}>
+          <div>
+            <CreditCard
+              cardnumber={"4321123412341234"}
+              cardname={"Morgan Bush"}
+              carddate={"09/30"}
+              cardcvc={"454"}
+            />
+          </div>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
             sx={{
-              padding: "10px",
-              
+              backgroundColor: "#fff",
+              color: "#000",
+              borderRadius: "10px",
+              width: "20%",
               margin: "auto",
-             
-              textAlign: "center",
-              lineHeight: "2",
-             
-            }}
-          >
-            <TitleBox buttonText="Pay or Move Money"/> 
-          </Box>
-          <Box sx={{ margin: "auto" }}>
-            <div>
-              <CreditCard
-                cardnumber={"4321123412341234"}
-                cardname={"Morgan Bush"}
-                carddate={"09/30"}
-                cardcvc={"454"}
-              />
-            </div>
-          </Box>
-          <Box
-            sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "flex-start",
               alignItems: "center",
-              height: "100%",
+              padding: "10px",
             }}
+            onClick={handleClick}
           >
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: "10px",
-                width: "20%",
-                margin: "auto",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                padding: "10px",
-              }}
-              onClick={handleClick}
-            >
-              <GroupRoundedIcon sx={{ marginRight: "10px" }} />
-              Someone You've Paid Before
-            </Button>
-          </Box>
+            <GroupRoundedIcon sx={{ marginRight: "10px" }} />
+            Someone You've Paid Before
+          </Button>
+        </Box>
 
         <Box
           sx={{
