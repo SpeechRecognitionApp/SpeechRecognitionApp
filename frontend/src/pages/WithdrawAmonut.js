@@ -16,7 +16,7 @@ function WithdrawAmount() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/insertmoney");
+    navigate("/takecash");
   }
 
   // Mock data for card balance

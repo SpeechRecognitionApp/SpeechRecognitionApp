@@ -19,6 +19,7 @@ import SantanderBranches from "./pages/SantanderBranches";
 import TakeCash from "./pages/TakeCash";
 import InsertMoney from "./pages/InsertMoney";
 import Chatbot from "./pages/Chatbot";
+import EnterPin from "./pages/EnterPin";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
         <Route path="/branches" element={<SantanderBranches />} />
         <Route path="/takecash" element={<TakeCash />} />
         <Route path="/insertmoney" element={<InsertMoney />} />
-        <Route path="/chatbot" element ={<Chatbot />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/enterpin" element={<EnterPin />} />
       </Routes>
     </div>
   );
