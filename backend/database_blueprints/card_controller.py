@@ -42,7 +42,7 @@ def get_card(card_number):
     card = Card.objects(card_number=card_number).first()
     if not card:
         return jsonify({'message': 'Card not found'}), 404
-    return jsonify(card.to_json()), 200
+    return jsonify(json.loads(card.to_json())), 200
 
 @card_controller.route('/cards/user/<user_id>', methods=['GET'])
 def get_cards_by_user(user_id):

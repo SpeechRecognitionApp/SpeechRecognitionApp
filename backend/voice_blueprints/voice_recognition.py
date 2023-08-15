@@ -5,7 +5,7 @@ import subprocess
 import time
 import pyaudio
 from vosk import Model, KaldiRecognizer
-
+from word2number import w2n
 
 # Load the Vosk model
 model = Model(lang="en-us")
@@ -77,8 +77,20 @@ def extract_text_and_check_for_keywords(data_json):
     words = text.split()
     # print(words)
 
+    # 尝试将输入文本转换为数字
+    try:
+        number = w2n.word_to_num(text)
+        return json.dumps({"text": number})
+    except ValueError:
+        # 输入文本无法转换为数字
+        pass
+
     if "transfer" in words:
         return json.dumps({"text": "transfer"})
+    if "select" in words:
+        return json.dumps({"text": "select"})
+    if "confirm" in words:
+        return json.dumps({"text": "confirm"})
     if "withdraw" in words:
         return json.dumps({"text": "withdraw"})
     if "deposit" in words:

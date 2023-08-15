@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Radio, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 
 function SelectContact() {
   const navigate = useNavigate();
@@ -28,6 +29,36 @@ function SelectContact() {
       .catch((error) => {
         console.error("Failed to fetch contacts:", error);
       });
+  }, []);
+
+  useEffect(() => {
+    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+
+    const isNumeric = (str) => {
+      return !isNaN(str) && !isNaN(parseFloat(str));
+    };
+
+    socket.on("recognized_text", (data) => {
+      const text = JSON.parse(data).text;
+      // setRecognizedText(text);
+      console.log("Number detected:", text);
+      if (isNumeric(text)) {
+        // If the recognized text is a number, update the state with the numeric value
+        setSelectedValue(parseFloat(text));
+        console.log("Number detected:", text);
+        return; // Exit early as we've handled the numeric case
+      }
+
+      if (text && text.includes("select")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/selectamount";
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   // Step 2: Format the contacts data for the DataGrid
