@@ -3,12 +3,90 @@ import { Box, Grid, Typography, TextField, Button, Paper, Avatar } from "@mui/ma
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyRoundedIcon from '@mui/icons-material/SmartToyRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import MicRoundedIcon from '@mui/icons-material/MicRounded';
+import InputAdornment from "@mui/material/InputAdornment";
+import WatsonRecorder from "../AudioRecorders/WatsonRecorder";
+
+
 
 function WatsonChatBot() {
+  const [recording, setRecording] = useState(false);
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [transcribedText, setTranscribedText] = useState("");
+  const mediaRecorder = useRef(null);
+  const audioChunks = useRef([]);
   const [chatHistory, setChatHistory] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [sessionID, setSessionID] = useState(null);
   const chatContainerRef = useRef(null);
+
+  const handleSendButtonClick = () => {
+    handleSendMessage(); // Call your existing send message function
+  };
+
+  const startRecording = () => {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      mediaRecorder.current = new MediaRecorder(stream);
+      mediaRecorder.current.ondataavailable = (event) => {
+        audioChunks.current.push(event.data);
+      };
+      mediaRecorder.current.onstop = saveAudioToDisk;
+      mediaRecorder.current.start();
+      setRecording(true);
+    });
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder.current) {
+      mediaRecorder.current.stop();
+      setRecording(false);
+    }
+  };
+
+  const handleMicButtonClick = () => {
+    if (!recording) {
+      // Start recording
+      startRecording();
+    } else {
+      // Stop recording
+      stopRecording();
+    }
+  };
+
+  const saveAudioToDisk = () => {
+    const audioBlob = new Blob(audioChunks.current, { type: "audio/wav" });
+    const audioUrl = URL.createObjectURL(audioBlob);
+    setAudioUrl(audioUrl);
+    console.log(audioBlob);
+    console.log(audioBlob.size, audioBlob.type);
+    // Send audio to server
+    sendAudioToServer(audioBlob);
+  };
+
+
+  const sendAudioToServer = (audioBlob) => {
+    const formData = new FormData();
+    formData.append("audio", audioBlob);
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+    fetch("http://127.0.0.1:5000/transcribe", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response from server:", data.text);
+
+        const transcribedText = data.text;
+        setInputMessage(transcribedText);
+        
+
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+
 
   useEffect(() => {
     // Generate a new session ID when the component mounts
@@ -139,28 +217,52 @@ function WatsonChatBot() {
           ))}
         </Box>
       </Grid>
-      {/* Grid item for the input field */}
       <Grid item xs={12}>
-        <Box sx={{ display: "flex", alignItems: "center", mx: 'auto', mt: 5, width: 1000 }}>
+        <Box sx={{ display: "flex", alignItems: "center", mx: "auto", mt: 5, width: 1000 }}>
           <TextField
             label="Type your message"
             variant="outlined"
             fullWidth
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={handleSendMessage}
+                    sx={{ textTransform: "none" }}
+                  >
+                    <SendIcon />
+                  </Button>
+                
+                </InputAdornment>
+              ),
+            }}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={handleSendMessage}
-            sx={{ ml: '10px', height: 56, width: 100, textTransform: 'none' }}
+                      <Button
+            variant="outlined"
+            sx={{
+              width: 50,
+              height: 56,
+              ml: 2,
+              borderColor: recording ? "red" : "#BFBFBF",
+              "&:hover": {
+                borderColor: "red",
+              },
+            }}
+            onClick={handleMicButtonClick} // Call the updated button click handler
           >
-            <SendIcon />
-          </Button>
+            <MicRoundedIcon sx={{ color: recording ? "red" : "black" }} />
+            </Button>
+            
         </Box>
       </Grid>
+      <WatsonRecorder onSendButtonClick={handleSendButtonClick} />
     </Grid>
+   
   );
 }
 

@@ -19,6 +19,7 @@ def transcribe():
     # Transcribe the audio file using Vosk
     result = transcribe_audio(file)
 
+
     if not result:
         return jsonify({"error": "The voice command you entered is incorrect"}), 400
 

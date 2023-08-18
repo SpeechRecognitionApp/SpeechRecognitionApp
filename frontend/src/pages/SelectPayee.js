@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 function SelectPayee() {
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
+  const [recognizedText, setRecognizedText] = useState("");
   const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
 
   useEffect(() => {
@@ -59,13 +60,13 @@ function SelectPayee() {
 
       if (text && text.includes("before")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Withdraw detected");
+        console.log("Someone paid before detected");
         window.location.href = "/selectcontact";
       }
 
       if (text && text.includes("create")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Withdraw detected");
+        console.log("New person detected detected");
         window.location.href = "/createnewpayee";
       }
     });
