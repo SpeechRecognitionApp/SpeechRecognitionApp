@@ -8,6 +8,9 @@ const Footer = () => {
   const navigate = useNavigate();
 
   function handleClick() {
+    navigate("/welcome");
+  }
+  function handleClick2() {
     navigate("/");
   }
 
@@ -54,7 +57,11 @@ const Footer = () => {
             Tutorials
           </Typography>
         </Button>
-        <Button className="footer-button" style={{ textTransform: "none" }}>
+        <Button
+          className="footer-button"
+          style={{ textTransform: "none" }}
+          onClick={handleClick2}
+        >
           <Typography
             variant="h6"
             sx={{

@@ -18,7 +18,6 @@ app.register_blueprint(transcription)
 app.register_blueprint(bankproxy)
 app.register_blueprint(controllers)
 
-
 username = "minhazh00"
 password = "Openbankminz1!"
 consumer_key = "kbvhddnoif1m5iisus1uewgqgkkyplunvs5otfhb"

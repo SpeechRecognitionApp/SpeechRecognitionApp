@@ -3,6 +3,8 @@ import json
 from ibm_watson import AssistantV2, ApiException
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
+
+
 chatbot = Blueprint('chatbot', __name__)
 
 

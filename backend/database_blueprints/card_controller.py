@@ -7,8 +7,10 @@ card_controller = Blueprint('card_controller', __name__)
 @card_controller.route('/card/verify_pin', methods=['POST'])
 def verify_pin():
     data = request.get_json()
+    print(data)
     card_number = data.get('card_number')
     pin = int(data.get('pin'))
+
 
     # 查找与给定卡号匹配的卡
     card = Card.objects(card_number=card_number).first()
@@ -40,7 +42,7 @@ def get_card(card_number):
     card = Card.objects(card_number=card_number).first()
     if not card:
         return jsonify({'message': 'Card not found'}), 404
-    return jsonify(card.to_json()), 200
+    return jsonify(json.loads(card.to_json())), 200
 
 @card_controller.route('/cards/user/<user_id>', methods=['GET'])
 def get_cards_by_user(user_id):

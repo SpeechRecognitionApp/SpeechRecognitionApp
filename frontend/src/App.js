@@ -19,12 +19,13 @@ import SantanderBranches from "./pages/SantanderBranches";
 import TakeCash from "./pages/TakeCash";
 import InsertMoney from "./pages/InsertMoney";
 import Chatbot from "./pages/Chatbot";
+import EnterPin from "./pages/EnterPin";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/transfer" element={<TransferPage />} />
@@ -41,7 +42,8 @@ function App() {
         <Route path="/branches" element={<SantanderBranches />} />
         <Route path="/takecash" element={<TakeCash />} />
         <Route path="/insertmoney" element={<InsertMoney />} />
-        <Route path="/chatbot" element ={<Chatbot />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/" element={<EnterPin />} />
       </Routes>
     </div>
   );
