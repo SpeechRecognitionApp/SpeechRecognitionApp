@@ -52,11 +52,11 @@ function WatsonChatBot() {
         
           if (data.response.text.includes("Redirecting you to the deposit page...")) {
             setTimeout(() => {
-              window.location.href = "/deposit"; // Redirect to deposit page
+              window.location.href = "/depositamount"; // Redirect to deposit page
             }, 2000); // 2 seconds delay
           } else if (data.response.text.includes("Redirecting you to the withdraw page...")) {
             setTimeout(() => {
-              window.location.href = "/withdraw"; // Redirect to withdraw page
+              window.location.href = "/withdrawamount"; // Redirect to withdraw page
             }, 2000); // 2 seconds delay
           } else if (data.response.text.includes("Redirecting you to the transfer page...")) {
             setTimeout(() => {
