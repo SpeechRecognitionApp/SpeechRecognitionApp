@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import HeaderRecorder from "../AudioRecorders/HeaderRecording";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -88,6 +89,7 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+      <HeaderRecorder/>
     </AppBar>
   );
 };

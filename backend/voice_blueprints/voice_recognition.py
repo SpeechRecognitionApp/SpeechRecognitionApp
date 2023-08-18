@@ -99,6 +99,16 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "before"})
     if "create" in words:
         return json.dumps({"text": "create"})
+    if "transaction" in words:
+        return json.dumps({"text":"transaction"})
+    if "assistant" in words:
+        return json.dumps({"text": "assistant"})
+    if "back" in words:
+        return json.dumps({"text": "back"})
+    if "forward" in words:
+        return json.dumps({"text": "forward"})
+    if "home" in words:
+        return json.dumps({"text": "home"})
     transactions_command = ["transaction", "history", "records", "transaction history"]
     transfer_commands = ["send", "money", "to"]
     account_commands = ["account", "management", "account management", "manage"]
@@ -111,4 +121,4 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "account"})
 
     # 如果以上条件都不满足，返回一个错误消息
-    return json.dumps({"error": "The voice command you entered is incorrect"})
+    return json.dumps({"error": f"You said {words} - incorrect voice command"})

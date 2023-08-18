@@ -11,9 +11,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import WithdrawAudioRecorder from "../AudioRecorders/WithdrawAudioRecorder";
 
 function WithdrawAmount() {
   const navigate = useNavigate();
+
+  
+  const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
+  const [manualInput, setManualInput] = useState("");
 
   function handleClick() {
     navigate("/takecash");
@@ -99,6 +105,8 @@ function WithdrawAmount() {
               <TextField
                 variant="outlined"
                 type="number"
+                value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber
+                onChange={(e) => setManualInput(e.target.value)} // Update manualInput state
                 sx={{ maxWidth: 200 }} // Limit the width of the TextField
                 InputProps={{
                   inputProps: {
@@ -141,7 +149,8 @@ function WithdrawAmount() {
           </Button>
         </Box>
       </Box>
-
+      <WithdrawAudioRecorder  detectedNumber={detectedNumber} // Pass detectedNumber as prop
+       setDetectedNumber={setDetectedNumber} />
       <Footer />
     </Box>
   );

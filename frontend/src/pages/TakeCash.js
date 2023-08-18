@@ -6,6 +6,7 @@ import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Radio, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Cash from "../AudioRecorders/Cash";
 
 function TakeCash() {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ function TakeCash() {
           Confirm
         </Button>
       </Box>
+      <Cash />
       <Footer />
     </Box>
   );

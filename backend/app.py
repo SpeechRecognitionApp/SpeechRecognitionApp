@@ -57,5 +57,5 @@ def init_constant_voice():
 
 if __name__ == '__main__':
     # app.run(debug=True, port=5008)
-    # socketio.start_background_task(target=init_constant_voice)
+    socketio.start_background_task(target=init_constant_voice)
     socketio.run(app, debug=True, allow_unsafe_werkzeug=True, port=5000)

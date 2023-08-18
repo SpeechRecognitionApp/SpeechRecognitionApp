@@ -7,6 +7,7 @@ const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
   const [recognizedText, setRecognizedText] = useState("");
+  const [selectedValue, setSelectedValue] = useState(null);
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
 
@@ -14,24 +15,46 @@ const AudioRecorder = () => {
     const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
 
     socket.on("recognized_text", (data) => {
-      const text = JSON.parse(data).text;
+      const parsedData = JSON.parse(data);
+      const text = parsedData.text;
+    
+      // Handle recognized numbers
+      if (typeof text === "number") {
+        // Handle the number value here
+        console.log("Number detected:", text);
+        setSelectedValue(parseFloat(text));
+        return; // Exit early, as we've handled the number case
+      }
+    
       setRecognizedText(text);
 
       if (text && text.includes("deposit")) {
         // Stop recording when "deposit" is detected
         console.log("Deposit detected");
-        window.location.href = "/deposit";
+        window.location.href = "/depositamount";
       }
       if (text && text.includes("withdraw")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
         console.log("Withdraw detected");
-        window.location.href = "/withdraw";
+        window.location.href = "/withdrawamount";
       }
 
       if (text && text.includes("transfer")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
         console.log("Withdraw detected");
         window.location.href = "/transfer";
+      }
+
+      if (text && text.includes("assistant")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/chatbot";
+      }
+
+      if (text && text.includes("transaction")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/transactions";
       }
     });
 

@@ -11,9 +11,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import { useNavigate } from "react-router-dom";
+import DepositAudioRecorder from "../AudioRecorders/DepositAudioRecorder";
+import { useState } from "react";
 
 function DepositAmount() {
   const navigate = useNavigate();
+
+  const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
+  const [manualInput, setManualInput] = useState("");
 
   function handleClick() {
     navigate("/insertmoney");
@@ -99,6 +104,8 @@ function DepositAmount() {
               <TextField
                 variant="outlined"
                 type="number"
+                value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber
+                onChange={(e) => setManualInput(e.target.value)} // Update manualInput state
                 sx={{ maxWidth: 200 }} // Limit the width of the TextField
                 InputProps={{
                   inputProps: {
@@ -141,7 +148,9 @@ function DepositAmount() {
           </Button>
         </Box>
       </Box>
-
+      <DepositAudioRecorder
+       detectedNumber={detectedNumber} // Pass detectedNumber as prop
+       setDetectedNumber={setDetectedNumber} />
       <Footer />
     </Box>
   );
