@@ -111,6 +111,21 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "home"})
     if "send" in words:
         return json.dumps({"text": "send"})
+    if "first" in words:
+        return json.dumps({"text": "first"})
+    if "last" in words:
+        return json.dumps({"text": "last"})
+    if "email" in words:
+        return json.dumps({"text": "email"})
+    if "line" in words:
+        return json.dumps({"text": "line"})
+    if "house" in words:
+        return json.dumps({"text": "house"})
+    if "post" in words:
+        return json.dumps({"text": "post"})
+    if "reset" in words:
+        return json.dumps({"text": "reset"})
+
 
     transactions_command = ["transaction", "history", "records", "transaction history"]
     transfer_commands = ["send", "money", "to"]

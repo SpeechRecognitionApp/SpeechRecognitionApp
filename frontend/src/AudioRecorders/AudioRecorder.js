@@ -42,7 +42,7 @@ const AudioRecorder = () => {
       if (text && text.includes("transfer")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
         console.log("Withdraw detected");
-        window.location.href = "/transfer";
+        window.location.href = "/selectpayee";
       }
 
       if (text && text.includes("assistant")) {
@@ -55,6 +55,12 @@ const AudioRecorder = () => {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
         console.log("Withdraw detected");
         window.location.href = "/transactions";
+      }
+
+      if (text && text.includes("account")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/accountmanage";
       }
     });
 

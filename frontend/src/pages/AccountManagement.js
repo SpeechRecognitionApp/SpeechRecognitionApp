@@ -4,9 +4,57 @@ import Footer from "../components/Footer";
 import TitleBox from "../components/TitleBox";
 import { Grid, Box, TextField, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import AccountManageRecorder from "../AudioRecorders/AccountManageRecorder";
+import { useRef } from "react";
 
 function AccountManagePage() {
   const navigate = useNavigate();
+
+  const firstNameRef = useRef(null); 
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const houseRef = useRef(null);
+  const streetRef = useRef(null);
+  const postRef = useRef(null);
+
+  const focusFirstNameTextField = () => {
+    if (firstNameRef.current) {
+      firstNameRef.current.focus();
+    }
+  };
+
+  const focusLastNameTextField = () => {
+    if (lastNameRef.current) {
+      lastNameRef.current.focus();
+    }
+  };
+
+  const focusEmailTextField = () => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  };
+
+  const focusStreetTextField = () => {
+    if (streetRef.current) {
+      streetRef.current.focus();
+    }
+  };
+
+  const focusHouseTextField = () => {
+    if (houseRef.current) {
+      houseRef.current.focus();
+    }
+  };
+
+  const focusPostTextField = () => {
+    if (postRef.current) {
+      postRef.current.focus();
+    }
+  };
+
+
+  
 
   function handleClick() {
     navigate("/dashboard");
@@ -76,6 +124,7 @@ function AccountManagePage() {
                   label="First Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={firstNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -83,6 +132,7 @@ function AccountManagePage() {
                   label="Street Line"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef ={streetRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -90,6 +140,7 @@ function AccountManagePage() {
                   label="Last Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef ={lastNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -97,6 +148,7 @@ function AccountManagePage() {
                   label="House Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={houseRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -104,6 +156,7 @@ function AccountManagePage() {
                   label="Email Address"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={emailRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -111,6 +164,7 @@ function AccountManagePage() {
                   label="Post code"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={postRef}
                 />
               </Grid>
             </Grid>
@@ -159,6 +213,12 @@ function AccountManagePage() {
           </Button>
         </Box>
       </Box>
+      <AccountManageRecorder onFirstKeywordDetected={focusFirstNameTextField}
+        onLastKeywordDetected={focusLastNameTextField}
+        onEmailKeywordDetected={focusEmailTextField}
+        onStreetKeywordDetected={focusStreetTextField}
+        onHouseKeywordDetected={focusHouseTextField}
+        onPostKeywordDetected={focusPostTextField}/>
       <Footer />
     </Box>
   );
