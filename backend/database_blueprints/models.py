@@ -1,9 +1,15 @@
 from mongoengine import *
 from mongoengine.signals import pre_save
 import datetime
+import certifi
+
+# connect('bank_app')  # 连接到MongoDB数据库，数据库名为'bank_app'
+connect(db='VoiceBank',
+        host='mongodb+srv://junweizhang530:Zjw530293@cluster0.9dvhmyd.mongodb.net/?retryWrites=true&w=majority',
+        authentication_source='admin',
+        tlsCAFile=certifi.where())
 
 
-connect('bank_app')  # 连接到MongoDB数据库，数据库名为'bank_app'
 class Counter(Document):
     name = StringField(required=True, unique=True)
     value = IntField(required=True)
@@ -11,7 +17,6 @@ class Counter(Document):
 
 @pre_save.connect
 def pre_save_user(sender, document, **kwargs):
-
     if sender != User:
         return
 
@@ -27,6 +32,7 @@ def pre_save_user(sender, document, **kwargs):
     counter.reload()  # Refresh the object after updating
 
     document.user_id = str(counter.value)
+
 
 class User(Document):
     user_id = StringField(unique=True)
@@ -56,6 +62,8 @@ def pre_save_contact(sender, document, **kwargs):
     counter.reload()  # Refresh the object after updating
 
     document.contact_id = str(counter.value)
+
+
 class Contact(Document):
     contact_id = StringField(unique=True)
     first_name = StringField(required=True)
@@ -114,6 +122,8 @@ def pre_save_transaction(sender, document, **kwargs):
     counter.reload()  # Refresh the object after updating
 
     document.transaction_id = str(counter.value)
+
+
 class Transaction(Document):
     transaction_id = StringField(required=True)
     timestamp = DateTimeField(default=datetime.datetime.now)
