@@ -13,7 +13,15 @@ function SelectContact() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/selectamount");
+    if (selectedValue) {
+      navigate("/selectamount", {
+        state: {
+          contactName: `${selectedValue.firstName} ${selectedValue.lastName}`,
+        },
+      });
+    } else {
+      alert("Please select a contact first!");
+    }
   }
 
   const [contacts, setContacts] = useState([]); // Step 1: State to hold contacts
@@ -64,6 +72,7 @@ function SelectContact() {
   // Step 2: Format the contacts data for the DataGrid
   const rows = contacts.map((contact, index) => ({
     id: index,
+    contactId: contact.contact_id,
     firstName: contact.first_name,
     lastName: contact.second_name,
     sort_code: contact.sort_code,
@@ -79,13 +88,21 @@ function SelectContact() {
       align: "left",
       renderCell: (params) => (
         <Radio
-          checked={selectedValue === params.value}
-          onChange={() => setSelectedValue(params.value)}
-          value={params.value}
+          checked={selectedValue && selectedValue.id === params.row.id}
+          onChange={() => setSelectedValue(params.row)} // 保存整行数据
+          value={params.row.id}
           name="select-row-radio-button"
           inputProps={{ "aria-label": `Select row ${params.value}` }}
         />
       ),
+    },
+    {
+      field: "contactId",
+      headerName: "Contact Id",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      align: "left",
+      flex: 1,
     },
     {
       field: "withdraw",

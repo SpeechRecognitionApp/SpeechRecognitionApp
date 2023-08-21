@@ -17,6 +17,8 @@ function SelectPayee() {
   const [card, setCard] = useState(null);
   const [recognizedText, setRecognizedText] = useState("");
   const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
+  // Mock data for card balance
+  const cardBalance = "£500.00";
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -100,7 +102,7 @@ function SelectPayee() {
         sx={{
           display: "grid", // Make this Box a grid container
           gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-          padding: "20px", // Add some padding around the Box
+          padding: "10px", // Add some padding around the Box
         }}
       >
         <Box
@@ -128,61 +130,67 @@ function SelectPayee() {
               </Typography>
             )}
           </div>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-          }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#fff",
-              color: "#000",
-              borderRadius: "10px",
-              width: "20%",
-              margin: "auto",
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              padding: "10px",
-            }}
-            onClick={handleClick}
-          >
-            <GroupRoundedIcon sx={{ marginRight: "10px" }} />
-            Someone You've Paid Before
-          </Button>
-        </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-          }}
-        >
-          <Button
-            variant="contained"
+          <Typography variant="h6">
+            Current Card Balance: {cardBalance}
+          </Typography>
+        </Box>
+        <Box>
+          <Box
             sx={{
-              backgroundColor: "#fff",
-              color: "#000",
-              borderRadius: "10px",
-              width: "20%",
-              marginBottom: "auto",
-              display: "flex", // Enable Flexbox layout
-              justifyContent: "flex-start", // Align content to the left
-              alignItems: "center", // Center content vertically
-              padding: "10px", // Add some padding
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50%",
             }}
-            onClick={handleClick2}
           >
-            <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new person
-            or company
-          </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                borderRadius: "10px",
+                width: "20%",
+                margin: "auto",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                padding: "10px",
+              }}
+              onClick={handleClick}
+            >
+              <GroupRoundedIcon sx={{ marginRight: "10px" }} />
+              Someone You've Paid Before
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50%",
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                borderRadius: "10px",
+                width: "20%",
+                marginBottom: "auto",
+                display: "flex", // Enable Flexbox layout
+                justifyContent: "flex-start", // Align content to the left
+                alignItems: "center", // Center content vertically
+                padding: "10px", // Add some padding
+              }}
+              onClick={handleClick2}
+            >
+              <PersonAddAltRoundedIcon sx={{ marginRight: "10px" }} />A new
+              person or company
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Footer />
