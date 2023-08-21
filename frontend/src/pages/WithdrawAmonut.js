@@ -11,8 +11,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import WithdrawAudioRecorder from "../AudioRecorders/WithdrawAudioRecorder";
+import axios from "axios";
 
 function WithdrawAmount() {
   const navigate = useNavigate();
@@ -20,13 +21,58 @@ function WithdrawAmount() {
   
   const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
   const [manualInput, setManualInput] = useState("");
+  const [card, setCard] = useState(null);
+  const [cardBalance, setCardBalance] = useState(null);
+  const cardNumber = "1252452125167000";
 
-  function handleClick() {
-    navigate("/takecash");
+  
+
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:5000/card/${cardNumber}`
+        );
+        setCard(response.data);
+        setCardBalance(response.data.balance);
+      } catch (error) {
+        if (error.response) {
+          console.error("Card not found", error.response.data);
+        } else if (error.request) {
+          console.error("No response was received", error.request);
+        } else {
+          console.error("Error", error.message);
+        }
+      }
+    };
+
+    fetchCardData();
+  }, [cardNumber]);
+
+  const handleClick = async () => {
+    const withdrawAmount = manualInput || detectedNumber;
+    
+    try {
+      const requestBody = {
+        card_number: cardNumber,
+        withdraw_amount: withdrawAmount,
+      };
+
+      await axios.post("http://127.0.0.1:5000/withdraw", requestBody);
+
+      // Navigate to the next page after successful deposit
+      navigate("/takecash");
+    } catch (error) {
+      console.error("Error depositing amount:", error);
+    }
+  };
+
+  function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString().substr(-2);
+    return `${month}/${year}`;
   }
-
-  // Mock data for card balance
-  const cardBalance = "£500.00";
 
   return (
     <Box
@@ -58,12 +104,20 @@ function WithdrawAmount() {
             mt: "auto",
           }}
         >
-          <CreditCard
-            cardnumber={"4321123412341234"}
-            cardname={"Morgan Bush"}
-            carddate={"09/30"}
-            cardcvc={"454"}
-          />
+            <div>
+            {card ? (
+              <CreditCard
+                cardnumber={card.card_number}
+                cardname={"Morgan Bush"}
+                carddate={formatDate(card.expiry_date.$date)}
+                cardcvc={card.cvc}
+              />
+            ) : (
+              <Typography variant="h6" color="textSecondary">
+                Loading Card Information...
+              </Typography>
+            )}
+          </div>
           {/* Display Card Balance */}
           <Box
             sx={{
@@ -74,7 +128,7 @@ function WithdrawAmount() {
             }}
           >
             <Typography variant="h6">
-              Current Card Balance: {cardBalance}
+            Current Card Balance: {cardBalance ? `£${cardBalance}` : "Loading..."}
             </Typography>
           </Box>
         </Box>

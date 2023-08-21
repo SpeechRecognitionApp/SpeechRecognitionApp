@@ -39,9 +39,9 @@ class User(Document):
     first_name = StringField(required=True)
     second_name = StringField(required=True)
     email = StringField(required=True)
-    house_name = StringField()
-    street_line = StringField()
-    postcode = StringField()
+    house_name = StringField(required=True)
+    street_line = StringField(required=True)
+    postcode = StringField(required=True)
 
 
 @pre_save.connect

@@ -5,9 +5,34 @@ import TitleBox from "../components/TitleBox";
 import { Grid, Box, TextField, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AccountManageRecorder from "../AudioRecorders/AccountManageRecorder";
-import { useRef } from "react";
+import { useRef,useState,useEffect } from "react";
+import axios from "axios";
 
 function AccountManagePage() {
+  const [userData, setUserData] = useState({
+    first_name: "",
+    second_name: "",
+    email: "",
+    house_name: "",
+    street_line: "",
+    postcode: "",
+  });
+
+  useEffect(() => {
+    // Fetch user info when the component mounts
+    fetchUserInfo();
+  }, []);
+
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:5000/user/1");
+      const user = response.data;
+      setUserData(user);
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
+
   const navigate = useNavigate();
 
   const firstNameRef = useRef(null); 
@@ -58,6 +83,10 @@ function AccountManagePage() {
 
   function handleClick() {
     navigate("/dashboard");
+  }
+
+  function handleClick2() {
+    window.location.reload();
   }
   const textFieldStyle = {
     backgroundColor: "white",
@@ -124,6 +153,7 @@ function AccountManagePage() {
                   label="First Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  value={userData.first_name}
                   inputRef={firstNameRef}
                 />
               </Grid>
@@ -132,6 +162,7 @@ function AccountManagePage() {
                   label="Street Line"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  value={userData.street_line}
                   inputRef ={streetRef}
                 />
               </Grid>
@@ -140,6 +171,7 @@ function AccountManagePage() {
                   label="Last Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  value={userData.second_name}
                   inputRef ={lastNameRef}
                 />
               </Grid>
@@ -148,6 +180,7 @@ function AccountManagePage() {
                   label="House Name"
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  value={userData.house_name}
                   inputRef={houseRef}
                 />
               </Grid>
@@ -157,6 +190,7 @@ function AccountManagePage() {
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                   inputRef={emailRef}
+                  value={userData.email}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -165,6 +199,7 @@ function AccountManagePage() {
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                   inputRef={postRef}
+                  value={userData.postcode}
                 />
               </Grid>
             </Grid>
@@ -191,6 +226,7 @@ function AccountManagePage() {
               marginBottom: "auto",
             }}
             style={resetButtonStyle}
+            onClick={handleClick2}
           >
             Reset
           </Button>
