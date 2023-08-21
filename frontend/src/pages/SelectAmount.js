@@ -11,11 +11,95 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CreditCard from "../components/CreditCard";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function SelectAmount() {
   const navigate = useNavigate();
+  const [card, setCard] = useState(null);
+  const location = useLocation();
+  const contactName = location.state.contactName;
+  const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
+  // Mock data for card balance
+  const cardBalance = "£500.00";
+  const [transferAmount, setTransferAmount] = useState(0);
 
+  async function handleWithdraw() {
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/withdraw", {
+        card_number: cardNumber,
+        withdraw_amount: parseFloat(transferAmount),
+      });
+
+      if (response.status === 200) {
+        // Handle success - update UI if necessary
+        console.log("Withdrawal successful!");
+        console.log("New Balance:", response.data.new_balance);
+        // Proceed to create transaction history
+        handleCreateTransaction();
+      } else {
+        // Handle error
+        console.error("Error in withdrawal:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Failed to withdraw:", error);
+    }
+  }
+
+  async function handleCreateTransaction() {
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/transaction", {
+        user_id: "1",
+        amount: parseFloat(transferAmount),
+        type: "transfer",
+        receiver: contactName,
+        // Add other fields if necessary
+      });
+
+      if (response.status === 201) {
+        // Handle success - update UI if necessary
+        console.log("Transaction created successfully!");
+      } else {
+        // Handle error
+        console.error("Error in transaction creation:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Failed to create transaction:", error);
+    }
+  }
+
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:5000/card/${cardNumber}`
+        );
+        setCard(response.data);
+      } catch (error) {
+        if (error.response) {
+          console.error("Card not found", error.response.data);
+        } else if (error.request) {
+          console.error("No response was received", error.request);
+        } else {
+          console.error("Error", error.message);
+        }
+      }
+    };
+
+    fetchCardData();
+  }, [cardNumber]);
+
+  function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString().substr(-2);
+    return `${month}/${year}`;
+  }
   function handleClick() {
+    handleWithdraw();
+    // Navigation or other logic here if necessary
+    handleCreateTransaction;
     navigate("/dashboard");
   }
   return (
@@ -41,17 +125,26 @@ function SelectAmount() {
           }}
         >
           {/* 标题 */}
-          <Box sx={{ marginBottom: "auto", marginTop: "auto" }}>
+          <Box sx={{ margin: "auto" }}>
             <div>
-              <CreditCard
-                cardnumber={"4321123412341234"}
-                cardname={"Morgan Bush"}
-                carddate={"09/30"}
-                cardcvc={"454"}
-              />
+              {card ? (
+                <CreditCard
+                  cardnumber={card.card_number}
+                  cardname={"Morgan Bush"}
+                  carddate={formatDate(card.expiry_date.$date)}
+                  cardcvc={card.cvc}
+                />
+              ) : (
+                <Typography variant="h6" color="textSecondary">
+                  Loading Card Information...
+                </Typography>
+              )}
             </div>
-          </Box>
 
+            <Typography variant="h6">
+              Current Card Balance: {cardBalance}
+            </Typography>
+          </Box>
           <Box
             sx={{
               padding: "10px 20px 30px 200px",
@@ -76,7 +169,7 @@ function SelectAmount() {
               </Grid>
               <Grid item>
                 <Typography variant="h6" sx={{ marginRight: "120px" }}>
-                  Money D Luffy
+                  {contactName}
                 </Typography>
               </Grid>
             </Grid>
@@ -107,6 +200,8 @@ function SelectAmount() {
                 <TextField
                   variant="outlined"
                   type="number"
+                  value={transferAmount}
+                  onChange={(e) => setTransferAmount(e.target.value)}
                   sx={{ maxWidth: 200 }} // Limit the width of the TextField
                   InputProps={{
                     inputProps: {
