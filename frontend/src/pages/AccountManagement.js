@@ -6,6 +6,7 @@ import { Grid, Box, TextField, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AccountManageRecorder from "../AudioRecorders/AccountManageRecorder";
 import { useRef,useState,useEffect } from "react";
+import swal from "sweetalert";
 import axios from "axios";
 
 function AccountManagePage() {
@@ -17,6 +18,10 @@ function AccountManagePage() {
     street_line: "",
     postcode: "",
   });
+
+ 
+
+  
 
   useEffect(() => {
     // Fetch user info when the component mounts
@@ -31,6 +36,16 @@ function AccountManagePage() {
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
+  };
+
+  const updateUserDetails = async () => {
+    try {
+      await axios.put("http://127.0.0.1:5000/user/1", userData);
+      console.log("User details updated successfully!");
+    } catch (error) {
+      console.error("Error updating user details:", error);
+    }
+    swal("Success","Details have been updated","success");
   };
 
   const navigate = useNavigate();
@@ -79,11 +94,10 @@ function AccountManagePage() {
   };
 
 
+
   
 
-  function handleClick() {
-    navigate("/dashboard");
-  }
+
 
   function handleClick2() {
     window.location.reload();
@@ -149,13 +163,14 @@ function AccountManagePage() {
               alignItems="center"
             >
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="First Name"
-                  fullWidth
-                  InputProps={{ style: textFieldStyle }}
-                  value={userData.first_name}
-                  inputRef={firstNameRef}
-                />
+              <TextField
+                label="First Name"
+                fullWidth
+                InputProps={{ style: textFieldStyle }}
+                value={userData.first_name} // Use value prop instead of defaultValue
+                inputRef={firstNameRef}
+                onChange={(e) => setUserData({ ...userData, first_name: e.target.value })} // Handle changes
+              />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -164,6 +179,7 @@ function AccountManagePage() {
                   InputProps={{ style: textFieldStyle }}
                   value={userData.street_line}
                   inputRef ={streetRef}
+                  onChange={(e) => setUserData({ ...userData, street_line: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -173,6 +189,7 @@ function AccountManagePage() {
                   InputProps={{ style: textFieldStyle }}
                   value={userData.second_name}
                   inputRef ={lastNameRef}
+                  onChange={(e) => setUserData({ ...userData, second_name: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -182,15 +199,18 @@ function AccountManagePage() {
                   InputProps={{ style: textFieldStyle }}
                   value={userData.house_name}
                   inputRef={houseRef}
+                  onChange={(e) => setUserData({ ...userData, house_name: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Email Address"
                   fullWidth
+                  value={userData.email}
                   InputProps={{ style: textFieldStyle }}
                   inputRef={emailRef}
-                  value={userData.email}
+                  onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -199,7 +219,11 @@ function AccountManagePage() {
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
                   inputRef={postRef}
-                  value={userData.postcode}
+                  value = {userData.postcode}
+                  onChange={(e) => setUserData({ ...userData, postcode: e.target.value })}
+                  
+                  
+
                 />
               </Grid>
             </Grid>
@@ -243,7 +267,7 @@ function AccountManagePage() {
               marginBottom: "auto",
             }}
             style={confirmButtonStyle}
-            onClick={handleClick}
+            onClick={updateUserDetails}
           >
             Confirm
           </Button>

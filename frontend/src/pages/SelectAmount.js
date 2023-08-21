@@ -99,7 +99,7 @@ function SelectAmount() {
   function handleClick() {
     handleWithdraw();
     // Navigation or other logic here if necessary
-    handleCreateTransaction;
+    handleCreateTransaction();
     navigate("/dashboard");
   }
   return (
