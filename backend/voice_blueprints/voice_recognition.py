@@ -125,7 +125,16 @@ def extract_text_and_check_for_keywords(data_json):
         return json.dumps({"text": "post"})
     if "reset" in words:
         return json.dumps({"text": "reset"})
-
+    if "code" in words:
+        return json.dumps({"text": "code"})
+    if "account" in words:
+        return json.dumps({"text": "account"})
+    if "account" in words:
+        return json.dumps({"text": "account"})
+    if "reference" in words:
+        return json.dumps({"text": "reference"})
+    if "description" in words:
+        return json.dumps({"text": "description"})
 
     transactions_command = ["transaction", "history", "records", "transaction history"]
     transfer_commands = ["send", "money", "to"]

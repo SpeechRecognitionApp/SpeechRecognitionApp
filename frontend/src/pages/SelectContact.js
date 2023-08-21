@@ -39,6 +39,17 @@ function SelectContact() {
       });
   }, []);
 
+  // Step 2: Format the contacts data for the DataGrid
+  const rows = contacts.map((contact, index) => ({
+    id: index,
+    contactId: contact.contact_id,
+    firstName: contact.first_name,
+    lastName: contact.second_name,
+    sort_code: contact.sort_code,
+    accountNumber: contact.account_number,
+  }));
+  console.log(rows);
+
   useEffect(() => {
     const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
 
@@ -51,13 +62,13 @@ function SelectContact() {
       // setRecognizedText(text);
       console.log("Number detected:", text);
       if (isNumeric(text)) {
-        // If the recognized text is a number, update the state with the numeric value
-        setSelectedValue(parseFloat(text));
-        console.log("Number detected:", text);
-        return; // Exit early as we've handled the numeric case
+        const rowIndex = parseInt(text, 10);
+        if (rowIndex >= 0 && rowIndex < rows.length) {
+          setSelectedValue(rows[rowIndex]); // 使用 rowIndex 获取行数据并将其设置为 selectedValue
+        }
       }
 
-      if (text && text.includes("select")) {
+      if (typeof text === "string" && text.includes("select")) {
         // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
         console.log("Withdraw detected");
         window.location.href = "/selectamount";
@@ -69,17 +80,6 @@ function SelectContact() {
     };
   }, []);
 
-  // Step 2: Format the contacts data for the DataGrid
-  const rows = contacts.map((contact, index) => ({
-    id: index,
-    contactId: contact.contact_id,
-    firstName: contact.first_name,
-    lastName: contact.second_name,
-    sort_code: contact.sort_code,
-    accountNumber: contact.account_number,
-  }));
-  console.log(rows);
-
   const columns = [
     {
       field: "id",
@@ -89,7 +89,7 @@ function SelectContact() {
       renderCell: (params) => (
         <Radio
           checked={selectedValue && selectedValue.id === params.row.id}
-          onChange={() => setSelectedValue(params.row)} // 保存整行数据
+          onChange={() => setSelectedValue(params.row)} // 当用户点击选择时，保存整个行数据
           value={params.row.id}
           name="select-row-radio-button"
           inputProps={{ "aria-label": `Select row ${params.value}` }}
