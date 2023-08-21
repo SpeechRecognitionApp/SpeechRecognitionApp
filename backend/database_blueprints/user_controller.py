@@ -29,8 +29,32 @@ def get_user(user_id):
 @user_controller.route('/user/<user_id>', methods=['PUT'])
 def update_user(user_id):
     data = request.get_json()
-    User.objects(user_id=user_id).update_one(set__name=data['name'], set__email=data['email'])
+
+    # Fetch the user to check existence
+    user = User.objects(user_id=user_id).first()
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+
+    # Extract the updated fields from the data
+    update_fields = {}
+    if 'first_name' in data:
+        update_fields['set__first_name'] = data['first_name']
+    if 'second_name' in data:
+        update_fields['set__second_name'] = data['second_name']
+    if 'email' in data:
+        update_fields['set__email'] = data['email']
+    if 'house_name' in data:
+        update_fields['set__house_name'] = data['house_name']
+    if 'street_line' in data:
+        update_fields['set__street_line'] = data['street_line']
+    if 'postcode' in data:
+        update_fields['set__postcode'] = data['postcode']
+
+    # Update the user
+    User.objects(user_id=user_id).update_one(**update_fields)
+
     return jsonify({'message': 'User updated successfully'}), 200
+
 
 @user_controller.route('/user/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
