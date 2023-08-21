@@ -22,10 +22,9 @@ function SelectAmount() {
   const contactName = location.state.contactName;
   const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
   // Mock data for card balance
-  const cardBalance = "£500.00";
   const [transferAmount, setTransferAmount] = useState(0);
 
-  async function handleWithdraw() {
+  async function handleWithdraw(onSuccess) {
     try {
       const response = await axios.post("http://127.0.0.1:5000/withdraw", {
         card_number: cardNumber,
@@ -33,13 +32,13 @@ function SelectAmount() {
       });
 
       if (response.status === 200) {
-        // Handle success - update UI if necessary
         console.log("Withdrawal successful!");
         console.log("New Balance:", response.data.new_balance);
-        // Proceed to create transaction history
         handleCreateTransaction();
+        onSuccess();
+      } else if (response.status === 400) {
+        alert("Insufficient balance. Withdrawal failed.");
       } else {
-        // Handle error
         console.error("Error in withdrawal:", response.data.message);
       }
     } catch (error) {
@@ -47,25 +46,27 @@ function SelectAmount() {
     }
   }
 
-  async function handleCreateTransaction() {
+  async function handleWithdraw(onSuccess) {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/transaction", {
-        user_id: "1",
-        amount: parseFloat(transferAmount),
-        type: "transfer",
-        receiver: contactName,
-        // Add other fields if necessary
+      const response = await axios.post("http://127.0.0.1:5000/withdraw", {
+        card_number: cardNumber,
+        withdraw_amount: parseFloat(transferAmount),
       });
 
-      if (response.status === 201) {
-        // Handle success - update UI if necessary
-        console.log("Transaction created successfully!");
+      if (response.status === 200) {
+        console.log("Withdrawal successful!");
+        console.log("New Balance:", response.data.new_balance);
+        handleCreateTransaction();
+        onSuccess();
       } else {
-        // Handle error
-        console.error("Error in transaction creation:", response.data.message);
+        console.error("Error in withdrawal:", response.data.message);
       }
     } catch (error) {
-      console.error("Failed to create transaction:", error);
+      if (error.response && error.response.status === 400) {
+        alert("Insufficient balance. Withdrawal failed.");
+      } else {
+        console.error("Failed to withdraw:", error);
+      }
     }
   }
 
@@ -97,11 +98,16 @@ function SelectAmount() {
     return `${month}/${year}`;
   }
   function handleClick() {
-    handleWithdraw();
-    // Navigation or other logic here if necessary
-    handleCreateTransaction();
-    navigate("/dashboard");
+    if (transferAmount <= 0) {
+      alert("Transfer amount should be greater than 0");
+      return;
+    }
+
+    handleWithdraw(() => {
+      navigate("/dashboard");
+    });
   }
+
   return (
     <>
       <Box
@@ -140,10 +146,15 @@ function SelectAmount() {
                 </Typography>
               )}
             </div>
-
-            <Typography variant="h6">
-              Current Card Balance: {cardBalance}
-            </Typography>
+            {card ? (
+              <Typography variant="h6">
+                Current Card Balance: {card.balance}
+              </Typography>
+            ) : (
+              <Typography variant="h6" color="textSecondary">
+                Loading Card Information...
+              </Typography>
+            )}
           </Box>
           <Box
             sx={{

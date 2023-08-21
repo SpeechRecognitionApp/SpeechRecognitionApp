@@ -131,9 +131,15 @@ function SelectPayee() {
             )}
           </div>
 
-          <Typography variant="h6">
-            Current Card Balance: {cardBalance}
-          </Typography>
+          {card ? (
+            <Typography variant="h6">
+              Current Card Balance: {card.balance}
+            </Typography>
+          ) : (
+            <Typography variant="h6" color="textSecondary">
+              Loading Card Information...
+            </Typography>
+          )}
         </Box>
         <Box>
           <Box

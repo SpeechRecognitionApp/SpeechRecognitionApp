@@ -61,11 +61,12 @@ function SelectContact() {
       const text = JSON.parse(data).text;
       // setRecognizedText(text);
       console.log("Number detected:", text);
+      console.log(" detected:", isNumeric(text));
       if (isNumeric(text)) {
         const rowIndex = parseInt(text, 10);
-        if (rowIndex >= 0 && rowIndex < rows.length) {
-          setSelectedValue(rows[rowIndex]); // 使用 rowIndex 获取行数据并将其设置为 selectedValue
-        }
+        console.log("rowIndex detected:", rowIndex);
+        setSelectedValue(rows[rowIndex]); // 使用 rowIndex 获取行数据并将其设置为 selectedValue
+        console.log("selectedValue detected:", selectedValue);
       }
 
       if (typeof text === "string" && text.includes("select")) {
@@ -78,7 +79,7 @@ function SelectContact() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [selectedValue]);
 
   const columns = [
     {
