@@ -48,21 +48,42 @@ function DepositAmount() {
 
   const handleClick = async () => {
     const amountToDeposit = manualInput || detectedNumber;
-    
+  
     try {
       const requestBody = {
         card_number: cardNumber,
         deposit_amount: amountToDeposit,
       };
-
+  
       await axios.post("http://127.0.0.1:5000/deposit", requestBody);
-
+  
+      // Create a transaction for the deposit
+      try {
+        const response = await axios.post("http://127.0.0.1:5000/transaction", {
+          user_id: "1", // Replace with the appropriate user ID
+          amount: parseFloat(amountToDeposit),
+          type: "deposit",
+          // Add other fields if necessary
+        });
+  
+        if (response.status === 201) {
+          // Handle success - update UI if necessary
+          console.log("Transaction created successfully!");
+        } else {
+          // Handle error
+          console.error("Error in transaction creation:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Failed to create transaction:", error);
+      }
+  
       // Navigate to the next page after successful deposit
       navigate("/insertmoney");
     } catch (error) {
       console.error("Error depositing amount:", error);
     }
   };
+  
 
   // Mock data for card balance
 

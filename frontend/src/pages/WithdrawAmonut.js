@@ -57,44 +57,59 @@ function WithdrawAmount() {
   
 
   const handleClick = async () => {
-
     const withdrawAmount = manualInput || detectedNumber;
-    
-
+  
     if (withdrawAmount > cardBalance) {
       swal({
-        timer:2000,
-        title:"Error",
-        text:"Amount exceeds balance",
-        icon:"error"});
-    }
-
-    else if (!withdrawAmount) {
+        timer: 2000,
+        title: "Error",
+        text: "Amount exceeds balance",
+        icon: "error"
+      });
+    } else if (!withdrawAmount) {
       swal({
-        timer:2000,
-        title:"Error",
-        text:" Please enter an amount",
-        icon:"error"});
-    }
-
-    else {
+        timer: 2000,
+        title: "Error",
+        text: " Please enter an amount",
+        icon: "error"
+      });
+    } else {
       try {
         const requestBody = {
           card_number: cardNumber,
-          withdraw_amount: withdrawAmount,
+          withdraw_amount: withdrawAmount
         };
   
         await axios.post("http://127.0.0.1:5000/withdraw", requestBody);
   
-        // Navigate to the next page after successful deposit
+        // Create a transaction for the withdrawal
+        try {
+          const response = await axios.post("http://127.0.0.1:5000/transaction", {
+            user_id: "1", 
+            amount: parseFloat(withdrawAmount),
+            type: "withdraw",
+            // Add other fields if necessary
+          });
+  
+          if (response.status === 201) {
+            // Handle success - update UI if necessary
+            console.log("Transaction created successfully!");
+          } else {
+            // Handle error
+            console.error("Error in transaction creation:", response.data.message);
+          }
+        } catch (error) {
+          console.error("Failed to create transaction:", error);
+        }
+  
+        // Navigate to the next page after successful withdrawal
         navigate("/takecash");
       } catch (error) {
-        console.error("Error depositing amount:", error);
+        console.error("Error withdrawing amount:", error);
       }
     }
-    
-  
   };
+  
 
   function formatDate(timestamp) {
     const date = new Date(timestamp);
