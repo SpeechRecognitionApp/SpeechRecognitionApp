@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import io from "socket.io-client";
 
 function SelectAmount() {
   const navigate = useNavigate();
@@ -89,6 +90,29 @@ function SelectAmount() {
 
     fetchCardData();
   }, [cardNumber]);
+
+  useEffect(() => {
+    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+
+    socket.on("recognized_text", (data) => {
+      const text = JSON.parse(data).text;
+
+      if (text && text.includes("confirm")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Someone paid before detected");
+        handleClick();
+      }
+
+      if (text && text.includes("create")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("New person detected detected");
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   function formatDate(timestamp) {
     const date = new Date(timestamp);
