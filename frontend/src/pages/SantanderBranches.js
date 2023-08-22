@@ -13,10 +13,8 @@ const SantanderBranches = () => {
           "http://127.0.0.1:5000/proxy/sanuk/external/open-banking/v2.2/branches"
         );
 
-        // 从响应中提取 data 字段
         const data = response.data.data;
 
-        // 遍历 data 数组并提取出每个分行的名字，然后更新 branches 状态
         const branchNames = [];
         data.forEach((item) => {
           item.Brand[0].Branch.forEach((branch) => {

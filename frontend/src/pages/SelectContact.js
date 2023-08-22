@@ -28,7 +28,7 @@ function SelectContact() {
   }
 
   const [contacts, setContacts] = useState([]); // Step 1: State to hold contacts
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState({});
 
   useEffect(() => {
     const userId = "1"; // Replace with actual user ID
