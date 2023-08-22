@@ -15,7 +15,10 @@ function TransactionsPage() {
     axios
       .get(`http://127.0.0.1:5000/transactions/user/${userId}`)
       .then((response) => {
-        setTransactions(response.data);
+        const sortedData = response.data.sort(
+          (a, b) => new Date(b.timestamp.$date) - new Date(a.timestamp.$date)
+        );
+        setTransactions(sortedData);
       })
       .catch((error) => {
         console.error("Failed to fetch contacts:", error);
