@@ -19,7 +19,7 @@ function AccountManagePage() {
     postcode: "",
   });
 
- 
+  
 
   
 
@@ -45,7 +45,12 @@ function AccountManagePage() {
     } catch (error) {
       console.error("Error updating user details:", error);
     }
-    swal("Success","Details have been updated","success");
+    swal({
+      timer:3000,
+      title:"Success",
+      text:"Details have been updated",
+      icon:"success"});
+    
   };
 
   const navigate = useNavigate();
@@ -278,7 +283,10 @@ function AccountManagePage() {
         onEmailKeywordDetected={focusEmailTextField}
         onStreetKeywordDetected={focusStreetTextField}
         onHouseKeywordDetected={focusHouseTextField}
-        onPostKeywordDetected={focusPostTextField}/>
+        onPostKeywordDetected={focusPostTextField}
+        onConfirmKeywordDetected={updateUserDetails}
+        
+        />
       <Footer />
     </Box>
   );

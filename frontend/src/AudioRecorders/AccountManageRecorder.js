@@ -7,7 +7,8 @@ const AccountManageRecorder = ({ onFirstKeywordDetected,
   onEmailKeywordDetected,
   onStreetKeywordDetected,
   onHouseKeywordDetected,
-  onPostKeywordDetected, }) => {
+  onPostKeywordDetected,
+  onConfirmKeywordDetected }) => {
   const [selectedValue, setSelectedValue] = useState(null);
 
 
@@ -67,9 +68,18 @@ const AccountManageRecorder = ({ onFirstKeywordDetected,
       }
 
       if (text && text.includes("confirm")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
-        console.log("Home detected");
+        // Call the function prop to simulate clicking the "Confirm" button
+        onConfirmKeywordDetected();
       }
+
+
+      // if (text && text.includes("okay")) {
+      //   // Simulate a click on the SweetAlert "OK" button
+      //   if (sweetAlertRef.current) {
+      //     console.log("okay received")
+      //     sweetAlertRef.current.clickConfirm();
+      //   }
+      // }
     });
 
     return () => {
