@@ -55,7 +55,7 @@ function InsertMoney() {
           height: "20%",
         }}
       >
-        <Button
+        {/* <Button
           variant="contained"
           sx={{
             backgroundColor: "#fff",
@@ -68,7 +68,7 @@ function InsertMoney() {
           onClick={handleClick}
         >
           Confirm
-        </Button>
+        </Button> */}
       </Box>
       <Cash />
       <Footer />

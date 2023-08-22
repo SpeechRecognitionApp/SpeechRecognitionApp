@@ -17,6 +17,7 @@ function TakeCash() {
 
   const [selectedValue, setSelectedValue] = useState(null);
 
+
   return (
     <Box
       sx={{
@@ -55,7 +56,7 @@ function TakeCash() {
           height: "20%",
         }}
       >
-        <Button
+        {/* <Button
           variant="contained"
           sx={{
             backgroundColor: "#fff",
@@ -68,7 +69,7 @@ function TakeCash() {
           onClick={handleClick}
         >
           Confirm
-        </Button>
+        </Button> */}
       </Box>
       <Cash />
       <Footer />

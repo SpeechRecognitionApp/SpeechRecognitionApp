@@ -14,13 +14,17 @@ import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import WithdrawAudioRecorder from "../AudioRecorders/WithdrawAudioRecorder";
 import axios from "axios";
+import swal from "sweetalert";
 
 function WithdrawAmount() {
   const navigate = useNavigate();
 
   
+
+  
   const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
   const [manualInput, setManualInput] = useState("");
+  const [confirmedWithdrawAmount, setConfirmedWithdrawAmount] = useState(null);
   const [card, setCard] = useState(null);
   const [cardBalance, setCardBalance] = useState(null);
   const cardNumber = "1252452125167000";
@@ -35,6 +39,7 @@ function WithdrawAmount() {
         );
         setCard(response.data);
         setCardBalance(response.data.balance);
+        
       } catch (error) {
         if (error.response) {
           console.error("Card not found", error.response.data);
@@ -49,22 +54,46 @@ function WithdrawAmount() {
     fetchCardData();
   }, [cardNumber]);
 
+  
+
   const handleClick = async () => {
+
     const withdrawAmount = manualInput || detectedNumber;
     
-    try {
-      const requestBody = {
-        card_number: cardNumber,
-        withdraw_amount: withdrawAmount,
-      };
 
-      await axios.post("http://127.0.0.1:5000/withdraw", requestBody);
-
-      // Navigate to the next page after successful deposit
-      navigate("/takecash");
-    } catch (error) {
-      console.error("Error depositing amount:", error);
+    if (withdrawAmount > cardBalance) {
+      swal({
+        timer:2000,
+        title:"Error",
+        text:"Amount exceeds balance",
+        icon:"error"});
     }
+
+    else if (!withdrawAmount) {
+      swal({
+        timer:2000,
+        title:"Error",
+        text:" Please enter an amount",
+        icon:"error"});
+    }
+
+    else {
+      try {
+        const requestBody = {
+          card_number: cardNumber,
+          withdraw_amount: withdrawAmount,
+        };
+  
+        await axios.post("http://127.0.0.1:5000/withdraw", requestBody);
+  
+        // Navigate to the next page after successful deposit
+        navigate("/takecash");
+      } catch (error) {
+        console.error("Error depositing amount:", error);
+      }
+    }
+    
+  
   };
 
   function formatDate(timestamp) {
@@ -204,7 +233,7 @@ function WithdrawAmount() {
         </Box>
       </Box>
       <WithdrawAudioRecorder  detectedNumber={detectedNumber} // Pass detectedNumber as prop
-       setDetectedNumber={setDetectedNumber} />
+       setDetectedNumber={setDetectedNumber} handleClick = {handleClick}/>
       <Footer />
     </Box>
   );

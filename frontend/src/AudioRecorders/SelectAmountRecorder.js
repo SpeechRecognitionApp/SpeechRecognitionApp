@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 
-const DepositAudioRecorder = ({ detectedNumber, setDetectedNumber,handleClick}) => {
+const SelectAmountRecorder = ({ detectedNumber, setDetectedNumber,handleClick}) => {
   const [recognizedText, setRecognizedText] = useState("");
   const [confirmed, setConfirmed] = useState(false);
 
@@ -48,4 +48,4 @@ const DepositAudioRecorder = ({ detectedNumber, setDetectedNumber,handleClick}) 
   return null;
 };
 
-export default DepositAudioRecorder;
+export default SelectAmountRecorder;

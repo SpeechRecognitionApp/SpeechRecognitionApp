@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 
-const WithdrawAudioRecorder = ({ detectedNumber, setDetectedNumber }) => {
+const WithdrawAudioRecorder = ({ detectedNumber, setDetectedNumber, handleClick}) => {
   const [recognizedText, setRecognizedText] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
   
 
   useEffect(() => {
@@ -26,17 +27,24 @@ const WithdrawAudioRecorder = ({ detectedNumber, setDetectedNumber }) => {
         return; // Exit early as we've handled the numeric case
     }
 
-      if (text && text.includes("confirm")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
-        console.log("Confrmation detected");
-        window.location.href = "/takecash";
-      }
-    });
+    if (text && text.includes("confirm")) {
+      console.log("Confirmation detected");
+      setConfirmed(true);
+    }
+  });
 
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (confirmed) {
+      handleClick();
+    }
+  }, [confirmed, handleClick]);
+
+  return null;
 };
 
 export default WithdrawAudioRecorder;

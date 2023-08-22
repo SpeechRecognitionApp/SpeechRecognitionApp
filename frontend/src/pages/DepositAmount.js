@@ -204,7 +204,7 @@ function DepositAmount() {
       </Box>
       <DepositAudioRecorder
        detectedNumber={detectedNumber} // Pass detectedNumber as prop
-       setDetectedNumber={setDetectedNumber} />
+       setDetectedNumber={setDetectedNumber} handleClick={handleClick} />
       <Footer />
     </Box>
   );
