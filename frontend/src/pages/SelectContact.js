@@ -20,7 +20,10 @@ function SelectContact() {
         },
       });
     } else {
-      alert("Please select a contact first!");
+      swal("Oops!", "Please select a contact first!", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 3000);
     }
   }
 

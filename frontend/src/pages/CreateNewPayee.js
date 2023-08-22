@@ -71,18 +71,27 @@ function CreateNewPayee() {
       !sortCode.trim() ||
       !accountNumber.trim()
     ) {
-      alert("Please fill in all the required fields.");
+      swal("Oops!", "Please fill in all the required fields.", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 3000);
       return;
     }
 
     // Format checks
     if (!/^\d+$/.test(sortCode)) {
-      alert("Sort Code must be a number.");
+      swal("Oops!", "Sort Code must be a number", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 2000);
       return;
     }
 
     if (!/^\d+$/.test(accountNumber)) {
-      alert("Account Number must be a number.");
+      swal("Oops!", "Account Number must be a number", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 2000);
       return;
     }
 
@@ -105,13 +114,19 @@ function CreateNewPayee() {
 
       if (response.status === 201) {
         swal("Success", "New Payee Have Been Created", "success");
+        setTimeout(() => {
+          swal.close();
+        }, 3000);
         navigate("/selectamount", {
           state: {
             contactName: `${firstName} ${lastName}`,
           },
         });
       } else {
-        alert("Failed to create contact");
+        swal("Oops!", "Failed to create contact", "error");
+        setTimeout(() => {
+          swal.close();
+        }, 2000);
       }
     } catch (error) {
       console.error("There was a problem with the server: ", error);
