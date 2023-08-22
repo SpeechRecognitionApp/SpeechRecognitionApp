@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 import json
+from . import config
 from ibm_watson import AssistantV2, ApiException
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
@@ -11,7 +12,7 @@ chatbot = Blueprint('chatbot', __name__)
 
 environment_id ='d7424110-25f5-41cc-b36f-2125ac788404'
 
-authenticator = IAMAuthenticator('F569BFpVhG88Ch7WCjNGt34NS1Vpl7w7mOhYph78z0c7')
+authenticator = IAMAuthenticator(config.api_key)
 assistant = AssistantV2(
     version='2018-09-20',
     authenticator=authenticator
