@@ -10,6 +10,7 @@ const AccountManageRecorder = ({
   onPostKeywordDetected,
   onConfirmKeywordDetected }) => {
   const [selectedValue, setSelectedValue] = useState(null);
+  const [confirmed, setConfirmed] = useState(false);
 
   useEffect(() => {
     const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
@@ -61,7 +62,8 @@ const AccountManageRecorder = ({
 
       if (text && text.includes("confirm")) {
         // Call the function prop to simulate clicking the "Confirm" button
-        onConfirmKeywordDetected();
+        setConfirmed(true);
+        
       }
 
 
@@ -78,6 +80,14 @@ const AccountManageRecorder = ({
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (confirmed) {
+      onConfirmKeywordDetected()
+    }
+  }, [confirmed, onConfirmKeywordDetected]);
+
+  return null;
 };
 
 export default AccountManageRecorder;
