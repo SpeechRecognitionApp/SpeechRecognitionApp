@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CreateNewPayeeRecorder from "../AudioRecorders/CreateNewPayeeRecorder";
 import { useRef } from "react";
+import swal from "sweetalert";
 
 function CreateNewPayee() {
   const navigate = useNavigate();
@@ -103,8 +104,12 @@ function CreateNewPayee() {
       });
 
       if (response.status === 201) {
-        alert("Contact created successfully");
-        navigate("/selectamount");
+        swal("Success", "New Payee Have Been Created", "success");
+        navigate("/selectamount", {
+          state: {
+            contactName: `${firstName} ${lastName}`,
+          },
+        });
       } else {
         alert("Failed to create contact");
       }

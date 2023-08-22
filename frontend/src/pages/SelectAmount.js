@@ -35,6 +35,7 @@ function SelectAmount() {
         console.log("Withdrawal successful!");
         console.log("New Balance:", response.data.new_balance);
         handleCreateTransaction();
+        swal("Success", "New Payee Have Been Created", "success");
         onSuccess();
       } else if (response.status === 400) {
         alert("Insufficient balance. Withdrawal failed.");
@@ -46,27 +47,25 @@ function SelectAmount() {
     }
   }
 
-  async function handleWithdraw(onSuccess) {
+  async function handleCreateTransaction() {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/withdraw", {
-        card_number: cardNumber,
-        withdraw_amount: parseFloat(transferAmount),
+      const response = await axios.post("http://127.0.0.1:5000/transaction", {
+        user_id: "1",
+        amount: parseFloat(transferAmount),
+        type: "transfer",
+        receiver: contactName,
+        // Add other fields if necessary
       });
 
-      if (response.status === 200) {
-        console.log("Withdrawal successful!");
-        console.log("New Balance:", response.data.new_balance);
-        handleCreateTransaction();
-        onSuccess();
+      if (response.status === 201) {
+        // Handle success - update UI if necessary
+        console.log("Transaction created successfully!");
       } else {
-        console.error("Error in withdrawal:", response.data.message);
+        // Handle error
+        console.error("Error in transaction creation:", response.data.message);
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert("Insufficient balance. Withdrawal failed.");
-      } else {
-        console.error("Failed to withdraw:", error);
-      }
+      console.error("Failed to create transaction:", error);
     }
   }
 
