@@ -5,6 +5,9 @@ import TitleBox from "../components/TitleBox";
 import { Grid, Box, TextField, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CreateNewPayeeRecorder from "../AudioRecorders/CreateNewPayeeRecorder";
+import { useRef } from "react";
+import swal from "sweetalert";
 
 function CreateNewPayee() {
   const navigate = useNavigate();
@@ -16,6 +19,49 @@ function CreateNewPayee() {
   const [description, setDescription] = useState("");
   const [reference, setReference] = useState("");
 
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const sortCodeRef = useRef(null);
+  const accountNumberRef = useRef(null);
+  const referenceRef = useRef(null);
+  const descroptionRef = useRef(null);
+
+  const focusFirstNameTextField = () => {
+    if (firstNameRef.current) {
+      firstNameRef.current.focus();
+    }
+  };
+
+  const focusLastNameTextField = () => {
+    if (lastNameRef.current) {
+      lastNameRef.current.focus();
+    }
+  };
+
+  const focusSortCodeTextField = () => {
+    if (sortCodeRef.current) {
+      sortCodeRef.current.focus();
+    }
+  };
+
+  const focusAccountNumberTextField = () => {
+    if (accountNumberRef.current) {
+      accountNumberRef.current.focus();
+    }
+  };
+
+  const focusReferenceTextField = () => {
+    if (referenceRef.current) {
+      referenceRef.current.focus();
+    }
+  };
+
+  const focusDescriptionTextField = () => {
+    if (descroptionRef.current) {
+      descroptionRef.current.focus();
+    }
+  };
+
   const userId = "1"; // Assume this is the logged-in user's ID
 
   const handleSubmit = async () => {
@@ -25,18 +71,27 @@ function CreateNewPayee() {
       !sortCode.trim() ||
       !accountNumber.trim()
     ) {
-      alert("Please fill in all the required fields.");
+      swal("Oops!", "Please fill in all the required fields.", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 3000);
       return;
     }
 
     // Format checks
     if (!/^\d+$/.test(sortCode)) {
-      alert("Sort Code must be a number.");
+      swal("Oops!", "Sort Code must be a number", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 2000);
       return;
     }
 
     if (!/^\d+$/.test(accountNumber)) {
-      alert("Account Number must be a number.");
+      swal("Oops!", "Account Number must be a number", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 2000);
       return;
     }
 
@@ -58,10 +113,20 @@ function CreateNewPayee() {
       });
 
       if (response.status === 201) {
-        alert("Contact created successfully");
-        navigate("/selectamount");
+        swal("Success", "New Payee Have Been Created", "success");
+        setTimeout(() => {
+          swal.close();
+        }, 3000);
+        navigate("/selectamount", {
+          state: {
+            contactName: `${firstName} ${lastName}`,
+          },
+        });
       } else {
-        alert("Failed to create contact");
+        swal("Oops!", "Failed to create contact", "error");
+        setTimeout(() => {
+          swal.close();
+        }, 2000);
       }
     } catch (error) {
       console.error("There was a problem with the server: ", error);
@@ -134,6 +199,7 @@ function CreateNewPayee() {
                   onChange={(e) => setFirstName(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={firstNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -143,6 +209,7 @@ function CreateNewPayee() {
                   onChange={(e) => setSortCode(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={sortCodeRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -152,6 +219,7 @@ function CreateNewPayee() {
                   onChange={(e) => setLastName(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={lastNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -161,6 +229,7 @@ function CreateNewPayee() {
                   onChange={(e) => setAccountNumber(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={accountNumberRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -170,6 +239,7 @@ function CreateNewPayee() {
                   onChange={(e) => setDescription(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={descroptionRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -179,6 +249,7 @@ function CreateNewPayee() {
                   onChange={(e) => setReference(e.target.value)}
                   fullWidth
                   InputProps={{ style: textFieldStyle }}
+                  inputRef={referenceRef}
                 />
               </Grid>
             </Grid>
@@ -211,6 +282,14 @@ function CreateNewPayee() {
           </Button>
         </Box>
       </Box>
+      <CreateNewPayeeRecorder
+        onFirstNameDetected={focusFirstNameTextField}
+        onLastNameDetected={focusLastNameTextField}
+        onSortCodeDetected={focusSortCodeTextField}
+        onAccountNumberDetected={focusAccountNumberTextField}
+        onReferenceDetected={focusReferenceTextField}
+        onDescriptionDetected={focusDescriptionTextField}
+      />
       <Footer />
     </Box>
   );

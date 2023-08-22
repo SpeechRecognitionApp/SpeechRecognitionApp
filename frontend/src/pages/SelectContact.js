@@ -20,7 +20,10 @@ function SelectContact() {
         },
       });
     } else {
-      alert("Please select a contact first!");
+      swal("Oops!", "Please select a contact first!", "error");
+      setTimeout(() => {
+        swal.close();
+      }, 3000);
     }
   }
 
@@ -39,36 +42,6 @@ function SelectContact() {
       });
   }, []);
 
-  useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
-
-    const isNumeric = (str) => {
-      return !isNaN(str) && !isNaN(parseFloat(str));
-    };
-
-    socket.on("recognized_text", (data) => {
-      const text = JSON.parse(data).text;
-      // setRecognizedText(text);
-      console.log("Number detected:", text);
-      if (isNumeric(text)) {
-        // If the recognized text is a number, update the state with the numeric value
-        setSelectedValue(parseFloat(text));
-        console.log("Number detected:", text);
-        return; // Exit early as we've handled the numeric case
-      }
-
-      if (text && text.includes("select")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Withdraw detected");
-        window.location.href = "/selectamount";
-      }
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   // Step 2: Format the contacts data for the DataGrid
   const rows = contacts.map((contact, index) => ({
     id: index,
@@ -80,6 +53,37 @@ function SelectContact() {
   }));
   console.log(rows);
 
+  useEffect(() => {
+    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+
+    const isNumeric = (str) => {
+      return !isNaN(str) && !isNaN(parseFloat(str));
+    };
+
+    socket.on("recognized_text", (data) => {
+      const text = JSON.parse(data).text;
+      // setRecognizedText(text);
+      console.log("Number detected:", text);
+      console.log(" detected:", isNumeric(text));
+      if (isNumeric(text)) {
+        const rowIndex = parseInt(text, 10);
+        console.log("rowIndex detected:", rowIndex);
+        setSelectedValue(rows[rowIndex]); // 使用 rowIndex 获取行数据并将其设置为 selectedValue
+        console.log("selectedValue detected:", selectedValue);
+      }
+
+      if (typeof text === "string" && text.includes("select")) {
+        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        console.log("Withdraw detected");
+        window.location.href = "/selectamount";
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [selectedValue]);
+
   const columns = [
     {
       field: "id",
@@ -89,7 +93,7 @@ function SelectContact() {
       renderCell: (params) => (
         <Radio
           checked={selectedValue && selectedValue.id === params.row.id}
-          onChange={() => setSelectedValue(params.row)} // 保存整行数据
+          onChange={() => setSelectedValue(params.row)} // 当用户点击选择时，保存整个行数据
           value={params.row.id}
           name="select-row-radio-button"
           inputProps={{ "aria-label": `Select row ${params.value}` }}
