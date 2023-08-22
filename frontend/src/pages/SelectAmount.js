@@ -35,7 +35,7 @@ function SelectAmount() {
         console.log("Withdrawal successful!");
         console.log("New Balance:", response.data.new_balance);
         handleCreateTransaction();
-        swal("Success", "New Payee Have Been Created", "success");
+        swal("Success", "The Money Has been Transfered", "success");
         onSuccess();
       } else if (response.status === 400) {
         alert("Insufficient balance. Withdrawal failed.");
