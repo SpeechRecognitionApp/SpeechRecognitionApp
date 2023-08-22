@@ -133,7 +133,7 @@ function SelectPayee() {
 
           {card ? (
             <Typography variant="h6">
-              Current Card Balance: {card.balance}
+              Current Card Balance: £{card.balance}
             </Typography>
           ) : (
             <Typography variant="h6" color="textSecondary">

@@ -14,23 +14,28 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import swal from "sweetalert";
 import io from "socket.io-client";
+import TransferAudioRecorder from "../AudioRecorders/TransferAudioRecorder";
 
 function SelectAmount() {
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
+  const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
+  const [manualInput, setManualInput] = useState("");
   const location = useLocation();
   const contactName = location.state.contactName;
   const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
   // Mock data for card balance
-  const [transferAmount, setTransferAmount] = useState(0);
-  const transferAmountRef = useRef(transferAmount);
+  // const [transferAmount, setTransferAmount] = useState(0);
+  // const transferAmountRef = useRef(transferAmount);
 
-  useEffect(() => {
-    transferAmountRef.current = transferAmount;
-  }, [transferAmount]);
+  // useEffect(() => {
+  //   transferAmountRef.current = transferAmount;
+  // }, [transferAmount]);
 
   async function handleWithdraw(onSuccess) {
+    console.log("Withdraw function transfer amount is:",transferAmount)
     try {
       const response = await axios.post("http://127.0.0.1:5000/withdraw", {
         card_number: cardNumber,
@@ -107,31 +112,33 @@ function SelectAmount() {
     fetchCardData();
   }, [cardNumber]);
 
-  useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+  // useEffect(() => {
+  //   const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
 
-    socket.on("recognized_text", (data) => {
-      const text = JSON.parse(data).text;
+  //   socket.on("recognized_text", (data) => {
+  //     const text = JSON.parse(data).text;
 
-      if (text && text.includes("confirm")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Someone paid before detected");
-        console.log("Withdra!", transferAmount);
-        console.log("Withdra!", transferAmountRef.current);
+  //     if (text && text.includes("confirm")) {
+  //       // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+  //       console.log("Someone paid before detected");
+  //       console.log("Withdra!", transferAmount);
+  //       console.log("Withdra!", transferAmountRef.current);
 
-        handleClick();
-      }
+  //       handleClick();
+  //     }
 
-      if (text && text.includes("create")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("New person detected detected");
-      }
-    });
+  //     if (text && text.includes("create")) {
+  //       // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+  //       console.log("New person detected detected");
+  //     }
+  //   });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [transferAmount]);
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, [transferAmount]);
+
+  const transferAmount = manualInput || detectedNumber;
 
   function formatDate(timestamp) {
     const date = new Date(timestamp);
@@ -139,7 +146,12 @@ function SelectAmount() {
     const year = date.getFullYear().toString().substr(-2);
     return `${month}/${year}`;
   }
-  function handleClick() {
+  const handleClick = async () => {
+
+   
+
+    console.log("This is transfer amount",transferAmount)
+
     if (transferAmount <= 0) {
       swal("Oops!", "Transfer amount should be greater than 0", "error");
       setTimeout(() => {
@@ -193,7 +205,7 @@ function SelectAmount() {
             </div>
             {card ? (
               <Typography variant="h6">
-                Current Card Balance: {card.balance}
+                Current Card Balance: £{card.balance}
               </Typography>
             ) : (
               <Typography variant="h6" color="textSecondary">
@@ -256,8 +268,8 @@ function SelectAmount() {
                 <TextField
                   variant="outlined"
                   type="number"
-                  value={transferAmount}
-                  onChange={(e) => setTransferAmount(e.target.value)}
+                  value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber
+                  onChange={(e) => setManualInput(e.target.value)} // Update manualInput state
                   sx={{ maxWidth: 200 }} // Limit the width of the TextField
                   InputProps={{
                     inputProps: {
@@ -299,7 +311,8 @@ function SelectAmount() {
             </Button>
           </Box>
         </Box>
-
+        <TransferAudioRecorder detectedNumber={detectedNumber} // Pass detectedNumber as prop
+       setDetectedNumber={setDetectedNumber} handleClick={handleClick} />
         <Footer />
       </Box>
     </>
