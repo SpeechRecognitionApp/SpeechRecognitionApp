@@ -20,6 +20,7 @@ import TakeCash from "./pages/TakeCash";
 import InsertMoney from "./pages/InsertMoney";
 import Chatbot from "./pages/Chatbot";
 import EnterPin from "./pages/EnterPin";
+import SantanderProducts from "./pages/SantanderProducts";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
         <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/createnewpayee" element={<CreateNewPayee />} />
         <Route path="/branches" element={<SantanderBranches />} />
+        <Route path="/products" element={<SantanderProducts />} />
+        <Route path="/atms" element={<SantanderBranches />} />
         <Route path="/takecash" element={<TakeCash />} />
         <Route path="/insertmoney" element={<InsertMoney />} />
         <Route path="/chatbot" element={<Chatbot />} />

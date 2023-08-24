@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import TitleBox from "../components/TitleBox";
 
-const SantanderBranches = () => {
+const SantanderProducts = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [branches, setBranches] = useState([]);
@@ -16,7 +16,7 @@ const SantanderBranches = () => {
     const getBranches = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:5000/proxy/sanuk/external/open-banking/v2.2/branches"
+          "http://127.0.0.1:5000/proxy/sanuk/external/open-banking/v2.2/personal-current-accounts"
         );
 
         setData(response.data.data);
@@ -30,37 +30,33 @@ const SantanderBranches = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Data received:", data); // 打印接收到的数据
-
     const newRows = [];
 
-    data.forEach((branch, index) => {
-      console.log("Processing branch:", branch); // 打印当前处理的branch
-
-      branch.Brand.forEach((brand) => {
-        brand.Branch.forEach((branchDetail) => {
-          newRows.push({
-            id: newRows.length,
-            brandName: brand.BrandName,
-            branchName: branchDetail.Name,
-            type: branchDetail.Type,
-            phone: branchDetail.ContactInfo[0].ContactContent,
-            address: `${branchDetail.PostalAddress.StreetName}, ${branchDetail.PostalAddress.TownName}`,
+    data.forEach((item, index) => {
+      item.Brand.forEach((brand) => {
+        brand.PCA.forEach((pca) => {
+          pca.PCAMarketingState.forEach((state) => {
+            newRows.push({
+              id: newRows.length,
+              brandName: brand.BrandName,
+              accountName: pca.Name,
+              onSale: pca.OnSaleIndicator ? "Yes" : "No",
+              marketingState: state.MarketingState,
+            });
           });
         });
       });
     });
 
-    console.log("New rows:", newRows); // 打印生成的newRows
     setRows(newRows);
   }, [data]);
 
   const columns = [
+    { field: "id", headerName: "ID", flex: 1 },
     { field: "brandName", headerName: "Brand Name", flex: 1 },
-    { field: "branchName", headerName: "Branch Name", flex: 1 },
-    { field: "type", headerName: "Type", flex: 1 },
-    { field: "phone", headerName: "Phone", flex: 1 },
-    { field: "address", headerName: "Address", flex: 2 },
+    { field: "accountName", headerName: "Account Name", flex: 2 },
+    { field: "onSale", headerName: "On Sale", flex: 1 },
+    { field: "marketingState", headerName: "Marketing State", flex: 1 },
   ];
 
   if (error) {
@@ -106,7 +102,7 @@ const SantanderBranches = () => {
             lineHeight: "2",
           }}
         >
-          <TitleBox buttonText="Branches" />
+          <TitleBox buttonText="Account Products" />
         </Box>
         <Box
           sx={{
@@ -132,4 +128,4 @@ const SantanderBranches = () => {
   );
 };
 
-export default SantanderBranches;
+export default SantanderProducts;
