@@ -140,7 +140,21 @@ function WatsonChatBot() {
             setTimeout(() => {
               window.location.href = "/transfer"; // Redirect to transfer page
             }, 2000); // 2 seconds delay
+          } else if (data.response.text.includes("Redirecting you to the ATM locator page...")) {
+            setTimeout(() => {
+              window.location.href = "/atms"; // Redirect to ATM page
+            }, 2000); // 2 seconds delay
+          } else if (data.response.text.includes("Redirecting you to the products page....")) {
+            setTimeout(() => {
+              window.location.href = "/products"; // Redirect to products page
+            }, 2000); // 2 seconds delay
+          } else if (data.response.text.includes("Redirecting you to the branches page...")) {
+            setTimeout(() => {
+              window.location.href = "/branches"; // Redirect to branches page
+            }, 2000); // 2 seconds delay
           }
+
+          
         
       } catch (error) {
         console.error("Error sending message:", error);
