@@ -6,8 +6,25 @@ import Sidebar from "../components/Sidebar";
 import { Grid, Box, TextField, Button, Container } from "@mui/material";
 import KioskDashboard from "../components/DashboardItems";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:5000/check_login_status")
+      .then((response) => {
+        if (response.data.is_login === "0") {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to check login status:", error);
+      });
+  }, []);
+
   return (
     <Box
       sx={{

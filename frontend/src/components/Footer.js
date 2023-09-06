@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
 import "./Footer.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -11,7 +12,15 @@ const Footer = () => {
     navigate("/welcome");
   }
   function handleClick2() {
-    navigate("/");
+    axios
+      .delete("http://127.0.0.1:5000/logout")
+      .then((response) => {
+        console.log("Logged out successfully");
+      })
+      .catch((error) => {
+        console.error("Failed to log out:", error);
+      });
+    navigate("/insertcard");
   }
 
   return (
@@ -19,13 +28,11 @@ const Footer = () => {
       <Box
         className="app-footer"
         sx={{
-          // position: "fixed",
-          // bottom: 0,
           width: "100%",
           boxShadow: "0px -2px 10px rgba(0, 0, 0, 0.1)",
           borderTop: "1px solid rgba(0, 0, 0, 0.1)",
-          display: "flex", // Enable Flexbox layout
-          justifyContent: "space-around", // Distribute the buttons evenly
+          display: "flex",
+          justifyContent: "space-around",
           marginTop: "auto",
         }}
       >

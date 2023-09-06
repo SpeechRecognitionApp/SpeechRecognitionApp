@@ -21,6 +21,7 @@ import InsertMoney from "./pages/InsertMoney";
 import Chatbot from "./pages/Chatbot";
 import EnterPin from "./pages/EnterPin";
 import SantanderProducts from "./pages/SantanderProducts";
+import InsertCard from "./pages/InsertYourCard";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/takecash" element={<TakeCash />} />
         <Route path="/insertmoney" element={<InsertMoney />} />
         <Route path="/chatbot" element={<Chatbot />} />
+        <Route path="/insertcard" element={<InsertCard />} />
         <Route path="/" element={<EnterPin />} />
       </Routes>
     </div>
