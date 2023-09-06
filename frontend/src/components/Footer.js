@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
 import "./Footer.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -12,18 +11,7 @@ const Footer = () => {
     navigate("/welcome");
   }
   function handleClick2() {
-    axios
-      .delete("http://127.0.0.1:5000/logout")
-      .then((response) => {
-        console.log("Logged out successfully");
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("Failed to log out:", error);
-        // Optionally, you can still navigate back if logout fails
-        // navigate("/");
-      });
-    navigate("/insertcard");
+    navigate("/");
   }
 
   return (
