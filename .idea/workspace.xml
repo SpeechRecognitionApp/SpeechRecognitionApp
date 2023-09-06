@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92ccb80d-c90b-4eff-b4d8-870399107c80" name="Changes" comment="Welcome Page And Login Page">
+      <change afterPath="$PROJECT_DIR$/backend/database_blueprints/authentication_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatbot_blueprints/chatbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database_blueprints/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database_blueprints/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database_blueprints/card_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database_blueprints/card_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database_blueprints/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database_blueprints/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/voice_blueprints/voice_recognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/voice_blueprints/voice_recognition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SantanderBranches.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SantanderBranches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/AudioRecorders/AudioRecorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/AudioRecorders/AudioRecorder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/EnterPin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/EnterPin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/SelectAmount.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SelectAmount.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/SelectContact.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/SelectContact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Transactions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,11 +49,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/junwei/Documents/UCL/COMP0073 MSc Computer Science Project (22:23)/SpeechRecognitionApp&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/junwei/Documents/UCL/COMP0073 MSc Computer Science Project (22:23)/SpeechRecognitionApp/backend/chatbot_blueprints&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/chatbot_blueprints" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SpeechRecognitionApp" />
@@ -93,6 +103,10 @@
       <workItem from="1691972671637" duration="2423000" />
       <workItem from="1692031701172" duration="12897000" />
       <workItem from="1692507229396" duration="7731000" />
+      <workItem from="1692859507373" duration="1679000" />
+      <workItem from="1692962085403" duration="1314000" />
+      <workItem from="1693573580185" duration="620000" />
+      <workItem from="1693712314336" duration="14949000" />
     </task>
     <task id="LOCAL-00001" summary="Initialization">
       <created>1688384439415</created>
@@ -160,6 +174,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Welcome Page And Login Page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1692717260359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/SpeechRecognitionApp$app.coverage" NAME="app Coverage Results" MODIFIED="1693984393041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
   </component>
 </project>

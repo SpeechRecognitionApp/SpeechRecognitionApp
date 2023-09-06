@@ -9,12 +9,17 @@ import axios from "axios";
 import { Box } from "@mui/material";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 function EnterPin() {
   const [value, setValue] = useState("");
   const [pinTime, setPinTime] = useState(new Date());
   const pinRef = useRef(null);
   const keyboardRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Add a new state variable to keep track of failed attempts
+  const [failedAttempts, setFailedAttempts] = useState(0);
 
   useEffect(() => {
     const timerID = setInterval(() => setPinTime(new Date()), 1000);
@@ -25,7 +30,7 @@ function EnterPin() {
     console.log("useEffect triggered, current value:", value);
     if (value.length === 4) {
       console.log("value length is 4, calling onSubmitHandler");
-      onSubmitHandler();
+      onHandleComplete();
     }
   }, [value]);
 
@@ -70,41 +75,96 @@ function EnterPin() {
     }, 700);
   };
 
-  const onSubmitHandler = () => {
-    if (value.length !== 4) {
-      // If the length of the value is not equal to 4, we exit early.
-      // This ensures we don't attempt to submit an incomplete PIN.
-      return;
-    }
-    console.log("Submitting PIN, current value:", value);
+  const onHandleComplete = async () => {
+    onSubmitHandler(() => {
+      navigate("/insertcard");
+    });
+  };
 
-    const requestData = {
-      card_number: "1252452125167000",
-      pin: value,
-    };
-
+  const onSubmitHandler = (onSuccess) => {
+    // First check if the user is frozen
     axios
-      .post("http://127.0.0.1:5000/card/verify_pin", requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .get("http://127.0.0.1:5000/check_frozen_status")
       .then((response) => {
-        if (response.data.match) {
-          window.location.href = "/welcome";
-        } else {
+        if (response.data.isFrozen === "1") {
+          // Redirect to the insert card page if the account is frozen
           swal(
-            "Invalid PIN!",
-            "Pin you entered didn't match. Try again",
+            "Frozen Card!",
+            "Your Card has been frozen. Please Re-Insert Your Card",
             "error"
           );
-          handleClear();
+          setTimeout(() => {
+            swal.close();
+          }, 3000);
+          onSuccess();
+          return;
         }
+
+        // Fetch the current card_id and user_id
+        axios
+          .get("http://127.0.0.1:5000/get_current_card")
+          .then((response) => {
+            const { card_id, user_id } = response.data;
+
+            // Continue with PIN verification if the account is not frozen
+            if (value.length !== 4) {
+              return; // Exit early if PIN is incomplete
+            }
+
+            const requestData = {
+              card_id: card_id,
+              user_id: user_id,
+              pin: value,
+            };
+
+            axios
+              .post("http://127.0.0.1:5000/card/verify_pin", requestData, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((response) => {
+                if (response.data.match) {
+                  // Login successful, update is_login status
+                  axios.put("http://127.0.0.1:5000/login_success");
+                  window.location.href = "/welcome";
+                } else {
+                  // Login failed, increment fail_count
+                  axios.put("http://127.0.0.1:5000/login_fail");
+                  swal(
+                    "Invalid PIN!",
+                    "Pin you entered didn't match. Try again",
+                    "error"
+                  );
+                  handleClear();
+                }
+              })
+              .catch((error) => {
+                console.error("API request failed:", error);
+                swal(
+                  "Error",
+                  "Failed to verify PIN. Please try again later.",
+                  "error"
+                );
+                handleClear();
+              });
+          })
+          .catch((error) => {
+            console.error("Could not fetch current card:", error);
+            swal(
+              "Error",
+              "Failed to fetch current card. Please try again later.",
+              "error"
+            );
+          });
       })
       .catch((error) => {
-        console.error("API request failed:", error);
-        swal("Error", "Failed to verify PIN. Please try again later.", "error");
-        handleClear();
+        console.error("Could not check frozen status:", error);
+        swal(
+          "Error",
+          "Failed to check frozen status. Please try again later.",
+          "error"
+        );
       });
   };
 
@@ -137,7 +197,7 @@ function EnterPin() {
           type="numeric"
           inputMode="number"
           onChange={onChange}
-          onComplete={onSubmitHandler}
+          onComplete={onHandleComplete}
         />
         <Keyboard
           ref={keyboardRef}

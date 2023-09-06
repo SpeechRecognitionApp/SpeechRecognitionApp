@@ -55,31 +55,23 @@ function SelectContact() {
   console.log(rows);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
-
+    const socket = io("http://127.0.0.1:5000"); 
     const isNumeric = (str) => {
       return !isNaN(str) && !isNaN(parseFloat(str));
     };
-
     socket.on("recognized_text", (data) => {
       const text = JSON.parse(data).text;
-      // setRecognizedText(text);
-      console.log("Number detected:", text);
       console.log(" detected:", isNumeric(text));
       if (isNumeric(text)) {
         const rowIndex = parseInt(text, 10);
         console.log("rowIndex detected:", rowIndex);
-        setSelectedValue(rows[rowIndex]); // 使用 rowIndex 获取行数据并将其设置为 selectedValue
+        setSelectedValue(rows[rowIndex]); 
         console.log("selectedValue detected:", selectedValue);
       }
-
       if (typeof text === "string" && text.includes("select")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Withdraw detected");
         window.location.href = "/selectamount";
       }
     });
-
     return () => {
       socket.disconnect();
     };
@@ -94,7 +86,7 @@ function SelectContact() {
       renderCell: (params) => (
         <Radio
           checked={selectedValue && selectedValue.id === params.row.id}
-          onChange={() => setSelectedValue(params.row)} // 当用户点击选择时，保存整个行数据
+          onChange={() => setSelectedValue(params.row)} 
           value={params.row.id}
           name="select-row-radio-button"
           inputProps={{ "aria-label": `Select row ${params.value}` }}

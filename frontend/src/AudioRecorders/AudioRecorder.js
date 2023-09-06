@@ -94,7 +94,6 @@ const AudioRecorder = () => {
     setAudioUrl(audioUrl);
     console.log(audioBlob);
     console.log(audioBlob.size, audioBlob.type);
-    // Send audio to server
     sendAudioToServer(audioBlob);
   };
 
