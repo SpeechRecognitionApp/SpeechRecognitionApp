@@ -16,12 +16,9 @@ const Footer = () => {
       .delete("http://127.0.0.1:5000/logout")
       .then((response) => {
         console.log("Logged out successfully");
-        navigate("/");
       })
       .catch((error) => {
         console.error("Failed to log out:", error);
-        // Optionally, you can still navigate back if logout fails
-        // navigate("/");
       });
     navigate("/insertcard");
   }
@@ -31,13 +28,11 @@ const Footer = () => {
       <Box
         className="app-footer"
         sx={{
-          // position: "fixed",
-          // bottom: 0,
           width: "100%",
           boxShadow: "0px -2px 10px rgba(0, 0, 0, 0.1)",
           borderTop: "1px solid rgba(0, 0, 0, 0.1)",
-          display: "flex", // Enable Flexbox layout
-          justifyContent: "space-around", // Distribute the buttons evenly
+          display: "flex",
+          justifyContent: "space-around",
           marginTop: "auto",
         }}
       >
