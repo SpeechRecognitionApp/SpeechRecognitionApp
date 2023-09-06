@@ -133,3 +133,10 @@ class Transaction(Document):
     reference = StringField()
     amount = FloatField(required=True)
     user_id = StringField(required=True)
+
+class Authentication(Document):
+    user_id = StringField(required=True)
+    card_id = StringField(required=True)
+    is_login = StringField(default="0")
+    isFrozen = StringField(default="0")
+    fail_count = StringField(default="0")

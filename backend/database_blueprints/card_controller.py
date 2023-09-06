@@ -8,12 +8,12 @@ card_controller = Blueprint('card_controller', __name__)
 def verify_pin():
     data = request.get_json()
     print(data)
-    card_number = data.get('card_number')
+    card_id = data.get('card_id')
     pin = int(data.get('pin'))
 
 
     # 查找与给定卡号匹配的卡
-    card = Card.objects(card_number=card_number).first()
+    card = Card.objects(card_id=card_id).first()
 
     if not card:
         return jsonify({'message': 'Card not found'}), 404

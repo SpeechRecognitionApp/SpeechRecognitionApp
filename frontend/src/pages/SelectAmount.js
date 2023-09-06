@@ -148,8 +148,6 @@ function SelectAmount() {
   }
   const handleClick = async () => {
 
-   
-
     console.log("This is transfer amount",transferAmount)
 
     if (transferAmount <= 0) {
