@@ -4,7 +4,6 @@ import json
 
 contact_controller = Blueprint('contact_controller', __name__)
 
-
 @contact_controller.route('/contact', methods=['POST'])
 def create_contact():
     data = request.get_json()
@@ -19,7 +18,6 @@ def create_contact():
     )
     new_contact.save()
     return jsonify({'message': 'Contact created successfully'}), 201
-
 
 @contact_controller.route('/contact/<contact_id>', methods=['GET'])
 def get_contact(contact_id):
@@ -37,13 +35,11 @@ def get_contacts_by_user(user_id):
         return jsonify({'message': 'No contacts found for this user'}), 404
     return jsonify([json.loads(contact.to_json()) for contact in contacts]), 200
 
-
 @contact_controller.route('/contact/<contact_id>', methods=['PUT'])
 def update_contact(contact_id):
     data = request.get_json()
     Contact.objects(contact_id=contact_id).update_one(set__name=data['name'], set__email=data['email'])
     return jsonify({'message': 'Contact updated successfully'}), 200
-
 
 @contact_controller.route('/contact/<contact_id>', methods=['DELETE'])
 def delete_contact(contact_id):

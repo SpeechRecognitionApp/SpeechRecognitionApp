@@ -32,8 +32,6 @@ def get_transactions_by_user(user_id):
         return jsonify({'message': 'No cards found for this user'}), 404
     return jsonify([json.loads(transaction.to_json()) for transaction in transactions]), 200
 
-
-
 @transaction_controller.route('/transaction/<transaction_id>', methods=['PUT'])
 def update_transaction(transaction_id):
     data = request.get_json()
