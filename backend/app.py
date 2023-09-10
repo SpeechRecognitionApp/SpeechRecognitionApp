@@ -46,13 +46,7 @@ data = {
 def init_constant_voice():
     for result in constant_voice():
         if result:
-            # Emit recognized text to frontend via WebSocket
             socketio.emit('recognized_text', result)
-#
-# response = requests.get(url, data=data)
-# print(response.text)
-# with open('response.html', 'w') as f:
-#     f.write(response.text)
 
 
 if __name__ == '__main__':

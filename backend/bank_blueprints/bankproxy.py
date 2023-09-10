@@ -21,6 +21,5 @@ def proxy(url):
             resp = requests.delete(f'https://openbanking.santander.co.uk/{url}', headers=request.headers)
     except Exception as e:
         return Response(f"An error occurred: {str(e)}", status=500)
-
     headers = {k: v for k, v in resp.headers.items() if k.lower() not in ('transfer-encoding', 'content-length')}
     return resp.text, 200
