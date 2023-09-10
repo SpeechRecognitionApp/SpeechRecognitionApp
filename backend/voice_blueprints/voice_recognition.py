@@ -22,10 +22,8 @@ def constant_voice():
             text = recognizer.Result()
             result = extract_text_and_check_for_keywords(text)
             print(result)
-            yield result  # use yield instead of print
-            # if result:
-            #     # Emit recognized text to frontend via WebSocket
-            #     socketio.emit('recognized_text', result)
+            yield result
+
 
 def transcribe_audio(file):
     # Printing file name and MIME type
@@ -63,8 +61,6 @@ def transcribe_audio(file):
     final_result = recognizer.FinalResult()
     print(final_result)
 
-    # result = extract_text_and_check_for_keywords(final_result)
-    # print(result)
     if final_result:
         return final_result
     return None
@@ -72,17 +68,15 @@ def transcribe_audio(file):
 
 def extract_text_and_check_for_keywords(data_json):
     data = json.loads(data_json)
-    # print(data)
     text = data.get("text", "")
     words = text.split()
-    # print(words)
+    
 
-    # 尝试将输入文本转换为数字
+
     try:
         number = w2n.word_to_num(text)
         return json.dumps({"text": number})
-    except ValueError:
-        # 输入文本无法转换为数字
+    except ValueError:  
         pass
 
     if "transfer" in words:
@@ -155,5 +149,5 @@ def extract_text_and_check_for_keywords(data_json):
     if any(command in words for command in account_commands):
         return json.dumps({"text": "account"})
 
-    # 如果以上条件都不满足，返回一个错误消息
+
     return json.dumps({"error": f"You said {words} - incorrect voice command"})

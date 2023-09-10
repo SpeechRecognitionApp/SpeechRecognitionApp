@@ -20,15 +20,6 @@ assistant = AssistantV2(
 
 assistant.set_service_url('https://api.eu-gb.assistant.watson.cloud.ibm.com')
 
-#
-# session = assistant.create_session(
-#     assistant_id= environment_id
-# ).get_result()
-#
-#
-# session_id = session['session_id']
-# print(f"Session id is {session_id}")
-# Store the session ID globally
 global_session_id = None
 
 @chatbot.route("/new_session", methods=["GET"])
