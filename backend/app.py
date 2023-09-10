@@ -8,7 +8,7 @@ from bank_blueprints.openbank_api import authenticate_with_open_bank_project
 from database_blueprints import controllers
 
 # from facial_blueprints import trigger_facial
-# from chatbot_blueprints.chatbot import chatbot
+from chatbot_blueprints.chatbot import chatbot
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -22,7 +22,7 @@ username = "minhazh00"
 password = "Openbankminz1!"
 consumer_key = "kbvhddnoif1m5iisus1uewgqgkkyplunvs5otfhb"
 # trigger_facial()
-# app.register_blueprint(chatbot)
+app.register_blueprint(chatbot)
 
 
 auth_token = authenticate_with_open_bank_project(username, password, consumer_key)

@@ -4,8 +4,12 @@ import { Box, Typography } from "@mui/material";
 import "./Footer.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import YouTube from 'react-youtube';
+import FooterRecorder from "../AudioRecorders/FooterRecorder";
 
 const Footer = () => {
+  const [showYouTubePlayer, setShowYouTubePlayer] = useState(false);
   const navigate = useNavigate();
 
   function handleClick() {
@@ -22,6 +26,16 @@ const Footer = () => {
       });
     navigate("/insertcard");
   }
+
+  function openYouTubePlayer() {
+    setShowYouTubePlayer(true);
+  }
+
+  // Function to close the YouTube player
+  function closeYouTubePlayer() {
+    setShowYouTubePlayer(false);
+  }
+
 
   return (
     <div className="footer">
@@ -52,7 +66,7 @@ const Footer = () => {
             Accessibility
           </Typography>
         </Button>
-        <Button className="footer-button" style={{ textTransform: "none" }}>
+        <Button className="footer-button" style={{ textTransform: "none" }} onClick={openYouTubePlayer}>
           <Typography
             variant="h6"
             sx={{
@@ -81,6 +95,26 @@ const Footer = () => {
           </Typography>
         </Button>
       </Box>
+      {showYouTubePlayer && (
+        <div className="youtube-player" onClick={closeYouTubePlayer}>
+          <YouTube
+            videoId="56PzTHnRTVM" // Replace with your video ID
+            opts={{
+              width: '200%', // Width of the player
+              height: '60vh', // Height of the player
+              playerVars: {
+                autoplay: 1, // Auto-play the video
+              },
+            }}
+            onEnd={closeYouTubePlayer} // Close the player when the video ends
+          />
+        </div>
+      )}
+      <FooterRecorder 
+  handleClick={handleClick}
+  handleClick2={handleClick2}
+  openYouTubePlayer={openYouTubePlayer}
+  closeYouTubePlayer={closeYouTubePlayer} />
     </div>
   );
 };

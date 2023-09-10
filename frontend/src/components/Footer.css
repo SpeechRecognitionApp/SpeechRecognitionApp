@@ -29,4 +29,29 @@
     width: 1px;
     background-color: grey;
   }
+
+
+.youtube-player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  z-index: 9999;
+  cursor: pointer; 
+}
+
+/* Adjust the size of the player container */
+.youtube-player iframe {
+  height:60vh;; 
+  max-width: 800px; 
+  max-height: 80%; 
+  border: none; 
+}
+
+
   
