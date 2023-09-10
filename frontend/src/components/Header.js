@@ -69,7 +69,7 @@ const Header = () => {
           </Grid>
 
           <Grid item xs={8} container justifyContent="center">
-            <IconButton color="inherit" aria-label="home" onClick={goBack}>
+            <IconButton color="inherit" aria-label="left" onClick={goBack}>
               <ArrowBackRoundedIcon sx={{ height: 30, width: 30 }} />
             </IconButton>
 
@@ -77,7 +77,7 @@ const Header = () => {
               <HomeRoundedIcon sx={{ height: 50, width: 50 }} />
             </IconButton>
 
-            <IconButton color="inherit" aria-label="home" onClick={goForward}>
+            <IconButton color="inherit" aria-label="right" onClick={goForward}>
               <ArrowForwardRoundedIcon sx={{ height: 30, width: 30 }} />
             </IconButton>
           </Grid>

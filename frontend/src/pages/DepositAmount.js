@@ -177,6 +177,9 @@ function DepositAmount() {
             </Grid>
             <Grid item>
               <TextField
+                name="amountInput" 
+                id = "amountInput"
+                label="Deposit"
                 variant="outlined"
                 type="number"
                 value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber

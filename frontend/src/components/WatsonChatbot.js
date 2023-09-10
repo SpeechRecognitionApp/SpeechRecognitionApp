@@ -243,6 +243,7 @@ function WatsonChatBot() {
               endAdornment: (
                 <InputAdornment position="end">
                   <Button
+                   aria-label="send"
                     variant="contained"
                     color="primary"
                     size="large"

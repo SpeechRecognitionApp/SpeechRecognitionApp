@@ -202,6 +202,7 @@ function WithdrawAmount() {
             <Grid item>
               <TextField
                 variant="outlined"
+                label="Withdraw"
                 type="number"
                 value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber
                 onChange={(e) => setManualInput(e.target.value)} // Update manualInput state
