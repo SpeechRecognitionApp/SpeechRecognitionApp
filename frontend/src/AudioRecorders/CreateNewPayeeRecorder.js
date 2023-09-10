@@ -12,7 +12,7 @@ const CreateNewPayeeRecorder = ({
   const [selectedValue, setSelectedValue] = useState(null);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     socket.on("recognized_text", (data) => {
       const parsedData = JSON.parse(data);

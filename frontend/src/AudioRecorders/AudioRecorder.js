@@ -12,7 +12,7 @@ const AudioRecorder = () => {
   const audioChunks = useRef([]);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     socket.on("recognized_text", (data) => {
       const parsedData = JSON.parse(data);
@@ -40,25 +40,25 @@ const AudioRecorder = () => {
       }
 
       if (text && text.includes("transfer")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        // Stop recording when "transfer" is detected and redirect to the "/transfer" page
         console.log("Withdraw detected");
         window.location.href = "/selectpayee";
       }
 
       if (text && text.includes("assistant")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        // Stop recording when "assistant" is detected and redirect to the "/chatbot" page
         console.log("Withdraw detected");
         window.location.href = "/chatbot";
       }
 
       if (text && text.includes("transaction")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        // Stop recording when "transaction" is detected and redirect to the "/transaction" page
         console.log("Withdraw detected");
         window.location.href = "/transactions";
       }
 
       if (text && text.includes("account")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
+        // Stop recording when "account" is detected and redirect to the "/accountmanage" page
         console.log("Withdraw detected");
         window.location.href = "/accountmanage";
       }
@@ -97,22 +97,6 @@ const AudioRecorder = () => {
     sendAudioToServer(audioBlob);
   };
 
-  // const sendAudioToServer = (audioBlob) => {
-  //   const formData = new FormData();
-  //   formData.append("audio", audioBlob);
-  //   for (let [key, value] of formData.entries()) {
-  //     console.log(key, value);
-  //   }
-  //   fetch("http://127.0.0.1:5000/transcribe", {
-  //     method: "POST",
-  //     body: formData,
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("Response from server:", data);
-  //     })
-  //     .catch((error) => console.error("Error:", error));
-  // };
 
   const sendAudioToServer = (audioBlob) => {
     const formData = new FormData();
@@ -150,57 +134,7 @@ const AudioRecorder = () => {
       .catch((error) => console.error("Error:", error));
   };
 
-  // return (
-  //   <div className="container">
-  //     {recording ? (
-  //       <Button
-  //         variant="contained"
-  //         size="large"
-  //         sx={{
-  //           textTransform: "none",
-  //           bgcolor: "#ffff",
-  //           color: "black",
-  //           fontWeight: "black",
-  //         }}
-  //         onClick={stopRecording}
-  //       >
-  //         Stop Recording
-  //       </Button>
-  //     ) : (
-  //       <Button
-  //         variant="contained"
-  //         size="large"
-  //         sx={{
-  //           textTransform: "none",
-  //           size: "large",
-  //           bgcolor: "#ffff",
-  //           color: "black",
-  //           fontWeight: "bold",
-  //         }}
-  //         startIcon={<KeyboardVoiceIcon />}
-  //         onClick={startRecording}
-  //       >
-  //         Click to Start Voice Navigation
-  //       </Button>
-  //     )}
-  //     {audioUrl && (
-  //       <div className="audio-wrapper">
-  //         <p>Audio file:</p>
-  //         <audio controls src={audioUrl}></audio>
-  //         <p>
-  //           <a
-  //             href={audioUrl}
-  //             download="recording.wav"
-  //             className="download-link"
-  //           >
-  //             Download
-  //             {audioUrl}
-  //           </a>
-  //         </p>
-  //       </div>
-  //     )}
-  //   </div>
-  // );
+ 
 };
 
 export default AudioRecorder;

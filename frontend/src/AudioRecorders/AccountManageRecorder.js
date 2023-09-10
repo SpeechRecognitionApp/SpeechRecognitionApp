@@ -13,7 +13,7 @@ const AccountManageRecorder = ({
   const [confirmed, setConfirmed] = useState(false);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     socket.on("recognized_text", (data) => {
       const parsedData = JSON.parse(data);
@@ -56,24 +56,13 @@ const AccountManageRecorder = ({
       }
 
       if (text && text.includes("reset")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
         window.location.reload();
       }
 
       if (text && text.includes("confirm")) {
-        // Call the function prop to simulate clicking the "Confirm" button
         setConfirmed(true);
         
       }
-
-
-      // if (text && text.includes("okay")) {
-      //   // Simulate a click on the SweetAlert "OK" button
-      //   if (sweetAlertRef.current) {
-      //     console.log("okay received")
-      //     sweetAlertRef.current.clickConfirm();
-      //   }
-      // }
     });
 
     return () => {

@@ -7,7 +7,7 @@ const WatsonRecorder = ({ onSendButtonClick }) => {
   
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     socket.on("recognized_text", (data) => {
         const parsedData = JSON.parse(data);
@@ -22,8 +22,7 @@ const WatsonRecorder = ({ onSendButtonClick }) => {
         }
 
       if (text && text.includes("send")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
-        console.log("Confrmation detected");
+        console.log("Send detected");
         onSendButtonClick(); 
       }
     });

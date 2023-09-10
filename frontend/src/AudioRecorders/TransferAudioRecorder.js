@@ -7,7 +7,7 @@ const TransferAudioRecorder = ({ detectedNumber, setDetectedNumber,handleClick})
 
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     const isNumeric = (str) => {
         return !isNaN(str) && !isNaN(parseFloat(str));
@@ -28,7 +28,6 @@ const TransferAudioRecorder = ({ detectedNumber, setDetectedNumber,handleClick})
     }
 
       if (text && text.includes("confirm")) {
-        // Stop recording when "confirm" is detected and redirect to the "/insertmoney" page
         console.log("Confirmation detected");
         setConfirmed(true);
       }

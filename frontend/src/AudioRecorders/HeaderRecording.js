@@ -21,7 +21,7 @@ const navigate = useNavigate();
   
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000");
 
     socket.on("recognized_text", (data) => {
         const parsedData = JSON.parse(data);
@@ -38,19 +38,16 @@ const navigate = useNavigate();
 
 
       if (text && text.includes("back")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
         console.log("back detected");
         goBack();
       }
 
       if (text && text.includes("forward")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
         console.log("forward detected");
         goForward();
       }
 
       if (text && text.includes("home")) {
-        // Stop recording when "confirm" is detected and redirect to the "/takecash" page
         console.log("Home detected");
         returnHome();
       }
