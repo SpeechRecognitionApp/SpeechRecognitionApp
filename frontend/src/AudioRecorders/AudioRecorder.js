@@ -41,25 +41,25 @@ const AudioRecorder = () => {
 
       if (text && text.includes("transfer")) {
         // Stop recording when "transfer" is detected and redirect to the "/transfer" page
-        console.log("Withdraw detected");
+        console.log("Transfer detected");
         window.location.href = "/selectpayee";
       }
 
       if (text && text.includes("assistant")) {
         // Stop recording when "assistant" is detected and redirect to the "/chatbot" page
-        console.log("Withdraw detected");
+        console.log("Assistant detected");
         window.location.href = "/chatbot";
       }
 
       if (text && text.includes("transaction")) {
         // Stop recording when "transaction" is detected and redirect to the "/transaction" page
-        console.log("Withdraw detected");
+        console.log("Transaction detected");
         window.location.href = "/transactions";
       }
 
       if (text && text.includes("account")) {
         // Stop recording when "account" is detected and redirect to the "/accountmanage" page
-        console.log("Withdraw detected");
+        console.log("Account management detected");
         window.location.href = "/accountmanage";
       }
     });
