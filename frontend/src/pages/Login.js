@@ -15,7 +15,6 @@ export const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
-    // Your login logic here
   };
 
   return (

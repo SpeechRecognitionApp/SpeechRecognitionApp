@@ -21,21 +21,14 @@ import TransferAudioRecorder from "../AudioRecorders/TransferAudioRecorder";
 function SelectAmount() {
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
-  const [detectedNumber, setDetectedNumber] = useState(null); // New state for detected number
+  const [detectedNumber, setDetectedNumber] = useState(null); 
   const [manualInput, setManualInput] = useState("");
   const location = useLocation();
   const contactName = location.state.contactName;
-  const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
-  // Mock data for card balance
-  // const [transferAmount, setTransferAmount] = useState(0);
-  // const transferAmountRef = useRef(transferAmount);
-
-  // useEffect(() => {
-  //   transferAmountRef.current = transferAmount;
-  // }, [transferAmount]);
+  const cardNumber = "1252452125167000"; 
+  
 
   async function handleWithdraw(onSuccess) {
-    console.log("Withdraw function transfer amount is:",transferAmount)
     try {
       const response = await axios.post("http://127.0.0.1:5000/withdraw", {
         card_number: cardNumber,
@@ -43,26 +36,20 @@ function SelectAmount() {
       });
 
       if (response.status === 200) {
-        console.log("Withdrawal successful!");
-        console.log("New Balance:", response.data.new_balance);
         handleCreateTransaction();
         swal("Success", "The Money Has been Transfered", "success");
         setTimeout(() => {
           swal.close();
         }, 3000);
-
         onSuccess();
         console.error("Error in withdrawal:", response.data.message);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        // swal("Error", "The Money Has been Transfered", "Error");
         swal("Oops!", "Insufficient balance. Withdrawal failed.", "error");
         setTimeout(() => {
           swal.close();
         }, 3000);
-
-        // alert("Insufficient balance. Withdrawal failed.");
       } else {
         console.error("Failed to withdraw:", error);
       }
@@ -80,8 +67,6 @@ function SelectAmount() {
       });
 
       if (response.status === 201) {
-        // Handle success - update UI if necessary
-        console.log("Transaction created successfully!");
       } else {
         // Handle error
         console.error("Error in transaction creation:", response.data.message);
@@ -112,32 +97,6 @@ function SelectAmount() {
     fetchCardData();
   }, [cardNumber]);
 
-  // useEffect(() => {
-  //   const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
-
-  //   socket.on("recognized_text", (data) => {
-  //     const text = JSON.parse(data).text;
-
-  //     if (text && text.includes("confirm")) {
-  //       // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-  //       console.log("Someone paid before detected");
-  //       console.log("Withdra!", transferAmount);
-  //       console.log("Withdra!", transferAmountRef.current);
-
-  //       handleClick();
-  //     }
-
-  //     if (text && text.includes("create")) {
-  //       // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-  //       console.log("New person detected detected");
-  //     }
-  //   });
-
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, [transferAmount]);
-
   const transferAmount = manualInput || detectedNumber;
 
   function formatDate(timestamp) {
@@ -147,8 +106,6 @@ function SelectAmount() {
     return `${month}/${year}`;
   }
   const handleClick = async () => {
-
-    console.log("This is transfer amount",transferAmount)
 
     if (transferAmount <= 0) {
       swal("Oops!", "Transfer amount should be greater than 0", "error");
@@ -179,13 +136,12 @@ function SelectAmount() {
 
         <Box
           sx={{
-            display: "grid", // Make this Box a grid container
-            gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-            gap: "20px", // Add some gap between rows
-            padding: "20px", // Add some padding around the Box
+            display: "grid", 
+            gridTemplateRows: "auto auto auto", 
+            gap: "20px",
+            padding: "20px", 
           }}
         >
-          {/* 标题 */}
           <Box sx={{ margin: "auto" }}>
             <div>
               {card ? (
@@ -266,9 +222,9 @@ function SelectAmount() {
                 <TextField
                   variant="outlined"
                   type="number"
-                  value={manualInput || detectedNumber || ""} // Use manualInput or detectedNumber
-                  onChange={(e) => setManualInput(e.target.value)} // Update manualInput state
-                  sx={{ maxWidth: 200 }} // Limit the width of the TextField
+                  value={manualInput || detectedNumber || ""} 
+                  onChange={(e) => setManualInput(e.target.value)}
+                  sx={{ maxWidth: 200 }} 
                   InputProps={{
                     inputProps: {
                       min: 0,
@@ -309,7 +265,7 @@ function SelectAmount() {
             </Button>
           </Box>
         </Box>
-        <TransferAudioRecorder detectedNumber={detectedNumber} // Pass detectedNumber as prop
+        <TransferAudioRecorder detectedNumber={detectedNumber} 
        setDetectedNumber={setDetectedNumber} handleClick={handleClick} />
         <Footer />
       </Box>

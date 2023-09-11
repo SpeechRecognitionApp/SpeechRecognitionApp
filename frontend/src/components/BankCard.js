@@ -14,7 +14,6 @@ const BankCard = () => {
         overflow: "hidden",
       }}
     >
-      {/* Logo */}
       <div
         style={{
           display: "flex",
@@ -35,7 +34,6 @@ const BankCard = () => {
 
       <div
         style={{
-          // width: "100%",
           height: 260,
           background: "url(/bankcard.png)",
           backgroundSize: "cover",
@@ -57,14 +55,7 @@ const BankCard = () => {
           zIndex: 1,
         }}
       >
-        {/* <Typography
-          variant="body2"
-          color="text.secondary"
-          gutterBottom
-          sx={{ fontSize: "1.2rem", textAlign: "center" }}
-        >
-          Card Number:
-        </Typography> */}
+       
         <Typography
           variant="h5"
           component="div"
@@ -74,7 +65,6 @@ const BankCard = () => {
           1234 5678 9012 3456
         </Typography>
 
-        {/* Bank Card Indicators */}
         <div
           style={{
             display: "flex",

@@ -12,7 +12,6 @@ import io from "socket.io-client";
 
 function SelectContact() {
   const navigate = useNavigate();
-
   function handleClick() {
     if (selectedValue) {
       navigate("/selectamount", {
@@ -27,12 +26,11 @@ function SelectContact() {
       }, 3000);
     }
   }
-
-  const [contacts, setContacts] = useState([]); // Step 1: State to hold contacts
+  const [contacts, setContacts] = useState([]);
   const [selectedValue, setSelectedValue] = useState({});
 
   useEffect(() => {
-    const userId = "1"; // Replace with actual user ID
+    const userId = "1";
     axios
       .get(`http://127.0.0.1:5000/contacts/user/${userId}`)
       .then((response) => {
@@ -42,8 +40,6 @@ function SelectContact() {
         console.error("Failed to fetch contacts:", error);
       });
   }, []);
-
-  // Step 2: Format the contacts data for the DataGrid
   const rows = contacts.map((contact, index) => ({
     id: index,
     contactId: contact.contact_id,
@@ -52,21 +48,17 @@ function SelectContact() {
     sort_code: contact.sort_code,
     accountNumber: contact.account_number,
   }));
-  console.log(rows);
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); 
+    const socket = io("http://127.0.0.1:5000");
     const isNumeric = (str) => {
       return !isNaN(str) && !isNaN(parseFloat(str));
     };
     socket.on("recognized_text", (data) => {
       const text = JSON.parse(data).text;
-      console.log(" detected:", isNumeric(text));
       if (isNumeric(text)) {
         const rowIndex = parseInt(text, 10);
-        console.log("rowIndex detected:", rowIndex);
-        setSelectedValue(rows[rowIndex]); 
-        console.log("selectedValue detected:", selectedValue);
+        setSelectedValue(rows[rowIndex]);
       }
       if (typeof text === "string" && text.includes("select")) {
         window.location.href = "/selectamount";
@@ -86,7 +78,7 @@ function SelectContact() {
       renderCell: (params) => (
         <Radio
           checked={selectedValue && selectedValue.id === params.row.id}
-          onChange={() => setSelectedValue(params.row)} 
+          onChange={() => setSelectedValue(params.row)}
           value={params.row.id}
           name="select-row-radio-button"
           inputProps={{ "aria-label": `Select row ${params.value}` }}
@@ -142,11 +134,10 @@ function SelectContact() {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-          // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          padding: "20px", // Add some padding around the Box
+          display: "grid",
+          gridTemplateRows: "auto auto auto",
+          gap: "20px",
+          padding: "20px",
         }}
       >
         <Box

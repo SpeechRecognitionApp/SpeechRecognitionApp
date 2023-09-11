@@ -30,7 +30,6 @@ function InsertMoney() {
     >
       <Header />
 
-      {/* Main content */}
       <Box
         flex={1}
         display="flex"
@@ -55,20 +54,6 @@ function InsertMoney() {
           height: "20%",
         }}
       >
-        {/* <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#fff",
-            color: "#000",
-            borderRadius: "20px",
-            width: "20%",
-            textAlign: "center",
-            fontSize: 28,
-          }}
-          onClick={handleClick}
-        >
-          Confirm
-        </Button> */}
       </Box>
       <Cash />
       <Footer />

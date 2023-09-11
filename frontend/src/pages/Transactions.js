@@ -11,7 +11,7 @@ function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    const userId = "1"; // Replace with actual user ID
+    const userId = "1"; 
     axios
       .get(`http://127.0.0.1:5000/transactions/user/${userId}`)
       .then((response) => {
@@ -25,19 +25,16 @@ function TransactionsPage() {
       });
   }, []);
 
-  console.log("Parsing date:", transactions);
   const rows = transactions.map((transaction, index) => ({
     id: index,
     date: new Date(transaction.timestamp.$date),
     type: transaction.type,
-    receiver: transaction.receiver, // Receiver of the transaction
-    description: transaction.description, // Description of the transaction
-    ref: transaction.reference, // Reference of the transaction
-    amount: transaction.amount, // Amount of the transaction
-    // balance: transaction.balance,
+    receiver: transaction.receiver, 
+    description: transaction.description, 
+    ref: transaction.reference, 
+    amount: transaction.amount, 
   }));
 
-  console.log(rows);
 
   const columns = [
     {
@@ -51,7 +48,7 @@ function TransactionsPage() {
       headerName: "Date",
       flex: 1,
       editable: true,
-      type: "dateTime", // If you want to display it in a formatted manner
+      type: "dateTime", 
     },
     {
       field: "description",
@@ -84,13 +81,7 @@ function TransactionsPage() {
       flex: 1,
       editable: true,
     },
-    // {
-    //   field: "balance",
-    //   headerName: "Balance",
-    //   type: "number",
-    //   width: 110,
-    //   editable: true,
-    // },
+   
   ];
 
   return (
@@ -107,11 +98,10 @@ function TransactionsPage() {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-          // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          padding: "20px", // Add some padding around the Box
+          display: "grid", 
+          gridTemplateRows: "auto auto auto", 
+          gap: "20px", 
+          padding: "20px", 
         }}
       >
         <Box

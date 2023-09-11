@@ -20,7 +20,6 @@ const SantanderATMs = () => {
         );
 
         setData(response.data.data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       }
@@ -71,13 +70,6 @@ const SantanderATMs = () => {
     return <div>Error: {error}</div>;
   }
 
-  // if (!data) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (!data.data || !data.data[0].Brand[0].Branch) {
-  //   return <div>No branches data found.</div>;
-  // }
 
   return (
     <Box
@@ -93,11 +85,10 @@ const SantanderATMs = () => {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-          // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          padding: "20px", // Add some padding around the Box
+          display: "grid",
+          gridTemplateRows: "auto auto auto", 
+          gap: "20px", 
+          padding: "20px", 
         }}
       >
         <Box

@@ -16,8 +16,7 @@ function SelectPayee() {
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
   const [recognizedText, setRecognizedText] = useState("");
-  const cardNumber = "1252452125167000"; // 假设这是你想查询的卡号
-  // Mock data for card balance
+  const cardNumber = "1252452125167000"; 
   const cardBalance = "£500.00";
 
   useEffect(() => {
@@ -41,10 +40,6 @@ function SelectPayee() {
     fetchCardData();
   }, [cardNumber]);
 
-  // if (!card) {
-  //   return <div>Loading...</div>;
-  // }
-
   function handleClick() {
     navigate("/selectcontact");
   }
@@ -54,21 +49,17 @@ function SelectPayee() {
   }
 
   useEffect(() => {
-    const socket = io("http://127.0.0.1:5000"); // Replace the URL with your backend URL
+    const socket = io("http://127.0.0.1:5000"); 
 
     socket.on("recognized_text", (data) => {
       const text = JSON.parse(data).text;
       setRecognizedText(text);
 
       if (text && text.includes("before")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("Someone paid before detected");
         window.location.href = "/selectcontact";
       }
 
       if (text && text.includes("create")) {
-        // Stop recording when "withdraw" is detected and redirect to the "/withdraw" page
-        console.log("New person detected detected");
         window.location.href = "/createnewpayee";
       }
     });
@@ -100,9 +91,9 @@ function SelectPayee() {
       <TransferAudioRecorder />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-          padding: "10px", // Add some padding around the Box
+          display: "grid", 
+          gridTemplateRows: "1fr 1fr 1fr", 
+          padding: "10px", 
         }}
       >
         <Box
@@ -186,10 +177,10 @@ function SelectPayee() {
                 borderRadius: "10px",
                 width: "20%",
                 marginBottom: "auto",
-                display: "flex", // Enable Flexbox layout
-                justifyContent: "flex-start", // Align content to the left
-                alignItems: "center", // Center content vertically
-                padding: "10px", // Add some padding
+                display: "flex",
+                justifyContent: "flex-start", 
+                alignItems: "center", 
+                padding: "10px", 
               }}
               onClick={handleClick2}
             >

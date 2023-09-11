@@ -62,7 +62,7 @@ function CreateNewPayee() {
     }
   };
 
-  const userId = "1"; // Assume this is the logged-in user's ID
+  const userId = "1"; 
 
   const handleSubmit = async () => {
     if (
@@ -78,7 +78,6 @@ function CreateNewPayee() {
       return;
     }
 
-    // Format checks
     if (!/^\d+$/.test(sortCode)) {
       swal("Oops!", "Sort Code must be a number", "error");
       setTimeout(() => {
@@ -135,7 +134,6 @@ function CreateNewPayee() {
 
   const textFieldStyle = {
     backgroundColor: "white",
-    // width: "80%",
     borderRadius: "8px",
   };
 
@@ -170,10 +168,10 @@ function CreateNewPayee() {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          padding: "20px", // Add some padding around the Box
+          display: "grid", 
+          gridTemplateRows: "auto auto auto", 
+          gap: "20px", 
+          padding: "20px", 
         }}
       >
         <TitleBox buttonText="Create New Payee" />

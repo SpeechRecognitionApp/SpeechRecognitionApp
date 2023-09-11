@@ -27,28 +27,25 @@ function TransferPage() {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "1fr 1fr 1fr", // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          height: "100%", // Make this Box fill its parent
-          padding: "20px", // Add some padding around the Box
+          display: "grid", 
+          gridTemplateRows: "1fr 1fr 1fr", 
+          gap: "20px", 
+          height: "100%", 
+          padding: "20px", 
         }}
       >
         <Box
           sx={{
             padding: "20px",
-           
+
             margin: "auto",
-          
-           
+
             textAlign: "center",
             lineHeight: "2",
-            
           }}
         >
-          <TitleBox buttonText="Choose A Card to Transfer from" /> 
+          <TitleBox buttonText="Choose A Card to Transfer from" />
         </Box>
-        {/* 标题 */}
         <Box sx={{ marginTop: "auto", marginBottom: "auto" }}>
           <CardSelector />
         </Box>

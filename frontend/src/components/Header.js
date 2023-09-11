@@ -14,33 +14,25 @@ import HeaderRecorder from "../AudioRecorders/HeaderRecording";
 
 const Header = () => {
   const navigate = useNavigate();
-
   function handleClick() {
     navigate("/welcome");
   }
-
   const goBack = () => {
     navigate(-1);
   };
-
   const goForward = () => {
     navigate(1);
   };
-
   function returnHome() {
     navigate("/dashboard");
   }
   const [currentTime, setCurrentTime] = useState(new Date());
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-
-    // Clear the interval when the component is unmounted
     return () => clearInterval(timer);
   }, []);
-
   return (
     <AppBar
       position="static"
@@ -48,7 +40,7 @@ const Header = () => {
         width: "100%",
         backgroundColor: "#FFFFFF",
         color: "#000000",
-        boxShadow: "0px 3px 5px 2px rgba(0, 0, 0, 0.3)", // Red shadow
+        boxShadow: "0px 3px 5px 2px rgba(0, 0, 0, 0.3)",
       }}
     >
       <Toolbar>
@@ -89,9 +81,8 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
-      <HeaderRecorder/>
+      <HeaderRecorder />
     </AppBar>
   );
 };
-
 export default Header;

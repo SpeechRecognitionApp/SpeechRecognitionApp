@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -35,10 +34,6 @@ const WelcomePage = () => {
   function handleClick() {
     navigate("/dashboard");
   }
-
-  const handleConfirm = () => {
-    console.log("Confirmed:", mode);
-  };
 
   return (
     <div>
@@ -75,7 +70,6 @@ const WelcomePage = () => {
               container
               alignItems="center"
               spacing={5}
-              // justifyContent="space-between"
             >
               <Grid item>
                 <Typography variant="h6" style={{ marginLeft: "90px" }}>
@@ -94,7 +88,6 @@ const WelcomePage = () => {
               container
               alignItems="center"
               spacing={5}
-              // justifyContent="space-between"
               marginTop={2}
             >
               <Grid item>
@@ -117,7 +110,6 @@ const WelcomePage = () => {
               container
               alignItems="center"
               spacing={5}
-              // justifyContent="space-between"
               marginTop={2}
             >
               <Grid item>
@@ -137,7 +129,6 @@ const WelcomePage = () => {
               </Grid>
             </Grid>
           </FormControl>
-
           <Button
             variant="contained"
             sx={{ backgroundColor: "#4caf50", color: "white" }}

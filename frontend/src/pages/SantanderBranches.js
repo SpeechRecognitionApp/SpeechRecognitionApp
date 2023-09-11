@@ -20,7 +20,6 @@ const SantanderBranches = () => {
         );
 
         setData(response.data.data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       }
@@ -30,13 +29,9 @@ const SantanderBranches = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Data received:", data); // 打印接收到的数据
-
     const newRows = [];
 
     data.forEach((branch, index) => {
-      console.log("Processing branch:", branch); // 打印当前处理的branch
-
       branch.Brand.forEach((brand) => {
         brand.Branch.forEach((branchDetail) => {
           newRows.push({
@@ -50,8 +45,6 @@ const SantanderBranches = () => {
         });
       });
     });
-
-    console.log("New rows:", newRows); // 打印生成的newRows
     setRows(newRows);
   }, [data]);
 
@@ -67,14 +60,6 @@ const SantanderBranches = () => {
     return <div>Error: {error}</div>;
   }
 
-  // if (!data) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (!data.data || !data.data[0].Brand[0].Branch) {
-  //   return <div>No branches data found.</div>;
-  // }
-
   return (
     <Box
       sx={{
@@ -89,11 +74,10 @@ const SantanderBranches = () => {
       <Header />
       <Box
         sx={{
-          display: "grid", // Make this Box a grid container
-          gridTemplateRows: "auto auto auto", // Divide the container into three equal rows
-          // Divide the container into three equal rows
-          gap: "20px", // Add some gap between rows
-          padding: "20px", // Add some padding around the Box
+          display: "grid", 
+          gridTemplateRows: "auto auto auto", 
+          gap: "20px", 
+          padding: "20px", 
         }}
       >
         <Box

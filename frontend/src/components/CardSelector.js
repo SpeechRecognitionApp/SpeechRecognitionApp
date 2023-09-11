@@ -4,8 +4,6 @@ import { Card, CardContent } from "@mui/material";
 import { useState } from "react";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-
-// 导入 slick-carousel 的 CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BankCard from "./BankCard";
@@ -83,15 +81,7 @@ const CardSelector = () => {
           cardcvc={"454"}
         />
       </div>
-      {/* <div>
-        <CreditCard
-          cardnumber={"4321123412341234"}
-          cardname={"Morgan Bush"}
-          carddate={"09/30"}
-          cardcvc={"454"}
-        />
-      </div> */}
-      {/* Add more Card components for each card */}
+    
     </Slider>
   );
 };

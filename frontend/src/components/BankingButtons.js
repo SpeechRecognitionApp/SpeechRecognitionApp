@@ -23,24 +23,7 @@ function Banking_Buttons() {
     navigate("/deposit");
   }
 
-  //   useEffect(() => {
-  //     // Function to fetch the API data
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await fetch("http://127.0.0.1:5000/transcribe");
-  //         const data = await response.json();
-  //         // Check if the result contains the word "Deposit"
-  //         if (data.includes("Deposit")) {
-  //           // Click on the deposit button
-  //           document.getElementById("depositButton").click();
-  //         }
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   }, []);
+ 
   return (
     <div style={{ display: "flex" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>

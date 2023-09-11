@@ -13,13 +13,9 @@ import HistoryIcon from "@mui/icons-material/History";
 import AssistantIcon from "@mui/icons-material/Assistant";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LogoutIcon from "@mui/icons-material/Logout";
-// import { listUserDetail, userUpdateProfile } from "../../actions/userActions";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(null);
-  // const [expanded, setExpanded] = useState(false);
-
-  // const isMobile = useMediaQuery('(max-width: 768px)');
   const [expanded, setExpanded] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -55,7 +51,7 @@ const Sidebar = () => {
     bottom: 0,
     width: "80%",
     color: "white",
-    margin: "200px 0 0 0", //
+    margin: "200px 0 0 0", 
   };
 
   const onClick = (key) => {
@@ -90,12 +86,6 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Account Management" />
         </ListItem>
-        {/* <ListItem button component={Link} to="/logout" style={listItemStyle}>
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
-        <ListItemText primary="Log Out" />
-      </ListItem> */}
       </List>
       <Button
         variant="contained"

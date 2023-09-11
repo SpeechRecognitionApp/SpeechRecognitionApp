@@ -4,23 +4,19 @@ import { Box, Typography, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function InsertCard() {
-  // Image source (replace this with the actual image you have)
   const imgSrc = "/insert-card.png";
   const navigate = useNavigate();
 
-  // On component mount, trigger logout API
   useEffect(() => {
     axios
       .delete("http://127.0.0.1:5000/logout")
       .then((response) => {
-        console.log("Logged out successfully");
       })
       .catch((error) => {
         console.error("Failed to log out:", error);
       });
   }, []);
 
-  // Handle Confirm button click
   const handleConfirm = () => {
     axios
       .post("http://127.0.0.1:5000/insert_card", {
@@ -28,7 +24,6 @@ function InsertCard() {
         user_id: "1",
       })
       .then((response) => {
-        console.log("Card inserted successfully");
         navigate("/");
       })
       .catch((error) => {
@@ -45,7 +40,6 @@ function InsertCard() {
         alignItems="center"
         style={{ flex: 1 }}
       >
-        {/* Title */}
         <Typography variant="h4" gutterBottom>
           Please Insert Your Card
         </Typography>
@@ -57,7 +51,6 @@ function InsertCard() {
         alignItems="center"
         style={{ flex: 1 }}
       >
-        {/* Image */}
         <Box>
           <img src={imgSrc} alt="Insert Card" />
         </Box>
@@ -69,7 +62,6 @@ function InsertCard() {
         alignItems="center"
         style={{ flex: 1 }}
       >
-        {/* Confirm Button */}
 
         <Button
           variant="contained"
