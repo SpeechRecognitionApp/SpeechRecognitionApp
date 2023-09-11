@@ -4,6 +4,8 @@ from . import config
 from ibm_watson import AssistantV2, ApiException
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
+# The chatbot functionality is adapated from https://cloud.ibm.com/apidocs/assistant-v2
+
 
 
 chatbot = Blueprint('chatbot', __name__)

@@ -7,6 +7,9 @@ import pyaudio
 from vosk import Model, KaldiRecognizer
 from word2number import w2n
 
+
+# The function constant_voice is adapted from https://www.youtube.com/watch?v=3Mga7_8bYpw&t=658s
+
 # Load the Vosk model
 model = Model(lang="en-us")
 
