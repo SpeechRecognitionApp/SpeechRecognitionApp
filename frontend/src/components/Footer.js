@@ -98,7 +98,7 @@ const Footer = () => {
       {showYouTubePlayer && (
         <div className="youtube-player" onClick={closeYouTubePlayer}>
           <YouTube
-            videoId="56PzTHnRTVM" // Replace with your video ID
+            videoId="DoDO7xozJt4" // Replace with your video ID
             opts={{
               width: '200%', // Width of the player
               height: '60vh', // Height of the player
